@@ -14,6 +14,4 @@ def create_department(department_code, department_name):
 def get_all_departments():
     return Department.query.all()
 
-def list_departments_alphabetically():
-    departments = Department.query.order_by(Department.departmentName).all()
-    return departments
+

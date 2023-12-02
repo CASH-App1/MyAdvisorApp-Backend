@@ -33,14 +33,7 @@ def get_all_students():
     student_data = [{'studentID': student.studentID, 'firstName': student.firstName, 'lastName': student.lastName, 'email': student.email} for student in students]
     return student_data
 
-# Controller to get a list of students with a specific first name and last name
-def get_students_by_name(first_name, last_name):
-    students = Student.query.filter_by(firstName=first_name, lastName=last_name).all()
-    
-    # Create a list of dictionaries containing student data
-    student_search = [{'studentID': student.studentID, 'firstName': student.firstName, 'lastName': student.lastName, 'email':student.email} for student in students]
-    return student_search
-    
+  
 # Controller to update a student
 def update_student(studentID, new_first_name, new_last_name, new_email, new_username, new_password):
     student = Student.query.get(studentID)
@@ -57,5 +50,47 @@ def update_student(studentID, new_first_name, new_last_name, new_email, new_user
 
 
 
+def create_semester_history(student_id, year, semester_type):
+    new_semester_history = SemesterHistory(student_id=student_id, year=year, semester_type=semester_type)
+    db.session.add(new_semester_history)
+    db.session.commit()
+    return new_semester_history
 
 
+def get_student_history(student):
+    history = student.studentHistory
+
+    studentHist = []
+    for h in history:
+        studentHist.append(h.get_json())
+    
+    return studentHist
+
+
+def get_student_plans(student):
+    plans = student.coursePlans
+
+    studentPlans = []
+    for p in plans:
+       studentPlans.append(p.get_json())
+
+
+def addCoursetoHistory(studentid, semesterHistory, courseCode, gradeLetter, percent, courseType, semesterID):
+    courseHist = CourseHistory(courseCode, gradeLetter, percent, courseType, semesterID))
+    if courseHist not in semesterHistory.courses:
+        db.session.add(courseHist)
+        semesterHistory.courses.append(courseHist)   
+
+
+def updateStudentHistory(student, year, semesterType, histories):
+    semesterHist = create_semester_history(student.studentID, year, semesterType)
+    if semesterHist:
+        for hist in histories:
+            courseHist = addCoursetoHistory(semesterHist, hist['courseCode'], hist['gradeLetter'], hist['percent'], hist['CourseType'], semesterHist.historyID)
+
+        
+        student.studentHistory.append(semesterHist)
+        db.session.add(semesterHist)
+        db.session.commit()
+        return True
+    return False

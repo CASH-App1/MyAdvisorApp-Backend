@@ -14,38 +14,21 @@ def create_course(code, courseName, credits, difficulty):
         return course
     return None
 
-
     
 def get_course_by_courseCode(code):
-    course = Course.query.get(code).first()
-    if course:
-        return course
-    return None
+    return Course.query.get(code).first()
+   
 
-def courses_Sorted_byDifficulty():
-    courses =  Course.query.order_by(Course.difficulty.asc()).all()
-    codes = []
-
-    for c in courses:
-        codes.append(c.courseCode)
+def check_prerequisites(course, student):
+    qualify =0
+    prereq = Prerequisite.query.get(course.prereqID).first()
+    if prereq.prerequisiteCourses.count() > 0:
+        for p in prereq.prerequisiteCourses:
+            for s in student.studentHistory:
+                for c in s.courses:
+                    if p.courseCode == c.courseCode:
+                        qualify += 1
     
-    return codes
-
-def courses_Sorted_byDifficulty_Objects():
-    return Course.query.order_by(Course.difficulty.asc()).all()
-    
-# def get_prerequisites(prereqID):
-#     course = get_course_by_courseCode(code)
-#     prereqs = get_all_prerequisites(course.courseName)
-#     return prereqs
-
-def get_credits(code):
-    course = get_course_by_courseCode(code)
-    return course.credits if course else 0
-
-def get_ratings(code):
-    course = get_course_by_courseCode(code)
-    return course.rating if course else 0
-
-
-
+    if prereq.prerequisiteCourses.count() == 0 or prereq.prerequisiteCourses.count() == qualify:
+        return True
+    return False

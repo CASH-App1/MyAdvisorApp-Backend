@@ -53,3 +53,7 @@ def remove_semester_course(course_code, semester_id):
 # Get all semester courses
 def get_all_semester_courses():
     return SemesterCourse.query.all()
+
+
+def get_upcoming_semester():
+    return Semester.query.order_by(SemesterHistory.semesterID.desc()).first()
