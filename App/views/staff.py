@@ -69,7 +69,7 @@ def addProgramRequirements():
       add_program_prerequisites(data['programName'], foundation, 'foundation')
   return jsonify(message = 'Program pre-requisites added successfully'), 200
 
-@staff_views.route('/staff/newSemester', methods=['POST'])
+@staff_views.route('/staff/new-semester', methods=['POST'])
 @staff_required
 def addSemester():
   data = request.json
