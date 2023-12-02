@@ -2,13 +2,13 @@ from App.models import CoursesOfferedPerSem
 from App.controllers import get_course_by_courseCode
 from App.database import db
 
-def addSemesterCourses(courseCode):
-    course = get_course_by_courseCode(courseCode)
+def add_semester_courses(course_code):
+    course = get_course_by_courseCode(course_code)
     if course:
-        semCourses = CoursesOfferedPerSem(courseCode)
-        db.session.add(semCourses)
+        sem_courses = CoursesOfferedPerSem(code=course_code)
+        db.session.add(sem_courses)
         db.session.commit()
-        return semCourses
+        return sem_courses
     else:
         print("Course not found")
 
@@ -22,18 +22,15 @@ def delete_all_records():
         db.session.rollback()
         print(f"An error occurred: {str(e)}")
 
-def isCourseOffered(courseCode):
-    course = CoursesOfferedPerSem.query.filter_by(code=courseCode).first()
+def is_course_offered(course_code):
+    course = CoursesOfferedPerSem.query.filter_by(code=course_code).first()
     return True if course else False
 
-def get_all_courses():
-    return CoursesOfferedPerSem.query.all()
+def get_all_courses_alphabetical():
+    courses = CoursesOfferedPerSem.query.order_by(CoursesOfferedPerSem.code).all()
+    return courses
 
-def get_all_OfferedCodes():
-    offered = get_all_courses()
-    offeredcodes=[]
-
-    for c in offered:
-        offeredcodes.append(c.code)
-    
-    return offeredcodes
+def get_all_offered_codes():
+    offered = get_all_courses_alphabetical()
+    offered_codes = [c.code for c in offered]
+    return offered_codes

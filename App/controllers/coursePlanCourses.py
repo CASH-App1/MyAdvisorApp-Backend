@@ -1,25 +1,26 @@
-from App.models import CoursePlanCourses
+from App.models import CoursePlanCourses, CoursePlan, Course
 from App.database import db
 
-def createPlanCourse(planid, code):
-    course = CoursePlanCourses(planid, code)
-    db.session.add(course)
+def create_course_plan_courses(plan_id, course_code):
+    new_course_plan_courses = CoursePlanCourses(coursePlanID=plan_id, courseCode=course_code)
+    db.session.add(new_course_plan_courses)
     db.session.commit()
+    return new_course_plan_courses
 
-def getCourseFromCoursePlan(planid, coursecode):
-    return CoursePlanCourses.query.filter_by(
-        planId = planid,
-        code = coursecode
-    ).first()
+def edit_course_plan_courses(course_plan_course_id, plan_id, course_code):
+    course_plan_courses = CoursePlanCourses.query.get(course_plan_course_id)
 
-def get_all_courses_by_planid(id):
-    return CoursePlanCourses.query.filter_by(planId=id).all()
-
-def deleteCourseFromCoursePlan(planid, coursecode):
-    course = getCourseFromCoursePlan(planid, coursecode)
-    if course:
-        db.session.delete(course)
+    if course_plan_courses:
+        course_plan_courses.coursePlanID = plan_id
+        course_plan_courses.courseCode = course_code
         db.session.commit()
-        print("Course succesfully removed from course plan")
+        return course_plan_courses
     else:
-        print("Course is not in Course Plan")
+        return None
+
+def get_courses_by_plan_id(plan_id):
+    return CoursePlanCourses.query.filter_by(coursePlanID=plan_id).all()
+
+def get_course_plan_by_id(course_plan_course_id):
+    course_plan_courses = CoursePlanCourses.query.get(course_plan_course_id)
+    return course_plan_courses.coursePlan if course_plan_courses else None

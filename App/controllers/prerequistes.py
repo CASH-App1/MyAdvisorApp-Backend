@@ -1,19 +1,22 @@
-from App.models import Prerequisites
+from App.models import Prerequisite, Course
 from App.database import db
 
-def create_prereq(prereqCode, courseName):
-    prereq = Prerequisites(prereqCode, courseName)
-    db.session.add(prereq)
-    db.session.commit()
+def get_prerequisite_courses(prereq_id):
+    prerequisite = Prerequisite.query.get(prereq_id)
 
-def get_all_prerequisites(courseName):
-    return Prerequisites.query.filter(Prerequisites.courseName == courseName).all()
+    if prerequisite:
+        return prerequisite.prerequisiteCourses
+    else:
+        return None
 
-def getPrereqCodes(courseName):
-    prereqs = get_all_prerequisites(courseName)
-    codes = []
+def get_all_prereq_ids():
+    all_prereq_ids = Prerequisite.query.with_entities(Prerequisite.prereqID).all()
+    return [prereq_id for (prereq_id,) in all_prereq_ids]
 
-    for p in prereqs:
-        codes.append(p.prereq_courseCode)
-    
-    return codes
+def get_course_code_by_prereq_id(prereq_id):
+    prerequisite = Prerequisite.query.get(prereq_id)
+
+    if prerequisite:
+        return prerequisite.courseCode
+    else:
+        return None
