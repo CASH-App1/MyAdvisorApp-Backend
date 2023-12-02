@@ -63,7 +63,7 @@ def add_course_to_plan():
      return jsonify(error = f'The pre-requisites for {course.courseCode} have not been met!'), 400
     
     
-@student_views.route('/student/course-plan', methods=['DEL'])
+@student_views.route('/student/course-plan', methods=['DELETE'])
 @student_required
 def remove_course_from_plan():
     student = Student.query.filter_by(username = current_user.username).first()
@@ -96,7 +96,7 @@ def view_course_plans():
 
     if coursePlans:
         return jsonify(message = f'Student {studen.firstName} {student.lastName} Course Plans: {coursePlans}'), 200
-    return jsonify(message = f'Student {student.firstName} {student.lastName} has no created course plans.'), 200
+    return jsonify(error = f'Student {student.firstName} {student.lastName} has no created course plans.'), 200
 
 
 
@@ -116,12 +116,12 @@ def update_academic_history():
     updatedHistory = updateStudentHistory(student, data['year'],  data['semesterType'],  data['histories'])
     if updatedHistory:
         return jsonify(message = 'Semester History addition successful'), 200
-    return jsonify(message = 'Semester History addition unsuccessful'), 400
+    return jsonify(error = 'Semester History addition unsuccessful'), 400
 
 
-@student_views.route('/student/academic-history/<id>', methods=['GET'])
+@student_views.route('/student/academic-history', methods=['GET'])
 @student_required
-def view_academic_history(id):
+def view_academic_history():
     student = Student.query.filter_by(username = current_user.username).first()
     history = get_student_history(student)
 
