@@ -22,7 +22,8 @@ def stafflogin_action():
     data = request.json
     user = login(data['username'], data['password'])
     if user and isinstance(user, Staff):
-        return jsonify({"Staff token":jwt_authenticate(data['username'],data['password'])}), 200
+        token = jwt_authenticate(data['username'],data['password'])
+        return jsonify(staff_token = token), 200
     return jsonify(error = "Unauthorized. Invalid Credentials"), 401
 
 
@@ -31,7 +32,8 @@ def studentlogin_action():
     data = request.json
     user = login(data['username'], data['password'])
     if user and isinstance(user, Student):
-        return jsonify({"Student token":jwt_authenticate(data['username'],data['password'])}), 200
+        token = jwt_authenticate(data['username'],data['password'])
+        return jsonify(student_token = token), 200
     return jsonify(error = "Unauthorized. Invalid Credentials"), 401
 
 
