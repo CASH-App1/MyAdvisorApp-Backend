@@ -10,9 +10,9 @@ class CourseUnitTests(unittest.TestCase):
         newCourse = Course("CSCI101", "PR001", "DataStructures", 3, 8)
         assert (newCourse.courseCode, newCourse.prereqID, newCourse.courseName, newCourse.credits, newCourse.difficulty) == ("CSCI101", "PR001", "DataStructures", 3, 8)
 
-    def test_course_toDict(self):
+    def test_course_toJSON(self):
         newCourse = Course("CSCI101", "PR001", "DataStructures", 3, 8)
-        self.assertDictEqual(newCourse.toDict(), {"CourseCode":"CSCI101", "Prerequisite ID": "PR001", "Course Name":"Data Structures", "Credits":3, "Difficulty":8})
+        self.assertDictEqual(newCourse.get_json(), {"CourseCode":"CSCI101", "Prerequisite ID": "PR001", "Course Name":"Data Structures", "Credits":3, "Difficulty":8})
 
 
 class PrerequisiteUnitTests(unittest.TestCase):
@@ -21,9 +21,9 @@ class PrerequisiteUnitTests(unittest.TestCase):
         newPrerequisite = Prerequisite("MATH202")
         assert (newPrerequisite.courseCode) == ("MATH202")
     
-    def test_prerequisite_toDict(self):
+    def test_prerequisite_toJSON(self):
         newPrerequisite = Prerequisite("MATH202")
-        self.assertDictEqual(newPrerequisite.toDict(), {"Course Code": "MATH202"})
+        self.assertDictEqual(newPrerequisite.get_json(), {"Prerequisite ID":"PR001", "Course Code": "MATH202"})
     
 class CourseHistoryUnitTests(unittest.TestCase):
 

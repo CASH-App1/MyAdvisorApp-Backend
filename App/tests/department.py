@@ -11,6 +11,6 @@ class DepartmentUnitTests(unittest.TestCase):
         newDepartment = Department("DCIT", "Department of Computing and Information Technology")
         assert(newDepartment.departmentCode, newDepartment.departmentName) == ("DCIT", "Department of Computing and Information Technology")
 
-    def test_department_toDict(self):
+    def test_department_toJSON(self):
         newDepartment = Department("DCIT", "Department of Computing and Information Technology")
-        assert(newDepartment.toDict(), {"Department Code":"DCIT", "Department Name":"Department of Computing and Information Technology"})
+        assert(newDepartment.get_json(), {"Department Code":"DCIT", "Department Name":"Department of Computing and Information Technology"})
