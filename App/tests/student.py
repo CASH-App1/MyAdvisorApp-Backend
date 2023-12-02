@@ -1,44 +1,50 @@
-import os
-import tempfile
-import pytest
-import logging
-import unittest
+import os, tempfile, pytest, logging, unittest
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from App.main import create_app
 from App.database import db, create_db
-from App.models import User, Student, Program, StudentCourseHistory
-from App.controllers import (
-    create_user,
-    get_all_users_json,
-    login,
-    get_user,
-    update_user,
-    create_student,
-    addCoursetoHistory,
-    create_program,
-    create_course,
-    enroll_in_programme,
-    get_all_students_json,
-    update_student,
-    getCompletedCourses,
-)
+from App.models import User, Student, Program, StudentCourseHistory, StudentProgram
+
 
 
 LOGGER = logging.getLogger(__name__)
 
+'''
+Student Unit Tests
+'''
 
-class StudentUnitTest(unittest.TestCase):
+class StudentUnitTests(unittest.TestCase):
 
     def test_new_student(self):
-        student = Student("01234", "johnpass", "John Doe", 1)
-        assert student.name == "John Doe"
+        newStudent = Student(816031123, "Jane", "Doe", "jan@email.com")
+        assert (newStudent.studentID, newStudent.firstName, newStudent.lastName, newStudent.email) == (816031123, "Jane", "Doe", "jan@email.com")
 
-    def test_student_toJSON(self):
-        student = Student("01234", "johnpass", "John Doe", 1)
-        student_json = student.get_json()
-        self.assertDictEqual(
-            {"name": "John Doe", "student_id": "01234", "program": 1}, student_json)
+    def test_student_toDict(self):
+        newStudent = Student(816031123, "Jane", "Doe", "jan@email.com")
+        #student_json = newStudent.toDict()
+        self.assertDictEqual(newStudent.toDict(), {"Student ID":816031123, "First Name":"Jane", "Last Name":"Doe", "Email":"jan@email.com"})
+
+    def test_hashed_password(self):
+        password = "mypass123"
+        hashed = generate_password_hash(password, method='sha256')
+        newStudent = Student(816031123, password, "Jane", "Doe", "jan@email.com")
+        assert newStudent.password != password
+
+    def test_check_password(self):
+        password = "mypass123"
+        newStudent = Student(816030212, password, "Jane", "Doe", "jan@email.com")
+        assert newStudent.check_password(password) 
+
+class StudentProgramUnitTests(self):
+
+    def test_new_student_program(self):
+        newStudentProgram = StudentProgram("816030870", "30")
+        assert(newStudentProgram.studentID, newStudentProgram.programID) == ("816030870", "30")
+    
+
+
+'''
+Student Integration Tests
 
 
 class StudentIntegrationTests(unittest.TestCase):
@@ -126,3 +132,4 @@ class StudentIntegrationTests(unittest.TestCase):
     #     plan_json = view_course_plan(student)
     #     self.assertListEqual(
     #         [{"name": "Jerval", "student_id": "816025522", "program": 1}], plan_json)
+    '''
