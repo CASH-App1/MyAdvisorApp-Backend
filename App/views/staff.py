@@ -42,9 +42,6 @@ def addProgram():
 @staff_required
 def addProgramRequirements():
   data=request.json
-  # name=data['name']
-  # code=data['code']
-  # num=data['type']
 
   program = Program.query.filter_by(programName = data['programName']).first()
   if not program:
@@ -76,15 +73,15 @@ def addSemester():
 
   semester = Semester.query.filter_by(year = data['year'], semesterType = data['semesterType'])
   if semester:
-    return jsonify(message = 'Semester already exists!')
+    return jsonify(message = 'Semester already exists!'),400
 
   newSemester = create_semester(data['year'], data['semesterType'])
   if newSemester:
-    return jsonify(message = f'Success: {newSemester.__repr__()}')
-  return jsonify(error = 'Semester creation unsuccessful')
+    return jsonify(message = f'Success: {newSemester.__repr__()}'), 200
+  return jsonify(error = 'Semester creation unsuccessful'), 400
 
 
-@staff_views.route('/staff/offeredCourses', methods=['GET'])
+@staff_views.route('/staff/offered-courses', methods=['GET'])
 @staff_required
 def getSemesterCourses():
   data = request.json
@@ -94,7 +91,7 @@ def getSemesterCourses():
   return jsonify(error = 'Semester does not exist!'), 400
 
 
-@staff_views.route('/staff/semesterCourses', methods=['POST'])
+@staff_views.route('/staff/semester-courses', methods=['POST'])
 @staff_required
 def addSemesterCourse():
   data=request.json
@@ -118,7 +115,7 @@ def addSemesterCourse():
 
 
 
-@staff_views.route('/staff/semesterCourses', methods=['DEL'])
+@staff_views.route('/staff/semester-courses', methods=['DEL'])
 @staff_required
 def removeSemesterCourse():
   data=request.json
