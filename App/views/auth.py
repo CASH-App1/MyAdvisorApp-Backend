@@ -33,24 +33,20 @@ def login_action():
 @app.route('/signup-student', methods=['POST'])
 def signup_student():
     data = request.json
-    
-    student = Student.query.filter_by(username = data['username'])
-    staff = Staff.query.filter_by(username = data['username'])
-    if staff or student:
+    user = User.query.filter_by(username = data['username'])
+    if user:
         return jsonify(message='username already taken!'), 401
 
-    newStudent = Student(id = data['studentID'], firstName = data['firstName'], lastName = data['lastName'], email = data['email'], username = data['username'], password = data['password']) 
     program = Program.query.filter_by(programName = data['program1'])
     if not program:
         return jsonify(error= f'The degree program {data['program1']} does not exist'), 401
-    newStudent.programs.append(program)
 
     if data['program2']:
-    program = Program.query.filter_by(programName = data['program2'])
+        program = Program.query.filter_by(programName = data['program2'])
         if not program:
-            return jsonify(error= f'The degree program {data['program1']} does not exist'), 401
-        newStudent.programs.append(program)
+            return jsonify(error= f'The degree program {data['program2']} does not exist'), 401
 
+    newStudent = add_student(id = data['studentID'], firstName = data['firstName'], lastName = data['lastName'], email = data['email'], username = data['username'], password = data['password'], program1 = data['program1'], program2 = data['program2']) 
     db.session.add(newStudent)
     db.session.commit()
     return jsonify(message=f'Student {newStudent.studentID} - {newStudent.username} created!'), 201

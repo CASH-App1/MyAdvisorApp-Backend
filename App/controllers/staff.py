@@ -2,21 +2,40 @@ from App.models import Program, Course, Staff
 from App.database import db
 
 
-def create_staff(password, staff_id, name):
-    new_staff = Staff(password, staff_id, name)
-    db.session.add(new_staff)
-    db.session.commit()
-    return new_staff
-
-
-def verify_staff(username):
-    staff=Staff.query.filter_by(id=username).first()
-    if staff:
-        return True
-    return False
+def create_staff(staff_id, department_code, first_name, last_name, email, username, password):
+    user = User.query.filter_by(username = username).first()
+    if not user:
+        new_staff = Staff(staffID=staff_id, departmentCode= department_code, firstName=first_name, lastName=last_name, email=email, username = username, password = password)
+        department = Department.query.get(row['departmentCode']).first()
+        if department:
+            department.staffMembers.append(new_staff)
+            db.session.add(new_staff)
+            db.session.commit()
+            return new_staff
+    return None
 
 def get_staff_by_id(ID):
-    return Staff.query.filter_by(id=ID).first()
+    staff = Staff.query.get(ID).first()
+    if staff:
+        return staff
+    return None
+
+def get_all_staff():
+    return Staff.query.all()
+
+def update_staff(staffID, new_departmentCode, new_firstName, new_lastName, new_email, new_username, new_password):
+    staff = Staff.query.get(staffID)
+    if staff:
+        staff.departmentCode = new_departmentCode
+        staff.firstName = new_firstname
+        staff.lastName = new_lastName
+        staff.email = new_email
+        staff.username = new_username
+        staff.password = new_password
+        db.session.add(staff)
+        db.session.commit()
+        return staff
+    return None
 
 
 # def add_program(self, program_name, description):
