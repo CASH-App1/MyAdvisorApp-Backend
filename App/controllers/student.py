@@ -42,12 +42,14 @@ def get_students_by_name(first_name, last_name):
     return student_search
     
 # Controller to update a student
-def update_student(studentID, new_first_name, new_last_name, new_email):
+def update_student(studentID, new_first_name, new_last_name, new_email, new_username, new_password):
     student = Student.query.get(studentID)
     if student:
         student.firstName = new_first_name
         student.lastName = new_last_name
         student.email = new_email
+        student.username = new_username
+        student.password = new_password
         db.session.add(student)
         db.session.commit()
         return student

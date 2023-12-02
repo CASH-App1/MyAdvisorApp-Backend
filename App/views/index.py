@@ -1,6 +1,6 @@
 from flask import Blueprint, redirect, render_template, request, send_from_directory, jsonify
 from App.models import db
-from App.controllers import (create_course, create_staff,createCoursesfromFile)
+from App.controllers import *
 
 index_views = Blueprint('index_views', __name__, template_folder='../templates')
 
@@ -13,8 +13,9 @@ def init():
     with open('Mock Data/Department Data.csv') as file:
         reader = csv.DictReader(file)
         for row in reader:
-            newDept = Department(departmentCode =row['departmentCode'], departmentName = row['departmentName'])
-            db.session.add(newDept)
+            newDept = create_department(departmentCode =row['departmentCode'], departmentName = row['departmentName'])
+            if newDept:
+                db.session.add(newDept)
     db.session.commit() 
 
     with open('Mock Data/Staff Data.csv') as file:
@@ -29,26 +30,27 @@ def init():
     with open('Mock Data/Program Data.csv') as file:
         reader = csv.DictReader(file)
         for row in reader:
-            newProgram = Program(department_code = row['departmentCode'], program_name = row['programName'], core_credits = row['coreCredits'], elective_credits = row['electiveCredits'], foun_credits = row['founCredits'])
-            department = Department.query.get(row['departmentCode']).first()
-            department.programs.append(newProgram)
-            db.session.add(newProgram)
+            newProgram = create_program(department_code = row['departmentCode'], program_name = row['programName'], core_credits = row['coreCredits'], elective_credits = row['electiveCredits'], foun_credits = row['founCredits'])
+            if newProgram:
+                db.session.add(newProgram)
     db.session.commit() 
+
 
     with open('Mock Data/Course Data.csv') as file:
         reader = csv.DictReader(file)
         for row in reader:
-            prereq = Prerequisite(row['courseCode'])
-            newCourse = Course(courseCode = row['courseCode'], prereqID = prereq.prereqID, courseName = row['courseName'], credits = row['credits'], difficulty = row['difficulty'])
-            db.session.add(newCourse)
+            newCourse = create_course(row['courseCode'], row['courseName'], row['credits'], row['difficulty'])
+            if newCourse:
+                db.session.add(newCourse)
     db.session.commit() 
+
 
     with open('Mock Data/Program Requirements Data.csv') as file:
         reader = csv.DictReader(file)
         for row in reader:
-            program = Program.query.filter_by(programName = row['programName'])
-            program.add_course(row['courseCode'], row['courseType'])
-    db.session.commit() 
+            add_program_prerequisites(row['programName'], row['courseCode'], row['courseType'])
+        
+        db.session.commit() 
 
 
     with open('Mock Data/Student Data.csv') as file:

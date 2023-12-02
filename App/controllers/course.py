@@ -4,21 +4,23 @@ from App.database import db
 import json, csv
 
 
-def create_course(code, prereqID, courseName, credits, difficulty):
+def create_course(code, courseName, credits, difficulty):
     course = Course.query.filter_by(courseCode = code).first()
-    if course is None:
-        course = Course(code, prereqID, courseName, credits, difficulty)
-            
+    if not course:
+        prereqID = Prerequisite(code)
+        course = Course(code, prereqID, courseName, credits, difficulty)    
         db.session.add(course)
         db.session.commit()
         return course
-    else:
-        return None
+    return None
 
 
     
 def get_course_by_courseCode(code):
-    return Course.query.filter_by(courseCode=code).first()
+    course = Course.query.get(code).first()
+    if course:
+        return course
+    return None
 
 def courses_Sorted_byDifficulty():
     courses =  Course.query.order_by(Course.difficulty.asc()).all()
