@@ -25,13 +25,13 @@ def addProgram():
 
   program = Program.query.filter_by(programName = data['programName'])
   if program:
-    return jsonify(message = 'Program already exists'), 400
+    return jsonify(error = 'Program already exists'), 400
 
   newProgram = create_program(data['departmentCode'], data['programName'], data['coreCredits'], data['electiveCredits'], data['founCredits'])
   if newprogram:
     return jsonify(message = f"Program {newProgram.programName} added"), 201
   else:
-     return jsonify(message = "Program creation unsucessful"), 400
+     return jsonify(error = "Program creation unsucessful"), 400
 
 
 @staff_views.route('/program-requirements', methods=['POST'])
@@ -41,7 +41,7 @@ def addProgramRequirements():
 
   program = Program.query.filter_by(programName = data['programName']).first()
   if not program:
-    return jsonify(message = 'Program does not exist'), 400
+    return jsonify(error = 'Program does not exist'), 400
 
   #add core courses
   for core in data['coreCourses']:
@@ -102,12 +102,12 @@ def addSemesterCourse():
 
   offeredCourses = get_courses_in_semester(data['year'], data['semesterType'])
   if course in offeredCourses:
-    return jsonify({'message': f"{courseCode} already exists in the semester's offered courses"}), 400
+    return jsonify(message = f"{courseCode} already exists in the semester's offered courses"), 400
 
   course = add_semester_course(courseCode, semester.semesterID)
   if course:
      return jsonify(message = f'Added {course.courseCode} successfully'), 200
-  return jsonify(message = "Course addition unsucessful"), 400
+  return jsonify(error = "Course addition unsucessful"), 400
 
 
 
@@ -126,9 +126,9 @@ def removeSemesterCourse():
 
   offeredCourses = get_courses_in_semester(data['year'], data['semesterType'])
   if course in offeredCourses:
-    return jsonify({'message': f"{courseCode} already exists in the semester's offered courses"}), 400
+    return jsonify(message f"{courseCode} already exists in the semester's offered courses"), 400
 
   course = remove_semester_course(courseCode, semester.semesterID)
   if course:
      return jsonify(message = f'Deleted {course.courseCode} successfully'), 200
-  return jsonify(message = "Course deletion unsucessful"), 400
+  return jsonify(error = "Course deletion unsucessful"), 400
