@@ -54,7 +54,7 @@ def init():
     with open('Mock Data/Student Data.csv') as file:
         reader = csv.DictReader(file)
         for row in reader:
-            newStudent = add_student(id = row['studentID'], firstName = row['firstName'], lastName = row['lastName'], email = row['email'], username = row['username'], password = row['password'])
+            newStudent = add_student(id = row['studentID'], firstName = row['firstName'], lastName = row['lastName'], email = row['email'], username = row['username'], password = row['password'], program1 = row['program1'], program2 = row['program2'])
             if newStudent:
                 db.session.add(newStudent)
     db.session.commit() 
