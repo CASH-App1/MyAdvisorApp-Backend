@@ -51,30 +51,41 @@ def get_program_by_id(program_id):
 def get_core_credits(program_id):
     program = get_program_by_id(program_id)
     if program:
-        return program.coreCredits else 0
+        return program.coreCredits 
+    return 0
 
 def get_core_courses(program_id):
     program = get_program_by_id(program_id)
     courses = program.coreCourses
-    return courses if program else []
+    if program: 
+        return courses
+    return 0
 
 def get_elective_credits(program_id):
     program = get_program_by_id(program_id)
-    return program.electiveCredits if program else 0
+    if program:
+        return program.electiveCredits  
+    return 0
 
 def get_elective_courses(program_id):
     program = get_program_by_id(program_id)
     courses = program.electiveCourses
-    return courses if program else []
+    if program:
+        return courses  
+    return 0
 
 def get_foun_credits(program_name):
     program = get_program_by_name(program_name)
-    return program.founCredits if program else 0
+    if program:
+        return program.founCredits 
+    return 0
 
 def get_foun_courses(program_name):
     program = get_program_by_name(program_name)
     courses = program.founCourses
-    return courses if program else []
+    if program: 
+        return courses 
+    return 0
 
 def get_all_courses(program_name):
     core_courses = get_core_courses(program_name)

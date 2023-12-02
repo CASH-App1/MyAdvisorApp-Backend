@@ -1,5 +1,5 @@
 from .user import *
-from .course import *
+from .courses import *
 from .program import *
 from .department import *
 from .staff import *
@@ -7,7 +7,7 @@ from .student import *
 from .semester import *
 from .semesterHistory import *
 from .courseHistory import *
-from .programCourse import *
+from .programCourses import *
 from .prerequisite import *
 from .coursePlan import *
 from .coursePlanCourses import *
