@@ -111,7 +111,7 @@ def addSemesterCourse():
 
 
 
-@staff_views.route('/staff/semester-courses', methods=['DEL'])
+@staff_views.route('/staff/semester-courses', methods=['DELETE'])
 @staff_required
 def removeSemesterCourse():
   data=request.json
