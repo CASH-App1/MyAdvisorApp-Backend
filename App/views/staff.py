@@ -22,10 +22,6 @@ staff_views = Blueprint('staff_views', __name__, template_folder='../templates')
 @staff_required
 def addProgram():
   data=request.json
-  # data['programName']
-  # data['coreCredits']
-  # data['electiveCredits']
-  # data['founCredits']
 
   program = Program.query.filter_by(programName = data['programName'])
   if program:
@@ -49,21 +45,21 @@ def addProgramRequirements():
 
   #add core courses
   for core in data['coreCourses']:
-    check = check_prerequisite_exists(data['programName'], core)
+    check = check_prerequisite_exists(data['programName'], core['course'])
     if check:
-      add_program_prerequisites(data['programName'], core, 'core')
+      add_program_prerequisites(data['programName'], core['course'], 'core')
 
   #add elective courses
   for elective in data['electiveCourses']:
-    check = check_prerequisite_exists(data['programName'], elective)
+    check = check_prerequisite_exists(data['programName'], elective['course'])
     if check:
-      add_program_prerequisites(data['programName'], elective, 'elective')
+      add_program_prerequisites(data['programName'], elective['course'], 'elective')
 
   #add foundation courses
   for foundation in data['foundationCourses']:
-    check = check_prerequisite_exists(data['programName'], foundation)
+    check = check_prerequisite_exists(data['programName'], foundation['course'])
     if check:
-      add_program_prerequisites(data['programName'], foundation, 'foundation')
+      add_program_prerequisites(data['programName'], foundation['course'], 'foundation')
   return jsonify(message = 'Program pre-requisites added successfully'), 200
 
 @staff_views.route('/staff/new-semester', methods=['POST'])
