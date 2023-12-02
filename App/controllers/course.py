@@ -5,7 +5,7 @@ import json, csv
 
 
 def create_course(code, courseName, credits, difficulty):
-    course = Course.query.filter_by(courseCode = code).first()
+    course = Course.query.get(courseCode = code).first()
     if not course:
         prereqID = Prerequisite(code)
         course = Course(code, prereqID, courseName, credits, difficulty)    

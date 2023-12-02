@@ -48,8 +48,9 @@ def init():
     with open('Mock Data/Program Requirements Data.csv') as file:
         reader = csv.DictReader(file)
         for row in reader:
-            add_program_prerequisites(row['programName'], row['courseCode'], row['courseType'])
-        
+            check = check_prerequisite_exists(row['programName'], row['courseCode'])
+            if check:
+                add_program_prerequisites(row['programName'], row['courseCode'], row['courseType'])
         db.session.commit() 
 
 
