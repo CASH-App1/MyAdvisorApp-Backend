@@ -20,10 +20,9 @@ def init():
     with open('Mock Data/Staff Data.csv') as file:
         reader = csv.DictReader(file)
         for row in reader:
-            newStaff = Staff(staffID = row['staffID'], departmentCode = row['departmentCode'], firstName = row['firstName'], lastName = row['lastName'], email = row['email'], username = row['username'], password = row['password'])
-            department = Department.query.get(row['departmentCode']).first()
-            department.staffMembers.append(newStaff)
-            db.session.add(newStaff)
+            newStaff = new_staff(staffID = row['staffID'], departmentCode = row['departmentCode'], firstName = row['firstName'], lastName = row['lastName'], email = row['email'], username = row['username'], password = row['password'])
+            if newStaff:
+                db.session.add(newStaff)
     db.session.commit() 
 
 
@@ -55,16 +54,9 @@ def init():
     with open('Mock Data/Student Data.csv') as file:
         reader = csv.DictReader(file)
         for row in reader:
-            newStudent = Student(id = row['studentID'], firstName = row['firstName'], lastName = row['lastName'], email = row['email'], username = row['username'], password = row['password'])
-            
-            program = Program.query.filter_by(programName = row['program1'])
-            newStudent.programs.append(program)
-
-            program = Program.query.filter_by(programName = row['program2'])
-            if program:
-                newStudent.programs.append(program)
-
-            db.session.add(newStudent)
+            newStudent = add_student(id = row['studentID'], firstName = row['firstName'], lastName = row['lastName'], email = row['email'], username = row['username'], password = row['password'])
+            if newStudent:
+                db.session.add(newStudent)
     db.session.commit() 
 
     return jsonify({'database intialized'})

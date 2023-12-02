@@ -3,15 +3,29 @@ from App.controllers import (get_program_by_name)
 from App.database import db
 
 # Controller to add a new student
-def add_student(studentID, first_name, last_name, email):
-    new_student = Student(, studentID=studentID, firstName=first_name, lastName=last_name, email=email)
-    db.session.add(new_student)
-    db.session.commit()
-    return new_student
+def add_student(studentID, first_name, last_name, email, username, password, program1, program2):
+    user = User.query.filter_by(username = username).first()
+    if not user:
+        new_student = Student(, studentID=studentID, firstName=first_name, lastName=last_name, email=email)
+        program = Program.query.filter_by(programName = row['program1'])
+        if program:
+            new_student.programs.append(program)
+
+            program = Program.query.filter_by(programName = row['program2'])
+            if program:
+                newStudent.programs.append(program)
+            
+            db.session.add(new_student)
+            db.session.commit()
+            return new_student
+    return None
 
 # Controller to get a student by username (student_id)
 def get_student(studentID):
-    return Student.query.filter_by(studentID=student_studentID).first()
+    student = Student.query.get(studentID).first()
+    if student:
+        return student
+    return None
 
 # Controller to get a list of all students
 def get_all_students():
