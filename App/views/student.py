@@ -119,9 +119,9 @@ def update_academic_history():
     return jsonify(message = 'Semester History addition unsuccessful'), 400
 
 
-@student_views.route('/student/academic-history/<id>', methods=['GET'])
+@student_views.route('/student/academic-history', methods=['GET'])
 @student_required
-def view_academic_history(id):
+def view_academic_history():
     student = Student.query.filter_by(username = current_user.username).first()
     history = get_student_history(student)
 
