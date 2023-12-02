@@ -86,7 +86,7 @@ def updateStudentHistory(student, year, semesterType, histories):
     semesterHist = create_semester_history(student.studentID, year, semesterType)
     if semesterHist:
         for hist in histories:
-            courseHist = addCoursetoHistory(semesterHist, hist['courseCode'], hist['gradeLetter'], hist['percent'], hist['CourseType'], semesterHist.historyID)
+            courseHist = addCoursetoHistory(semesterHist, hist['courseCode'], hist['gradeLetter'], hist['percent'], hist['courseType'], semesterHist.historyID)
 
         
         student.studentHistory.append(semesterHist)
