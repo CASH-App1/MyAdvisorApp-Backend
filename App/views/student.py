@@ -44,10 +44,10 @@ def add_course_to_plan():
     if data['year']  != semester.year and data['semesterType'] != semseter.semesterType:
         return jsonify(error = f'Invalid semester entered'), 400
 
-    if not data['planID']:
+    if data['planID'] == 0:
         plan = create_course_plan(student.studentID)
 
-    if data['planID']:
+    if data['planID'] != 0:
         plan = get_course_plan(data['planID'])
         if not plan:
             return jsonify(error = f'Course Plan does not exist'), 400
@@ -75,7 +75,7 @@ def remove_course_from_plan():
     if data['year']  != semester.year and data['semesterType'] != semseter.semesterType:
         return jsonify(error = f'Invalid semester entered'), 400
 
-    if data['planID']:
+    if data['planID'] != 0:
         plan = get_course_plan(data['planID'])
         if not plan:
             return jsonify(error = f'Course Plan does not exist'), 400
