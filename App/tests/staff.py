@@ -46,14 +46,23 @@ def empty_db():
     db.drop_all()
 
 class StaffIntegrationTests(unittest.TestCase):
-    def test_create_staff(self):
-        staffid = 9
-        staffName = "Jane Doe"
-        staffpass = "janepass"
-        staff = create_staff(staffpass, staffid, staffName)
 
-        assert staff is not None
-        assert get_staff_by_id(9) != None
+    def test_create_staff(self):
+        staff = create_staff(101, "CLL", "Jane", "Austin", "jane101@mail.com", "jane", "janepass")
+        retrieved_staff = get_staff_by_id(staff.staffID)
         
+        self.assertEqual((retrieved_staff.departmentCode, retrieved_staff.firstName, retrieved_staff.lastName, 
+                        retrieved_staff.email, retrieved_staff.username),
+                         ("CLL", "Jane", "Austin", "jane101@mail.com", "jane"))
+
+    def test_update_staff(self):
+        staff = create_staff(101, "CLL", "Jane", "Austin", "jane101@mail.com", "jane", "janepass")
+        updated_staff = update_staff(staff.staffID, "DCIT", "Janice", "Dottin", "janice@example.com", "jan_dot", "newjanepass")
+        retrieved_staff = get_staff_by_id(updated_staff.staffID)
+
+        self.assertEqual((retrieved_staff.departmentCode, retrieved_staff.firstName, retrieved_staff.lastName, 
+                        retrieved_staff.email, retrieved_staff.username),
+                        ("DCIT", "Janice", "Dottin", "janice@example.com", "jan_dot"))
+
 
     
