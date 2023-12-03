@@ -1,6 +1,7 @@
 from App.database import db
 from sqlalchemy import Column, Integer, ForeignKey
 from sqlalchemy.orm import relationship
+from App.models import *
 
 class SemesterCourse(db.Model):
     __tablename__ = 'semester_courses'

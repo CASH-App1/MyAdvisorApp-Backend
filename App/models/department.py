@@ -1,6 +1,7 @@
 from App.database import db
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
+from App.models import *
 
 class Department(db.Model):
     departmentCode = Column(db.String(10), primary_key=True)

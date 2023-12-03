@@ -1,5 +1,5 @@
 from App.database import db
-from App.models import CoursePlanBuilder
+from App.models import *
 
 class EasiestCourses(CoursePlanBuilder):
     easiestCourseID = db.Column(db.Integer, primary_key=True)

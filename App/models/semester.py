@@ -1,6 +1,7 @@
 from App.database import db
 from sqlalchemy import Column, Integer, String, Date
 from sqlalchemy.orm import relationship
+from App.models import *
 
 class Semester(db.Model):
     semesterID= db.Column(db.Integer, primary_key = True) 

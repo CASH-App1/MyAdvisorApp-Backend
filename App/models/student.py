@@ -1,4 +1,4 @@
-from App.models import User  
+from App.models import *  
 from App.database import db
 
 class Student(User):

@@ -1,6 +1,7 @@
 from App.database import db
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
+from App.models import *
 
 class Program(db.Model):
     programID = Column(db.Integer, primary_key=True)

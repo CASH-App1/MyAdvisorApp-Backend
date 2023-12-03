@@ -1,6 +1,8 @@
 from App.database import db
 from sqlalchemy import Column, Integer, ForeignKey
 from sqlalchemy.orm import relationship
+from App.models import *
+
 
 class StudentProgram(db.Model):
     __tablename__ = 'student_programs'

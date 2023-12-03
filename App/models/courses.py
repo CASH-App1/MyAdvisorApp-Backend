@@ -1,5 +1,5 @@
 from App.database import db
-#from App.models import prerequisite
+from App.models import *
 import json
 
 class Course(db.Model):

@@ -1,6 +1,6 @@
 from App.database import db
 from sqlalchemy.orm import relationship
-from App.models import Course
+from App.models import *
 
 class Prerequisite(db.Model):
     prereqID = db.Column(db.Integer,primary_key= True)

@@ -1,4 +1,5 @@
 from App.database import db
+from App.models import *
 
 class CoursePlanDirector(db.Model):
     directorID = db.Column(db.Integer, primary_key=True)

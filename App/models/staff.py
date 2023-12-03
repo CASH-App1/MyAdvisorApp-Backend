@@ -1,7 +1,7 @@
 from .user import User 
 from App.database import db
 from sqlalchemy import Column, Integer, Date, ForeignKey
-from App.models import Department, User
+from App.models import *
 
 class Staff(User):
     
