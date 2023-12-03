@@ -11,6 +11,7 @@ def add_student(studentID, first_name, last_name, email, username, password, pro
         if program:
             new_student.programs.append(program)
 
+
             program = Program.query.filter_by(programName = row['program2'])
             if program:
                 newStudent.programs.append(program)
