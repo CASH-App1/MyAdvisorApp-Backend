@@ -40,7 +40,6 @@ class StudentUnitTest(unittest.TestCase):
         self.assertDictEqual(
             {"name": "John Doe", "student_id": "01234", "program": 1}, student_json)
 
-
 class StudentIntegrationTests(unittest.TestCase):
 
     def setUp(self):
@@ -59,70 +58,27 @@ class StudentIntegrationTests(unittest.TestCase):
             db.engine.dispose()
 
     def test_create_student(self):
-        program = create_program("Computer Science Major", 3, 4, 5)
-        student = create_student(
-            "01234", "johnpass", "John Doe", program.name)
-        assert student.name == "John Doe"
-
-    def test_get_all_student_json(self):
-        program = create_program("Computer Science Major", 3, 4, 5)
-        create_student("01234", "johnpass", "John Doe", program.name)
-        users_json = get_all_students_json()
-        self.assertListEqual(
-            [{"name": "John Doe", "student_id": "01234", "program": 1}], users_json)
+        student = add_student("816031318", "Sam", "Dawson", "sdawson@example.com", "sam_dawson", "password123", 
+                "Computer Science Major", "Electronics Minor")
+        retrieved_student = get_student(student.studentID)
+        
+        self.assertEqual((retrieved_student.firstName, retrieved_student.lastName, retrieved_student.email, 
+                        retrieved_student.username, retrieved_student.program1, retrieved_student.program2),
+                         ("Sam", "Dawson", "sdawson@example.com", "sam_dawson", "Computer Science Major", "Electronics Minor"))
 
     def test_update_student(self):
-        program = create_program("Computer Science Major", 3, 4, 5)
-        create_student("01234", "johnpass", "John Doe", program.name)
-        student = update_student("01234", "Bill")
-        assert student.name == "Bill"
+        student = add_student("816021458", "Jessica", "Pearson", "jessica.p@example.com", "jessica_pearson", "passjess", 
+                            "Computer Science Maajor", "Mathematics Major")
+        updated_student = update_student(student.studentID, "Janette", "Spectar", "janette@example.com", "janette_spectar", "new_password")
+        retrieved_student = get_student(updated_student.studentID)
 
-    # def test_add_course_to_plan(self):
-    #     course_code = "INFO2605"
-    #     prereqs = []
-    #     create_course("INFO2605", "Professional Ethics and Law", 3, 4, prereqs)
-    #     addSemesterCourses(course_code)
-    #     program = create_program("Computer Science Major", 3, 4, 5)
-    #     student = create_student(
-    #         "01234", "johnpass", "John Doe", program.name)
-    #     self.assertTrue(addCourseToPlan(student, course_code))
+        self.assertEqual((retrieved_student.firstName, retrieved_student.lastName, retrieved_student.email, retrieved_student.username),
+                         ("Janette", "Spectar", "janette@example.com", "janette_spectar"))
 
-    # def test_remove_course_from_plan(self):
-    #     course_code = "INFO2605"
-    #     prereqs = []
-    #     create_course("INFO2605", "Professional Ethics and Law", 3, 4, prereqs)
-    #     addSemesterCourses(course_code)
-    #     program = create_program("Computer Science Major", 3, 4, 5)
-    #     student = create_student(
-    #         "01234", "johnpass", "John Doe", program.name)
-    #     plan = create_CoursePlan(1)
-    #     addSemesterCourses(course_code)
-    #     addCourseToPlan(student, course_code)
-    #     enroll_in_programme(student.id, 1)
-    #     removeCourse(student, course_code)
-    #     course_from_course_plan = getCourseFromCoursePlan(plan.planId, course_code)
-    #     self.assertEqual(course_from_course_plan.planId, 1)
-    #     self.assertEqual(course_from_course_plan.code, "INFO2605")
-
-    def test_enroll_in_programme(self):
-        program = create_program("Computer Science Major", 3, 4, 5)
-        student = create_student(
-            "01234", "johnpass", "John Doe", program.name)
-        enroll_in_programme(student.id, 1)
-        assert enroll_in_programme(student.id, 1) == 1
-
-    # def test_view_course_plan(self):
-    #     course_code = "MATH2250"
-    #     create_course(
-    #         "/Users/jervalthomas/Desktop/Programming /Year 4 Sem 1/COMP 3613/flaskmvc/testData/courseData.csv")
-    #     addSemesterCourses(course_code)
-    #     program = create_program("Computer Science Major", 3, 4, 5)
-    #     student = create_student(
-    #         "816025522", "Password", "Jerval", program.name)
-    #     create_CoursePlan(1)
-    #     addSemesterCourses(course_code)
-    #     addCourseToPlan(student, course_code)
-    #     enroll_in_programme(student.id, 1)
-    #     plan_json = view_course_plan(student)
-    #     self.assertListEqual(
-    #         [{"name": "Jerval", "student_id": "816025522", "program": 1}], plan_json)
+    def test_create_semester_history(self):
+        student = add_student("123456789", "John", "Doe", "john.d@example.com", "john_doe", "password", "History Major", "Psychology")
+        semester_history = create_semester_history(student.studentID, 2023, 1)
+        self.assertIsNotNone(semester_history)
+        
+        student_history = get_student_history(student)
+        self.assertTrue(any(hist['year'] == 2023 and hist['semester_type'] == 1 for hist in student_history))
