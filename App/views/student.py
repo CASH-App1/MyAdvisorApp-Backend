@@ -22,13 +22,17 @@ def autogenerate_course_plan():
 
     student = Student.query.filter_by(username = current_user.username).first()
     valid_plans = ["Elective Priority", "Easiest Courses", "Fastest Graduation"]
+    valid_degree_types = ['Major', 'Minor', 'Special']
 
-    if data['planType'] in valid_plans:
-        plan = generator(student, data['planType'])
+    if data['planType'] in valid_plans and data['degreeType'] in valid_degree_types:
+        semester =  get_upcoming_semester()
+        plan = autogenerator(student, data['planType'], data['degreeType'], data['programID'], semester.semesterID)
         if plan:
-            return jsonify(message = f'{command} plan created & added to student plans
+            return jsonify(message = f'{command} plan created & added to student plans!
             {student.firstName} {student.lastName} - {data['planType']} Course Plan
             {plan.get_json()}'), 201
+            
+    return jsonify(error = 'Invalid plan type'), 401
 
 
 @student_views.route('/student/course-plan', methods=['POST'])
@@ -41,36 +45,25 @@ def add_course_to_plan():
         return jsonify(error = f'Invalid semester entered'), 400
 
     if not data['planID']:
-        plan = CoursePlan(student.studentID)
+        plan = create_course_plan(student.studentID)
 
     if data['planID']:
-        plan = CoursePlan.query.get(data['planID']).first()
+        plan = get_course_plan(data['planID'])
         if not plan:
             return jsonify(error = f'Course Plan does not exist'), 400
 
-    qualify = 0 #checks if all prereqs are met
-    course = Course.query.get(data['course']).first()
+    course = get_course_by_courseCode(data['course'])
     if not course:
         return jsonify(error = f'Course {data['course'].courseCode} does not exist'), 400 
-        
-    prereqs = Prerequisite.query.get(course.prereqID).first()
-    if prereqs.count() > 0:
-        for p in prereqs:
-            for s in student.studentHistory:
-                for c in s.courses:
-                    if p.courseCode == c.courseCode:
-                        qualify += 1
-                            
-    if prereqs.count() == 0 or qualify == prereqs.count():
+                     
+    if check_prerequisites(course, student):
         added = add_course_to_plan(course, plan)
         if added:
             return jsonify(message = 'Course(s) added successfully'), 200
-
-    if qualify != prereqs.count():
-        return jsonify(error = f'The pre-requisites for {course.courseCode} have not been met!'), 400
+     return jsonify(error = f'The pre-requisites for {course.courseCode} have not been met!'), 400
     
     
-@student_views.route('/student/course-plan', methods=['DEL'])
+@student_views.route('/student/course-plan', methods=['DELETE'])
 @student_required
 def remove_course_from_plan():
     student = Student.query.filter_by(username = current_user.username).first()
@@ -79,41 +72,39 @@ def remove_course_from_plan():
     if data['year']  != semester.year and data['semesterType'] != semseter.semesterType:
         return jsonify(error = f'Invalid semester entered'), 400
 
-    if not data['planID']:
-        return jsonify(error = f'Course Plan does not exist'), 400
-
     if data['planID']:
-        plan = CoursePlan.query.get(data['planID']).first()
+        plan = get_course_plan(data['planID'])
         if not plan:
             return jsonify(error = f'Course Plan does not exist'), 400
 
-    for course in data['courses']:
-        course = Course.query.get(course).first()
-        if not course:
-           return jsonify(error = f'Course {course.courseCode} does not exist'), 400 
-        added = remove_course_from_plan(course, plan)
-
-
-
+    course = get_course_by_courseCode(data['course'])
+    if not course:
+        return jsonify(error = f'Course {data['course'].courseCode} does not exist'), 400 
+    
+    removed = remove_course_to_plan(course, plan)
+    if removed:
+        return jsonify(message = f'Course {course.courseCode} removed successfully'), 200
+    return jsonify(error = f'Course {course.courseCode} removal was unsuccessful!'), 400
+    
 
 
 @student_views.route('/student/course-plans', methods=['GET'])
 @student_required
 def view_course_plans():
     student = Student.query.filter_by(username = current_user.username).first()
-    coursePlans = student.coursePlans
+    coursePlans = get_student_plans(student)
 
     if coursePlans:
-        return jsonify(message = f'Student {studen.firstName} {student.lastName} Course Plans: {student.coursePlans}'), 200
-    return jsonify(message = f'Student {student.firstName} {student.lastName} has no created course plans.'), 200
+        return jsonify(message = f'Student {studen.firstName} {student.lastName} Course Plans: {coursePlans}'), 200
+    return jsonify(error = f'Student {student.firstName} {student.lastName} has no created course plans.'), 200
+
 
 
 @student_views.route('/student/academic-history', methods=['POST'])
 @student_required
 def update_academic_history():
     data = request.json
-   
-    semester = Semester.query.order_by(SemesterHistory.semesterID.desc()).first()
+    semester = get_upcoming_semester()
     if data['year']  >= semester.year and data['semesterType'] >= semseter.semesterType:
         return jsonify(error = f'Invalid semester entered'), 400
 
@@ -122,28 +113,20 @@ def update_academic_history():
         return jsonify(error = f'Semester {data['semesterType']} - {data['year']} already exists!'), 200
     
     student = Student.query.filter_by(username = current_user.username).first()
-    semesterHist = SemesterHistory(student.studentID, data['year'], data['semesterType'])
-    if semesterHist:
-        for hist in data['courseHistories']:
-            courseHist = CourseHistory(courseCode = hist['courseCode'], gradeLetter = hist['gradeLetter'], percent = hist['percent'], courseType = hist['semesterType'], semID = semesterHist.historyID)
-            if courseHist not in semesterHist.courses:
-                db.session.add(courseHist)
-                semesterHist.courses.append(courseHist)
-        
-        student.studentHistory.append(semesterHist)
-        db.session.add(semesterHist)
-        db.session.commit()
+    updatedHistory = updateStudentHistory(student, data['year'],  data['semesterType'],  data['histories'])
+    if updatedHistory:
         return jsonify(message = 'Semester History addition successful'), 200
-    return jsonify(message = 'Semester History addition unsuccessful'), 400
+    return jsonify(error = 'Semester History addition unsuccessful'), 400
 
 
-@student_views.route('/student/academic-history/<id>', methods=['GET'])
+@student_views.route('/student/academic-history', methods=['GET'])
 @student_required
-def view_academic_history(id):
+def view_academic_history():
     student = Student.query.filter_by(username = current_user.username).first()
-    history = student.studentHistory
+    history = get_student_history(student)
 
     if history:
-        return jsonify(message = f'{student.firstName} {student.lastName} Academic History: {student.studentHistory}'), 200
+        return jsonify(message = f'{student.firstName} {student.lastName} Academic History: 
+                                    {history}'), 200
     return jsonify(error = f'There is no academic history for {student.firstName} {student.lastName}'), 200
     

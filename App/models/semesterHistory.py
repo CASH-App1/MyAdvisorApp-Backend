@@ -14,8 +14,12 @@ class SemesterHistory(db.Model):
         self.semesterType = semesterType
     
     def get_json(self):
+        courseInfo = []
+        for c in self.courses:
+            courseInfo.append(c.get_json())
+
         return{
             'Student ID': self.studentID, #is this suppose to be id or program_id alone 
             'Semester Date': f'{self.year} - Semester {self.semesterType}',
-            'Courses': self.courses
+            'Courses': courseInfo
         }

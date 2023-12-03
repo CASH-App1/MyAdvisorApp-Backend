@@ -14,7 +14,10 @@ class CoursePlan(db.Model):
         
 
     def get_json(self):
-        courses = [c.get_json() in self.courses]
+        courses = []
+        for c in self.courses:
+            courses.append(c.get_json())
+            
         return{
             'Plan ID': self.planId,
             'Student ID': self.studentId,

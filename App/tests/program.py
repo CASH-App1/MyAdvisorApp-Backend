@@ -1,47 +1,29 @@
-import unittest, pytest
+import os, tempfile, pytest, logging, unittest
 from App.models import Program, ProgramCourses
 from App.main import create_app
 from App.database import db, create_db
-from App.controllers import *
+
 
 class ProgramUnitTests(unittest.TestCase):
 
     def test_new_program(self):
-        programname = "Information Technology Special"
-        core_credits = 69
-        elective_credits = 15
-        foun_credits = 9
-        program = Program(programname, core_credits, elective_credits, foun_credits)
-        self.assertEqual(program.name, programname)
-        self.assertEqual(program.core_credits, core_credits)
-        self.assertEqual(program.elective_credits, elective_credits)
-        self.assertEqual(program.foun_credits, foun_credits)
+        newProgram = Program("DCIT", "Computer Science Special", "24", "3", "12")
+        assert(newProgram.departmentCode, newProgram.programName, newProgram.coreCredits, newProgram.electiveCredits, newProgram.founCredits) == ("DCIT", "Computer Science Special", "24", "3", "12")
     
-    def test_program_toJSON(self):
-        programname = "Information Technology Special"
-        core_credits = 69
-        elective_credits = 15
-        foun_credits = 9
-        
-        program = Program(programname, core_credits, elective_credits, foun_credits)
-        program_json = program.get_json()
+    def test_program_course_toDict (self):
+        newProgram = Program("DCIT", "Computer Science Special", "24", "3", "12")
+        self.assertDictEqual(newProgram.toDict(), {"Program ID":"CS100", "Department Code":"DCIT", "Program Name":"Computer Science Special", "Core Credits":"24", "Elective Credits":"3", "Foundation Credits":"12"})
 
-        self.assertDictEqual(program_json, {
-            'Program ID:': None,
-            'Program Name: ': programname,
-            'Core Credits: ': core_credits,
-            'Elective Credits ': elective_credits,
-            'Foundation Credits: ': foun_credits,
-        })
+class ProgramCourseUnitTests(unittest.TestCase):
 
     def test_new_program_course(self):
-        programcourse=ProgramCourses("1","INFO2605","2")
-        assert programcourse.code=="INFO2605"
+        newProgramCourse = ProgramCourses("COMP307", "CS100")
+        assert(newProgramCourse.courseCode, newProgramCourse.programID) == ("COMP307", "CS100")
 
     def test_program_course_toJSON(self):
-        programcourse=ProgramCourses("1","INFO2605","2")
-        programcourse_json=programcourse.get_json()
-        self.assertDictEqual(programcourse_json,{'Program Course ID:':None, 'Program ID:':'1','Course Code: ':'INFO2605','Course Type: ':'2'})
+        newProgramCourse = ProgramCourses("COMP307", "CS100")
+        self.assertDictEqual(newProgramCourse.get_json(), {"Program Course ID":"1", "Course Code":"COMP307", "Program ID":"CS100"})
+
 
 
 
@@ -88,3 +70,4 @@ class ProgramIntegrationTests(unittest.TestCase):
        
         all_program_courses = get_all_program_courses(program_name)
         self.assertTrue(any(course.course_code == course_code for course in all_program_courses))
+

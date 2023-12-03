@@ -16,7 +16,9 @@ class Semester(db.Model):
         if course not in self.courses:
             self.courses.append(course)
             db.session.commit()
+            return True
 
     def remove_course(course):
         self.courses.remove(course)
         db.session.commit()
+        return True

@@ -1,45 +1,41 @@
-import os
-import tempfile
-import pytest
-import logging
-import unittest
+import os, tempfile, pytest, logging, unittest
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from App.main import create_app
 from App.database import db, create_db
-from App.models import User, Student, Program, StudentCourseHistory, CoursePlan
-from App.controllers import *
+
+from App.models import User
+
 
 LOGGER = logging.getLogger(__name__)
 
 '''
-   Unit Tests
+   User Unit Tests
 '''
 
 
 class UserUnitTests(unittest.TestCase):
 
     def test_new_user(self):
-        user = User("bob", "bobpass")
-        assert user.username == "bob"
+        newUser = User("bob", "bobpass")
+        assert newUser.username == "bob"
 
     # pure function no side effects or integrations called
-    def test_get_json(self):
+    def test_user_json(self):
         user = User("bob", "bobpass")
         user_json = user.get_json()
-        self.assertDictEqual(user_json, {"id": None, "username": "bob"})
+        self.assertDictEqual(user_json, {"id": "101", "username": "bob"})
 
     def test_hashed_password(self):
         password = "mypass"
         hashed = generate_password_hash(password, method='sha256')
-        user = User("bob", password)
-        assert user.password != password
+        newUser = User("bob", password)
+        assert newUser.password != password
 
     def test_check_password(self):
         password = "mypass"
         user = User("bob", password)
         assert user.check_password(password)
-
 
 '''
     Integration Tests
@@ -96,3 +92,4 @@ class UsersIntegrationTests(unittest.TestCase):
         updated_user = get_user(user.id)
 
         self.assertEqual(updated_user.username, "new_john_doe")
+
