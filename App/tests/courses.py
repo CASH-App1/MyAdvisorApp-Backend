@@ -35,3 +35,20 @@ class CourseHistoryUnitTests(unittest.TestCase):
         newCourseHistory = CourseHistory("CSCI101", "A", "0.85", "elective")
         self.assertDictEqual(newCourseHistory.get_json(), {"Course History ID": "CH001", "Course Code":"CSCI101", "Grade":"A", "Percentage":"0.85", "Course Type":"elective"})
 
+
+"Integration Tests"
+class TestCourseIntegration(unittest.TestCase):
+    def test_create_course(self):
+        # Test data for the course
+        course_code = "COMP 1602"
+        course_name = "Computer Programming II"
+        credits = 3
+        difficulty = 3
+
+        
+        created_course = create_course(course_code, course_name, credits, difficulty)
+        self.assertIsNotNone(created_course)
+
+        retrieved_course = get_course_by_courseCode(course_code)
+        self.assertEqual((retrieved_course.code, retrieved_course.courseName, retrieved_course.credits, retrieved_course.difficulty),
+                         (course_code, course_name, credits, difficulty))
