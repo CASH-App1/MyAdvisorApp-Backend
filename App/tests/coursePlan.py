@@ -34,7 +34,7 @@ def empty_db():
     db.drop_all()
 
 
-# Integration Tests
+"Integration Tests" 
 class CoursePlanIntegrationTests(unittest.TestCase):
 
     def setUp(self):
