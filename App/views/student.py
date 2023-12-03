@@ -57,7 +57,7 @@ def add_course_to_plan():
         return jsonify(error = f'Course {data['course'].courseCode} does not exist'), 400 
 
     if course in plan.courses:
-        return jsonify(error = 'Course already exists in plan'), 2400
+        return jsonify(message = 'Course already exists in plan'), 200
                      
     if check_prerequisites(course, student):
         added = add_course_to_plan(course, plan)
@@ -85,7 +85,7 @@ def remove_course_from_plan():
         return jsonify(error = f'Course {data['course'].courseCode} does not exist'), 400 
 
     if course not in plan.courses:
-        return jsonify(error = 'Course does not exist in plan'), 400
+        return jsonify(message = 'Course does not exist in plan'), 200
     
     removed = remove_course_to_plan(course, plan)
     if removed:
