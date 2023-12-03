@@ -39,4 +39,41 @@ class StudentProgramUnitTests(unittest.TestCase):
     def test_new_student_program(self):
         newStudentProgram = StudentProgram("816030870", "30")
         assert(newStudentProgram.studentID, newStudentProgram.programID) == ("816030870", "30")
-    
+
+"Integration Tests"
+class StudentIntegrationTests(unittest.TestCase):
+
+    def setUp(self):
+        app = create_app(
+            {'TESTING': True, 'SQLALCHEMY_DATABASE_URI': 'sqlite:///test.db'})
+        self.app = app.test_client()
+
+        with app.app_context():
+            create_db()
+            db.create_all()
+
+    def tearDown(self):
+        with self.app:
+            db.session.remove()
+            db.drop_all()
+            db.engine.dispose()
+
+    def test_create_student(self):
+        student = add_student("816031318", "Sam", "Dawson", "sdawson@example.com", "sam_dawson", "password123", 
+                "Computer Science Major", "Electronics Minor")
+        retrieved_student = get_student(student.studentID)
+        
+        self.assertEqual((retrieved_student.firstName, retrieved_student.lastName, retrieved_student.email, 
+                        retrieved_student.username, retrieved_student.program1, retrieved_student.program2),
+                         ("Sam", "Dawson", "sdawson@example.com", "sam_dawson", "Computer Science Major", "Electronics Minor"))
+
+    def test_update_student(self):
+        student = add_student("816021458", "Jessica", "Pearson", "jessica.p@example.com", "jessica_pearson", "passjess", 
+                            "Computer Science Maajor", "Mathematics Major")
+        updated_student = update_student(student.studentID, "Janette", "Spectar", "janette@example.com", "janette_spectar", "new_password")
+        retrieved_student = get_student(updated_student.studentID)
+
+        self.assertEqual((retrieved_student.firstName, retrieved_student.lastName, retrieved_student.email, retrieved_student.username),
+                         ("Janette", "Spectar", "janette@example.com", "janette_spectar"))
+
+   
