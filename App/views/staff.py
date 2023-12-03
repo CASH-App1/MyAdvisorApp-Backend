@@ -1,7 +1,8 @@
 from flask import Blueprint, render_template, jsonify, request, send_from_directory, flash, redirect, url_for
 from flask_jwt_extended import jwt_required, current_user as jwt_current_user
 from flask_login import current_user, login_required
-from App.models import Program, ProgramCourses
+from functools import wraps
+from App.models import *
 
 from.index import index_views
 
@@ -126,7 +127,7 @@ def removeSemesterCourse():
 
   offeredCourses = get_courses_in_semester(data['year'], data['semesterType'])
   if course in offeredCourses:
-    return jsonify(message f"{courseCode} already exists in the semester's offered courses"), 400
+    return jsonify(message = f"{courseCode} already exists in the semester\'s offered courses"), 400
 
   course = remove_semester_course(courseCode, semester.semesterID)
   if course:

@@ -39,5 +39,5 @@ def setup_jwt(app):
     def user_lookup_callback(_jwt_header, jwt_data):
         identity = jwt_data["sub"]
         return User.query.get(identity)
-
+    
     return jwt

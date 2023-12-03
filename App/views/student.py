@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, jsonify, request, send_from_directory, flash, redirect, url_for
 from flask_jwt_extended import jwt_required, current_user as jwt_current_user
 from flask_login import current_user, login_required
+from functools import wraps
 from.index import index_views
 
 from App.controllers import *
@@ -28,9 +29,7 @@ def autogenerate_course_plan():
         semester =  get_upcoming_semester()
         plan = autogenerator(student, data['planType'], data['degreeType'], data['programID'], semester.semesterID)
         if plan:
-            return jsonify(message = f'{command} plan created & added to student plans!
-            {student.firstName} {student.lastName} - {data['planType']} Course Plan
-            {plan.get_json()}'), 201
+            return jsonify(message = f"{command} plan created & added to student plans! \n {student.firstName} {student.lastName} - {data['planType']} \n Course Plan {plan.get_json()}"), 201
             
     return jsonify(error = 'Invalid plan type'), 401
 
@@ -44,23 +43,26 @@ def add_course_to_plan():
     if data['year']  != semester.year and data['semesterType'] != semseter.semesterType:
         return jsonify(error = f'Invalid semester entered'), 400
 
-    if not data['planID']:
+    if data['planID'] == 0:
         plan = create_course_plan(student.studentID)
 
-    if data['planID']:
+    if data['planID'] != 0:
         plan = get_course_plan(data['planID'])
         if not plan:
             return jsonify(error = f'Course Plan does not exist'), 400
 
     course = get_course_by_courseCode(data['course'])
     if not course:
-        return jsonify(error = f'Course {data['course'].courseCode} does not exist'), 400 
+        return jsonify(error = f"Course {data['course'].courseCode} does not exist"), 400 
+
+    if course in plan.courses:
+        return jsonify(message = 'Course already exists in plan'), 200
                      
     if check_prerequisites(course, student):
         added = add_course_to_plan(course, plan)
         if added:
             return jsonify(message = 'Course(s) added successfully'), 200
-     return jsonify(error = f'The pre-requisites for {course.courseCode} have not been met!'), 400
+    return jsonify(error = f"The pre-requisites for {course.courseCode} have not been met!"), 400
     
     
 @student_views.route('/student/course-plan', methods=['DELETE'])
@@ -72,14 +74,17 @@ def remove_course_from_plan():
     if data['year']  != semester.year and data['semesterType'] != semseter.semesterType:
         return jsonify(error = f'Invalid semester entered'), 400
 
-    if data['planID']:
+    if data['planID'] != 0:
         plan = get_course_plan(data['planID'])
         if not plan:
             return jsonify(error = f'Course Plan does not exist'), 400
 
     course = get_course_by_courseCode(data['course'])
     if not course:
-        return jsonify(error = f'Course {data['course'].courseCode} does not exist'), 400 
+        return jsonify(error = f"Course {data['course'].courseCode} does not exist"), 400 
+
+    if course not in plan.courses:
+        return jsonify(message = 'Course does not exist in plan'), 200
     
     removed = remove_course_to_plan(course, plan)
     if removed:
@@ -110,7 +115,7 @@ def update_academic_history():
 
     semesterHist = SemesterHistory.query.filter_by(year = data['year'], semesterType = data['semesterType']).first()
     if semesterHist:
-        return jsonify(error = f'Semester {data['semesterType']} - {data['year']} already exists!'), 200
+        return jsonify(error = f"Semester {data['semesterType']} - {data['year']} already exists!"), 200
     
     student = Student.query.filter_by(username = current_user.username).first()
     updatedHistory = updateStudentHistory(student, data['year'],  data['semesterType'],  data['histories'])
@@ -126,7 +131,6 @@ def view_academic_history():
     history = get_student_history(student)
 
     if history:
-        return jsonify(message = f'{student.firstName} {student.lastName} Academic History: 
-                                    {history}'), 200
+        return jsonify(message = f'{student.firstName} {student.lastName} Academic History: \n {history}'), 200
     return jsonify(error = f'There is no academic history for {student.firstName} {student.lastName}'), 200
     

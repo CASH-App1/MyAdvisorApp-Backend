@@ -5,7 +5,7 @@ from sqlalchemy.orm import relationship
 class Semester(db.Model):
     semesterID= db.Column(db.Integer, primary_key = True) 
     courses= db.relationship('SemesterCourse', backref=db.backref('course', lazy='joined'))
-    year = db.Column(db.Date, nullable = False)
+    year = db.Column(db.Integer, nullable = False)
     semesterType= db.Column(db.Integer, nullable = False)
 
     def __init__(self, year, semestertype):

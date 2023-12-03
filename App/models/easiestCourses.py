@@ -2,8 +2,8 @@ from App.database import db
 from App.models import CoursePlanBuilder
 
 class EasiestCourses(CoursePlanBuilder):
-    easiestCourseID = db.Column(db.Integer, primary_key=True),
-    easiestPlan = db.Column(db.Integer,  db.ForeignKey('courseplan.planID'), nullable=False),
+    easiestCourseID = db.Column(db.Integer, primary_key=True)
+    easiestPlan = db.Column(db.Integer,  db.ForeignKey('courseplan.planID'), nullable=False)
 
     def __init__(self, studentID):
         self.reset(studentID)

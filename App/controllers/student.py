@@ -6,7 +6,7 @@ from App.database import db
 def add_student(studentID, first_name, last_name, email, username, password, program1, program2):
     user = User.query.filter_by(username = username).first()
     if not user:
-        new_student = Student(, studentID=studentID, firstName=first_name, lastName=last_name, email=email)
+        new_student = Student(studentID=studentID, firstName=first_name, lastName=last_name, email=email)
         program = Program.query.filter_by(programName = row['program1'])
         if program:
             new_student.programs.append(program)
@@ -76,7 +76,7 @@ def get_student_plans(student):
 
 
 def addCoursetoHistory(studentid, semesterHistory, courseCode, gradeLetter, percent, courseType, semesterID):
-    courseHist = CourseHistory(courseCode, gradeLetter, percent, courseType, semesterID))
+    courseHist = CourseHistory(courseCode, gradeLetter, percent, courseType, semesterID)
     if courseHist not in semesterHistory.courses:
         db.session.add(courseHist)
         semesterHistory.courses.append(courseHist)   

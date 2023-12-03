@@ -1,5 +1,5 @@
-from App.models import Course, Prerequisites
-from App.controllers.prerequistes import (create_prereq, get_all_prerequisites)
+from App.models import Course, Prerequisite
+from App.controllers.program import *
 from App.database import db
 import json, csv
 
