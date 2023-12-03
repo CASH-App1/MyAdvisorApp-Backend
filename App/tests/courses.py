@@ -1,6 +1,6 @@
 import pytest, unittest
 from App.models import Course, Prerequisites
-from App.controllers import *
+from App.controllers import create_course, courses_Sorted_byRating_Objects, get_course_by_courseCode, create_prereq, getPrereqCodes
 from App.main import create_app
 from App.database import db, create_db
 
@@ -69,11 +69,24 @@ def test_create_course():
     assert get_course_by_courseCode("INFO2605") != None
 
 
-class CourseIntegrationTests(unittest.TestCase):
+class CourseIntegrationTests(unittest.TestCase):    
+    def test_courses_sorted_by_rating(self):
+        prereqs=[]
 
-    def test_create_course(self):
-        course = create_course("COMP1601","Computer Programming I", 3, 3)
-        retrieved_course = get_course_by_courseCode(course.code)
+        create_course("COMP6000", "DNS", 3, 3, prereqs)
+        create_course("COMP6001", "DSN", 1, 3, prereqs)
+        sortedCourses = courses_Sorted_byRating_Objects()
+
+        self.assertTrue(sortedCourses)
+
+        for i in range(len(sortedCourses) - 1):
+            self.assertLessEqual(sortedCourses[i].rating, sortedCourses[i + 1].rating)
+
+
+    def test_create_prerequisite(self):
+        create_course("MATH1115", "Fundamental Mathematics for the General Sciences 1",1,6,[])
+        create_course("MATH2250", "Industrial Statistics",4,3,[])
         
-        self.assertEqual((retrieved_course.code, retrieved_course.courseName, retrieved_course.credits, retrieved_course.difficulty),
-                         ("COMP1601", "Computer Programming I", 3, 3)) 
+        create_prereq("MATH1115","Industrial Statistics")
+        prereqs=getPrereqCodes("Industrial Statistics")
+        self.assertEqual(['MATH1115'],prereqs)
