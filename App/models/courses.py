@@ -33,9 +33,13 @@ class Course(db.Model):
         self.difficulty = difficulty
         db.session.commit()
 
-    def __repr__(self):
-        return f"<Course {self.courseCode} - {self.courseName}>"
-    
-
+    def get_json(self):
+        courses = [c.get_json() in self.courses]
+        return{
+            'Course Code': self.courseCode,
+            'Course Name': self.courseName,
+            'Credits': self.credits,
+            'Difficulty': self.difficulty
+        }
     
     

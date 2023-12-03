@@ -36,8 +36,7 @@ class Student(User):
             return plan
         return None       
         
-    
-
+        
     def updateStudentHistory(self, year, semesterType):
         semHistory = SemesterHistory(self.studentID, year, semesterType)
         self.studentHistory.append(semHistory)

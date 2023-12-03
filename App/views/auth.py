@@ -17,57 +17,45 @@ auth_views = Blueprint('auth_views', __name__, template_folder='../templates')
 Page/Action Routes
 '''
 
-@auth_views.route('/users', methods=['GET'])
-def get_user_page():
-    users = get_all_users()
-    return render_template('users.html', users=users)
-
-
-@auth_views.route('/identify', methods=['GET'])
-@login_required
-def identify_page():
-    return jsonify({'message': f"username: {current_user.username}, id : {current_user.id}"})
-
-
-@auth_views.route('/login', methods=['POST'])
-def login_action():
-    data = request.form
-    user = login(data['username'], data['password'])
-    if user:
-        login_user(user)
-        return jsonify({"token":jwt_authenticate(data['username'],data['password'])})
-    return jsonify({"error":"invalid credentials"}), 401
-
-@auth_views.route('/logout', methods=['GET'])
-def logout_action():
-    data = request.form
-    user = login(data['username'], data['password'])
-    return 'logged out!'
-
-'''
-API Routes
-'''
-
-@auth_views.route('/api/users', methods=['GET'])
-def get_users_action():
-    users = get_all_users_json()
-    return jsonify(users)
-
-@auth_views.route('/api/users', methods=['POST'])
-def create_user_endpoint():
+@auth_views.route('/staff-login', methods=['POST'])
+def stafflogin_action():
     data = request.json
-    create_user(data['username'], data['password'])
-    return jsonify({'message': f"user {data['username']} created"})
+    user = login(data['username'], data['password'])
+    if user and isinstance(user, Staff):
+        token = jwt_authenticate(data['username'],data['password'])
+        return jsonify(staff_token = token), 200
+    return jsonify(error = "Unauthorized. Invalid Credentials"), 401
 
-@auth_views.route('/api/login', methods=['POST'])
-def user_login_api():
-  data = request.json
-  token = jwt_authenticate(data['username'], data['password'])
-  if not token:
-    return jsonify(message='bad username or password given'), 401
-  return jsonify(access_token=token)
 
-@auth_views.route('/api/identify', methods=['GET'])
-@jwt_required()
-def identify_user_action():
-    return jsonify({'message': f"username: {jwt_current_user.username}, id : {jwt_current_user.id}"})
+@auth_views.route('/student-login', methods=['POST'])
+def studentlogin_action():
+    data = request.json
+    user = login(data['username'], data['password'])
+    if user and isinstance(user, Student):
+        token = jwt_authenticate(data['username'],data['password'])
+        return jsonify(student_token = token), 200
+    return jsonify(error = "Unauthorized. Invalid Credentials"), 401
+
+
+@app.route('/signup-student', methods=['POST'])
+def signup_student():
+    data = request.json
+    user = User.query.filter_by(username = data['username'])
+    if user:
+        return jsonify(message='username already taken!'), 401
+
+    program = Program.query.filter_by(programName = data['program1'])
+    if not program:
+        return jsonify(error= f'The degree program {data['program1']} does not exist'), 401
+
+    if data['program2']:
+        program = Program.query.filter_by(programName = data['program2'])
+        if not program:
+            return jsonify(error= f'The degree program {data['program2']} does not exist'), 401
+
+    newStudent = add_student(id = data['studentID'], firstName = data['firstName'], lastName = data['lastName'], email = data['email'], username = data['username'], password = data['password'], program1 = data['program1'], program2 = data['program2']) 
+    db.session.add(newStudent)
+    db.session.commit()
+    return jsonify(message=f'Student {newStudent.studentID} - {newStudent.username} created!'), 201
+
+

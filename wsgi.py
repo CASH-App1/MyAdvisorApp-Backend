@@ -63,16 +63,7 @@ def initialize():
         reader = csv.DictReader(file)
         for row in reader:
             program = Program.query.filter_by(programName = row['programName'])
-            course = Course.query.get(row['courseCode'])
-            
-            if row['courseType'] == 'core':
-                program.coreCourses.append(course)
-
-            elif row['courseType'] == 'elective':
-                program.electiveCourses.append(course)
-
-            elif row['courseType'] == 'foundation':
-                program.founCourses.append(course)
+            program.add_course(row['courseCode'], row['courseType'])
     db.session.commit() 
 
 
