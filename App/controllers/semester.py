@@ -22,3 +22,6 @@ def update_semester(semester, new_year, new_semestertype):
     semester.semestertype = new_semestertype
     db.session.commit()
     return semester
+
+def get_semester_course_by_id(semester_course_id):
+    return SemesterCourse.query.get(semester_course_id)
