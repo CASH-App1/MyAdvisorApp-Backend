@@ -81,15 +81,33 @@ def test_authenticate():
 class UsersIntegrationTests(unittest.TestCase):
 
     def test_create_user(self):
-        user = create_user("rick", "bobpass")
-        assert user.username == "rick"
+        user = create_user("john_doe", "password123")
+        retrieved_user = get_user_by_username(user.username)
 
-    def test_get_all_users_json(self):
-        users_json = get_all_users_json()
-        self.assertListEqual([{"id": 1, "username": "bob"}, {
-                             "id": 2, "username": "rick"}], users_json)
+        self.assertEqual((retrieved_user.username, retrieved_user.password),
+                         ("john_doe", "password123"))
+
+    def test_login(self):
+        create_user("john_doe", "password123")
+        logged_in_user = login("john_doe", "password123")
+
+        self.assertIsNotNone(logged_in_user)
+
+    def test_authenticate(self):
+        create_user("john_doe", "password123")
+        authenticated = authenticate("john_doe", "password123")
+
+        self.assertTrue(authenticated)
+
+    def test_get_all_user_json(self):
+        create_user("john_doe", "password123")
+        users_json_data = get_all_users_json()
+
+        self.assertIn({"username": "john_doe"}, users_json_data)
 
     def test_update_user(self):
-        update_user(1, "ronnie")
-        user = get_user(1)
-        assert user.username == "ronnie"
+        user = create_user("john_doe", "password123")
+        update_user(user.id, "new_john_doe")
+        updated_user = get_user(user.id)
+
+        self.assertEqual(updated_user.username, "new_john_doe")
