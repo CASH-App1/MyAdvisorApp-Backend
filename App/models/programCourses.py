@@ -5,9 +5,9 @@ from sqlalchemy.orm import relationship
 class ProgramCourse(db.Model):
     __tablename__ = 'program_courses'
 
-    programCourseID = Column(Integer, primary_key=True)
+    programCourseID = Column(db.Integer, primary_key=True)
     courseCode = Column(db.String(8), ForeignKey('courses.courseCode'), nullable=False)
-    programID = Column(Integer, ForeignKey('programs.programID'), nullable=False)
+    programID = Column(db.Integer, ForeignKey('programs.programID'), nullable=False)
 
     program = relationship('Program', backref=db.backref('program_courses'))
     course = relationship('Course', backref=db.backref('program_courses'))

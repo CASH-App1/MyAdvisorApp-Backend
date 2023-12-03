@@ -3,10 +3,8 @@ from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
 
 class Department(db.Model):
-    __tablename__ = 'departments'
-
-    departmentCode = Column(String(10), primary_key=True)
-    departmentName = Column(String, nullable=False)
+    departmentCode = Column(db.String(10), primary_key=True)
+    departmentName = Column(db.String(100), nullable=False)
 
     programs = relationship('Program', backref='department')
     staffMembers = relationship('Staff', backref='department')

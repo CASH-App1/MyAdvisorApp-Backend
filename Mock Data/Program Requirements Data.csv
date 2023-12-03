@@ -1,0 +1,338 @@
+programName,courseCode,courseType
+Electronics Major,MATH202,foundation
+Electronics Major,FOUN342,elective
+Electronics Major,CHEM101,elective
+Electronics Major,HIST101,core
+Electronics Major,MATH202,core
+Electronics Major,PHIL202,core
+Electronics Major,FOUN342,elective
+Electronics Major,ANTH202,core
+Electronics Major,FOUN202,core
+Electronics Major,PSYC101,core
+Electronics Major,PHIL202,foundation
+Electronics Major,SOC101,core
+Chemistry Minor,FOUN202,elective
+Chemistry Minor,MARK202,elective
+Chemistry Minor,CSCI101,elective
+Chemistry Minor,THEA101,foundation
+Chemistry Minor,HIST101,core
+Chemistry Minor,MUS101,elective
+Chemistry Minor,THEA101,foundation
+Chemistry Minor,PHIL101,elective
+Chemistry Minor,DANC101,foundation
+Chemistry Minor,PSYC101,foundation
+Chemistry Minor,CHEM101,core
+Chemistry Minor,PHIL202,foundation
+Chemistry Minor,MARK202,elective
+Mathematics Minor,DANC101,core
+Mathematics Minor,HIST101,core
+Mathematics Minor,MARK202,elective
+Mathematics Minor,DANC101,core
+Mathematics Minor,PHIL101,core
+Mathematics Minor,SPAN101,foundation
+Mathematics Minor,PHIL202,core
+Mathematics Minor,EDUC101,foundation
+Mathematics Minor,SOCI101,elective
+Mathematics Minor,HUM101,foundation
+Mathematics Minor,DANC101,foundation
+Mathematics Minor,ASTR202,elective
+Mathematics Minor,CHEM202,foundation
+Biochemistry Minor,FOUN202,elective
+Biochemistry Minor,ASTR202,elective
+Biochemistry Minor,SOCI101,foundation
+Biochemistry Minor,SOCI101,elective
+Biochemistry Minor,FREN101,elective
+Biochemistry Minor,EDUC101,foundation
+Biochemistry Minor,HIST101,foundation
+Biochemistry Minor,POLI202,elective
+Biochemistry Minor,MATH202,elective
+Biochemistry Minor,ACCT202,foundation
+Biochemistry Minor,SOCI101,core
+Biochemistry Minor,HIST101,elective
+Biochemistry Minor,DANC101,elective
+Political Science Minor,PHIL101,core
+Political Science Minor,FOUN202,elective
+Political Science Minor,PHIL202,elective
+Political Science Minor,EDUC101,core
+Political Science Minor,SOCI101,foundation
+Political Science Minor,FREN101,foundation
+Political Science Minor,HIST101,elective
+Political Science Minor,CSCI101,core
+Political Science Minor,PHIL202,foundation
+Political Science Minor,REL101,foundation
+Political Science Minor,FIN202,foundation
+Political Science Minor,HIST101,foundation
+Political Science Minor,ANTH202,core
+Computer Science Special,EDUC101,core
+Computer Science Special,SPAN101,core
+Computer Science Special,MARK202,foundation
+Computer Science Special,CHEM202,core
+Computer Science Special,PSYC101,core
+Computer Science Special,THEA101,core
+Computer Science Special,FOUN202,core
+Computer Science Special,MATH202,core
+Computer Science Special,STAT202,foundation
+Computer Science Special,PSYC101,elective
+Computer Science Special,THEA101,core
+Computer Science Special,FOUN342,foundation
+Computer Science Special,FOUN202,foundation
+Business Administration,BUS202,foundation
+Business Administration,PHIL202,foundation
+Business Administration,HIST101,core
+Business Administration,BUS202,elective
+Business Administration,EDUC101,foundation
+Business Administration,CHEM101,elective
+Business Administration,ECON202,elective
+Business Administration,FOUN202,core
+Business Administration,REL101,elective
+Business Administration,THEA101,core
+Business Administration,SPAN101,foundation
+Business Administration,PHIL101,core
+Business Administration,MARK202,foundation
+Mechanical Engineering,FOUN342,elective
+Mechanical Engineering,PHIL101,core
+Mechanical Engineering,HIST101,foundation
+Mechanical Engineering,PHYS101,core
+Mechanical Engineering,FOUN202,core
+Mechanical Engineering,ACCT202,elective
+Mechanical Engineering,DANC101,elective
+Mechanical Engineering,ART101,elective
+Mechanical Engineering,ASTR202,elective
+Mechanical Engineering,STAT202,core
+Mechanical Engineering,ACCT202,elective
+Mechanical Engineering,DANC101,elective
+Mechanical Engineering,REL101,elective
+Biomedical Technology Special,CHEM101,foundation
+Biomedical Technology Special,MUS101,foundation
+Biomedical Technology Special,STAT202,elective
+Biomedical Technology Special,SPAN101,foundation
+Biomedical Technology Special,ECON202,foundation
+Biomedical Technology Special,STAT202,elective
+Biomedical Technology Special,ACCT202,elective
+Biomedical Technology Special,MARK202,foundation
+Biomedical Technology Special,CSCI101,core
+Biomedical Technology Special,SOC101,elective
+Biomedical Technology Special,MGMT202,foundation
+Biomedical Technology Special,FOUN202,elective
+Biomedical Technology Special,SPAN101,elective
+Psychology Major,ENG101,core
+Psychology Major,FOUN202,foundation
+Psychology Major,MGMT202,elective
+Psychology Major,BUS202,foundation
+Psychology Major,MGMT202,elective
+Psychology Major,FREN101,core
+Psychology Major,THEA101,foundation
+Psychology Major,SOCI101,foundation
+Psychology Major,MUS101,elective
+Psychology Major,REL101,foundation
+Psychology Major,MARK202,elective
+Psychology Major,PHYS101,elective
+Psychology Major,FREN101,foundation
+Nursing,GEOG202,core
+Nursing,ACCT202,elective
+Nursing,ACCT202,elective
+Nursing,MUS101,elective
+Nursing,HUM101,elective
+Nursing,HIST101,elective
+Nursing,BIOL202,foundation
+Nursing,ART101,foundation
+Nursing,THEA101,core
+Nursing,MUS101,foundation
+Nursing,PHIL202,foundation
+Nursing,FOUN202,elective
+Nursing,MATH202,foundation
+Marketing Major,REL101,foundation
+Marketing Major,PSYC101,core
+Marketing Major,BIOL202,core
+Marketing Major,CSCI101,foundation
+Marketing Major,MARK202,elective
+Marketing Major,PHYS101,foundation
+Marketing Major,MARK202,elective
+Marketing Major,CHEM202,foundation
+Marketing Major,THEA101,core
+Marketing Major,SOC101,core
+Marketing Major,EDUC101,foundation
+Marketing Major,HUM101,core
+Marketing Major,PSYC101,elective
+Electrical Engineering,FOUN342,foundation
+Electrical Engineering,BIOL202,foundation
+Electrical Engineering,POLI202,elective
+Electrical Engineering,ACCT202,foundation
+Electrical Engineering,FOUN202,core
+Electrical Engineering,THEA101,elective
+Electrical Engineering,ENG101,foundation
+Electrical Engineering,FOUN202,core
+Electrical Engineering,STAT202,core
+Electrical Engineering,PHIL101,foundation
+Electrical Engineering,FOUN342,foundation
+Electrical Engineering,SPAN101,foundation
+Electrical Engineering,ENG101,foundation
+Agriculture,HIST101,foundation
+Agriculture,PHIL202,core
+Agriculture,DANC101,core
+Agriculture,HUM101,elective
+Agriculture,REL101,core
+Agriculture,POLI202,core
+Agriculture,SOC101,foundation
+Agriculture,SOC101,foundation
+Agriculture,ENG101,core
+Agriculture,ANTH202,elective
+Agriculture,PHIL101,foundation
+Agriculture,THEA101,core
+Agriculture,ECON202,core
+Chemistry,FOUN342,elective
+Chemistry,FOUN202,foundation
+Chemistry,ACCT202,core
+Chemistry,CSCI101,core
+Chemistry,PHIL202,core
+Chemistry,FREN101,elective
+Chemistry,PSYC101,elective
+Chemistry,FOUN342,foundation
+Chemistry,ART101,elective
+Chemistry,BIOL202,elective
+Chemistry,STAT202,core
+Chemistry,ENG101,foundation
+Chemistry,ENG101,elective
+Environmental Physics Minor,MARK202,foundation
+Environmental Physics Minor,GEOG202,foundation
+Environmental Physics Minor,HIST101,foundation
+Environmental Physics Minor,PHIL101,elective
+Environmental Physics Minor,FOUN202,foundation
+Environmental Physics Minor,MARK202,elective
+Environmental Physics Minor,ACCT202,elective
+Environmental Physics Minor,ART101,foundation
+Environmental Physics Minor,SPAN101,core
+Environmental Physics Minor,ENG101,elective
+Environmental Physics Minor,ACCT202,core
+Environmental Physics Minor,ASTR202,elective
+Environmental Physics Minor,ACCT202,core
+History,CSCI101,core
+History,DANC101,core
+History,THEA101,foundation
+History,ECON202,elective
+History,FOUN202,foundation
+History,ECON202,foundation
+History,PSYC101,elective
+History,MATH202,foundation
+History,FREN101,foundation
+History,REL101,elective
+History,FOUN202,core
+History,FOUN342,elective
+History,ASTR202,foundation
+Actuarial Science Special,CHEM202,elective
+Actuarial Science Special,STAT202,elective
+Actuarial Science Special,MGMT202,elective
+Actuarial Science Special,SOC101,core
+Actuarial Science Special,PHIL202,core
+Actuarial Science Special,STAT202,core
+Actuarial Science Special,REL101,foundation
+Actuarial Science Special,THEA101,elective
+Actuarial Science Special,PHIL101,foundation
+Actuarial Science Special,GEOG202,elective
+Actuarial Science Special,EDUC101,foundation
+Actuarial Science Special,ASTR202,foundation
+Actuarial Science Special,ASTR202,elective
+Sociology,ART101,core
+Sociology,ANTH202,foundation
+Sociology,FOUN342,foundation
+Sociology,GEOG202,foundation
+Sociology,CHEM101,foundation
+Sociology,POLI202,core
+Sociology,ART101,elective
+Sociology,EDUC101,core
+Sociology,BIOL202,foundation
+Sociology,BIOL202,foundation
+Sociology,SOCI101,foundation
+Sociology,FOUN342,elective
+Sociology,DANC101,elective
+Art History,FIN202,elective
+Art History,FREN101,foundation
+Art History,THEA101,elective
+Art History,ASTR202,core
+Art History,FOUN342,elective
+Art History,CHEM202,foundation
+Art History,FOUN342,elective
+Art History,ART101,core
+Art History,PHYS101,core
+Art History,FOUN202,core
+Art History,MUS101,foundation
+Art History,ACCT202,core
+Art History,MARK202,elective
+Political Science,ASTR202,foundation
+Political Science,SOCI101,core
+Political Science,STAT202,foundation
+Political Science,FOUN202,core
+Political Science,PHYS101,elective
+Political Science,MARK202,foundation
+Political Science,CHEM202,core
+Political Science,ENG101,foundation
+Political Science,ECON202,foundation
+Political Science,REL101,elective
+Political Science,PHIL202,core
+Political Science,GEOG202,core
+Political Science,CSCI101,core
+Economics,FOUN202,core
+Economics,EDUC101,elective
+Economics,ART101,core
+Economics,ASTR202,elective
+Economics,MGMT202,elective
+Economics,HIST101,core
+Economics,PSYC101,foundation
+Economics,FOUN342,core
+Economics,HIST101,foundation
+Economics,CHEM202,elective
+Economics,FIN202,elective
+Economics,PHIL101,elective
+Economics,STAT202,elective
+Environmental Science Major,SOC101,foundation
+Environmental Science Major,DANC101,foundation
+Environmental Science Major,POLI202,foundation
+Environmental Science Major,SOCI101,core
+Environmental Science Major,PHIL202,core
+Environmental Science Major,MATH202,foundation
+Environmental Science Major,FIN202,core
+Environmental Science Major,POLI202,elective
+Environmental Science Major,CHEM101,elective
+Environmental Science Major,DANC101,core
+Environmental Science Major,ENG101,core
+Environmental Science Major,REL101,foundation
+Environmental Science Major,PHYS101,elective
+Geography Major,BUS202,foundation
+Geography Major,PHYS101,foundation
+Geography Major,STAT202,core
+Geography Major,PHIL202,elective
+Geography Major,ASTR202,foundation
+Geography Major,ACCT202,elective
+Geography Major,THEA101,elective
+Geography Major,CHEM101,foundation
+Geography Major,MUS101,elective
+Geography Major,STAT202,elective
+Geography Major,CHEM202,core
+Geography Major,FOUN342,elective
+Geography Major,PHYS101,foundation
+Education Primary General,ECON202,elective
+Education Primary General,MUS101,core
+Education Primary General,SPAN101,core
+Education Primary General,ECON202,core
+Education Primary General,ASTR202,elective
+Education Primary General,ECON202,elective
+Education Primary General,BUS202,elective
+Education Primary General,SOCI101,core
+Education Primary General,FREN101,foundation
+Education Primary General,HIST101,core
+Education Primary General,DANC101,elective
+Education Primary General,ASTR202,elective
+Education Primary General,BIOL202,core
+Veterinary Medicine,ANTH202,core
+Veterinary Medicine,PHYS101,core
+Veterinary Medicine,ANTH202,foundation
+Veterinary Medicine,FOUN202,core
+Veterinary Medicine,PSYC101,foundation
+Veterinary Medicine,HIST101,elective
+Veterinary Medicine,MARK202,elective
+Veterinary Medicine,ART101,foundation
+Veterinary Medicine,CHEM101,elective
+Veterinary Medicine,EDUC101,elective
+Veterinary Medicine,PHIL202,elective
+Veterinary Medicine,PHIL202,core
+Veterinary Medicine,SPAN101,core

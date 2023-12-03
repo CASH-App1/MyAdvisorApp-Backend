@@ -6,30 +6,7 @@ from flask.cli import with_appcontext, AppGroup
 
 from App.database import db, get_migrate
 from App.main import create_app
-from App.controllers import ( 
-    create_user, 
-    get_all_users_json, 
-    get_all_users, 
-    create_program,
-    get_all_OfferedCodes,
-    get_core_credits,
-    createCoursesfromFile,
-    get_course_by_courseCode,
-    get_prerequisites,
-    get_all_courses,
-    create_programCourse,
-    addSemesterCourses,
-    create_student,
-    create_staff,
-    get_program_by_name,
-    get_all_programCourses,
-    addCoursetoHistory,
-    getCompletedCourseCodes,
-    get_allCore,
-    addCourseToPlan,
-    get_student_by_id,
-    generator
-    )
+from App.controllers import *
 
 test1 = ["COMP1600",  "COMP1601", "COMP1602", "COMP1603", "COMP1604", "MATH1115", "INFO1600", "INFO1601",  "FOUN1101", "FOUN1105", "FOUN1301", "COMP3605", "COMP3606", "COMP3607", "COMP3608",]
 
@@ -47,34 +24,64 @@ migrate = get_migrate(app)
 def initialize():
     db.drop_all()
     db.create_all()
-    create_user('bob', 'bobpass')
-    createCoursesfromFile('testData/courseData.csv')
-    create_program("Computer Science Major", 69, 15, 9)
-    create_student(816, "boo", "testing", "Computer Science Major")
-    create_staff("adminpass","999", "admin")
-    
-    for c in test1:
-        addCoursetoHistory(816, c)
-    print('Student course history updated')
 
-    with open(file_path, 'r') as file:
-        for i, line in enumerate(file):
-            line = line.strip()
-            if i ==0:
-                programName = line
-            else:
-                course = line.split(',')
-                create_programCourse(programName, course[0],int(course[1]))
-    
-    file_path1='testData/test2.txt'
-    with open(file_path1, 'r') as file:
-        for i, line in enumerate(file):
-            line = line.strip()
-            addSemesterCourses(line)
+    with open('Mock Data/Department Data.csv') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            newDept = Department(departmentCode =row['departmentCode'], departmentName = row['departmentName'])
+            db.session.add(newDept)
+    db.session.commit() 
+
+    with open('Mock Data/Staff Data.csv') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            newStaff = Staff(staffID = row['staffID'], departmentCode = row['departmentCode'], firstName = row['firstName'], lastName = row['lastName'], email = row['email'], username = row['username'], password = row['password'])
+            department = Department.query.get(row['departmentCode']).first()
+            department.staffMembers.append(newStaff)
+            db.session.add(newStaff)
+    db.session.commit() 
 
 
+    with open('Mock Data/Program Data.csv') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            newProgram = Program(department_code = row['departmentCode'], program_name = row['programName'], core_credits = row['coreCredits'], elective_credits = row['electiveCredits'], foun_credits = row['founCredits'])
+            department = Department.query.get(row['departmentCode']).first()
+            department.programs.append(newProgram)
+            db.session.add(newProgram)
+    db.session.commit() 
 
-    
+    with open('Mock Data/Course Data.csv') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            prereq = Prerequisite(row['courseCode'])
+            newCourse = Course(courseCode = row['courseCode'], prereqID = prereq.prereqID, courseName = row['courseName'], credits = row['credits'], difficulty = row['difficulty'])
+            db.session.add(newCourse)
+    db.session.commit() 
+
+    with open('Mock Data/Program Requirements Data.csv') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            program = Program.query.filter_by(programName = row['programName'])
+            program.add_course(row['courseCode'], row['courseType'])
+    db.session.commit() 
+
+
+    with open('Mock Data/Student Data.csv') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            newStudent = Student(id = row['studentID'], firstName = row['firstName'], lastName = row['lastName'], email = row['email'], username = row['username'], password = row['password'])
+            
+            program = Program.query.filter_by(programName = row['program1'])
+            newStudent.programs.append(program)
+
+            program = Program.query.filter_by(programName = row['program2'])
+            if program:
+                newStudent.programs.append(program)
+
+            db.session.add(newStudent)
+    db.session.commit() 
+
     print('database intialized')
 
 '''

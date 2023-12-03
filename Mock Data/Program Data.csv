@@ -1,0 +1,27 @@
+programID,programName,departmentCode,coreCredits,electiveCredits,founCredits
+1,Electronics Major,DPHYS,21,9,6
+2,Chemistry Minor,DCHEM,6,15,15
+3,Mathematics Minor,DMS,15,9,15
+4,Biochemistry Minor,DLS,3,24,12
+5,Political Science Minor,DPOL,12,9,18
+6,Computer Science Special,DCIT,24,3,12
+7,Business Administration,DMGMT,12,12,15
+8,Mechanical Engineering,DMME,12,24,3
+9,Biomedical Technology Special,DPHYS,3,18,18
+10,Psychology Major,DBS,6,15,18
+11,Nursing,NURS,6,15,15
+12,Marketing Major,DMGMT,15,9,15
+13,Electrical Engineering,DCEE,9,6,24
+14,Agriculture,DAEE,21,6,12
+15,Chemistry,DCHEM,12,18,9
+16,Actuarial Science Special,DMS,9,15,15
+17,Environmental Physics Minor,DPHYS,9,12,18
+18,History,DHIST,9,18,12
+19,Sociology,DBS,9,9,21
+20,Art History,DCFA,15,15,9
+21,Political Science,DPOL,18,6,15
+22,Economics,DECON,12,21,6
+23,Environmental Science Major,DLS,15,9,15
+24,Geography Major,DGEO,6,18,15
+25,Education Primary General,DEDU,18,18,3
+26,Veterinary Medicine,SCM,15,15,9

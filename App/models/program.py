@@ -3,19 +3,16 @@ from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 
 class Program(db.Model):
-    __tablename__ = 'programs'
+    programID = Column(db.Integer, primary_key=True)
+    departmentCode = Column(db.String(10), ForeignKey('department.departmentCode'), nullable=False)
+    programName = Column(db.String, nullable=False)
+    coreCredits = Column(db.Integer, nullable=False)
+    electiveCredits = Column(db.Integer, nullable=False)
+    founCredits = Column(db.Integer, nullable=False)
 
-    programID = Column(Integer, primary_key=True)
-    departmentCode = Column(String(10), ForeignKey('departments.departmentCode'), nullable=False)
-    programName = Column(String, nullable=False)
-    coreCredits = Column(Integer, nullable=False)
-    electiveCredits = Column(Integer, nullable=False)
-    founCredits = Column(Integer, nullable=False)
-
-    coreCourses = db.relationship('ProgramCourse', sbackref=db.backref('course', lazy='joined'))
-    electiveCourses = db.relationship('ProgramCourse', backref=db.backref('course', lazy='joined'))
-    founCourses = db.relationship('ProgramCourse', backref=db.backref('course', lazy='joined'))
-    students = db.relationship('Student', backref=db.backref('student', lazy='joined'))
+    coreCourses = db.relationship('Course', secondary = 'program_courses', backref=db.backref('course', lazy='joined'))
+    electiveCourses = db.relationship('Course', secondary = 'program_courses', backref=db.backref('course', lazy='joined'))
+    founCourses = db.relationship('Course', secondary = 'program_courses', backref=db.backref('course', lazy='joined'))
 
     def __init__(self, department_code, program_name, core_credits, elective_credits, foun_credits):
         self.departmentCode = department_code

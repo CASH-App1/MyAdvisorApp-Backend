@@ -4,46 +4,31 @@ from App.database import db
 import json, csv
 
 
-def create_course(code, prereqID, courseName, credits, difficulty):
-    course = Course.query.filter_by(courseCode = code).first()
-    if course is None:
-        course = Course(code, prereqID, courseName, credits, difficulty)
-            
+def create_course(code, courseName, credits, difficulty):
+    course = Course.query.get(courseCode = code).first()
+    if not course:
+        prereqID = Prerequisite(code)
+        course = Course(code, prereqID, courseName, credits, difficulty)    
         db.session.add(course)
         db.session.commit()
         return course
-    else:
-        return None
-
+    return None
 
     
 def get_course_by_courseCode(code):
-    return Course.query.filter_by(courseCode=code).first()
+    return Course.query.get(code).first()
+   
 
-def courses_Sorted_byDifficulty():
-    courses =  Course.query.order_by(Course.difficulty.asc()).all()
-    codes = []
-
-    for c in courses:
-        codes.append(c.courseCode)
+def check_prerequisites(course, student):
+    qualify =0
+    prereq = Prerequisite.query.get(course.prereqID).first()
+    if prereq.prerequisiteCourses.count() > 0:
+        for p in prereq.prerequisiteCourses:
+            for s in student.studentHistory:
+                for c in s.courses:
+                    if p.courseCode == c.courseCode:
+                        qualify += 1
     
-    return codes
-
-def courses_Sorted_byDifficulty_Objects():
-    return Course.query.order_by(Course.difficulty.asc()).all()
-    
-# def get_prerequisites(prereqID):
-#     course = get_course_by_courseCode(code)
-#     prereqs = get_all_prerequisites(course.courseName)
-#     return prereqs
-
-def get_credits(code):
-    course = get_course_by_courseCode(code)
-    return course.credits if course else 0
-
-def get_ratings(code):
-    course = get_course_by_courseCode(code)
-    return course.rating if course else 0
-
-
-
+    if prereq.prerequisiteCourses.count() == 0 or prereq.prerequisiteCourses.count() == qualify:
+        return True
+    return False

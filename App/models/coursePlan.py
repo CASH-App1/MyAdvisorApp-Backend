@@ -1,19 +1,27 @@
 from App.database import db
+from App.models import Student, Semester, Program
 
 class CoursePlan(db.Model):
-    planId=db.Column(db.Integer, primary_key=True)
-    studentId=db.Column(db.Integer,  db.ForeignKey('student.id'), nullable=False)
-    
-    student = db.relationship('Student', backref=db.backref('course_plans', uselist=True))
+    planID = db.Column(db.Integer, primary_key=True)
+    studentID = db.Column(db.Integer,  db.ForeignKey('student.studentID'), nullable=False)
+    semesterID = db.Column(db.Integer,  db.ForeignKey('semester.semesterID'))
+    program = db.Column(db.Integer, db.ForeignKey('program.programID'))
+    courses = db.relationship('Course', secondary = 'CoursePlanCourses', backref = 'coursePlan', lazy = True)
 
-    # courses = db.relationship('CoursePlanCourses', backref = 'coursePlan', lazy=True)
-
-    def __init__(self, studentid, ):
+    def __init__(self, studentid):
         self.studentId = studentid
+        self.semesterID = semesterID
         
 
     def get_json(self):
+        courses = []
+        for c in self.courses:
+            courses.append(c.get_json())
+            
         return{
-            'planId': self.planId,
-            'studentId': self.studentId,
+            'Plan ID': self.planId,
+            'Student ID': self.studentId,
+            'Semester ID': self.semesterID,
+            'Program ID': self.program,
+            'Courses': courses
         }

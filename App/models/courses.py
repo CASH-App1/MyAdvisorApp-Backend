@@ -1,5 +1,5 @@
 from App.database import db
-from App.models import prerequisites
+#from App.models import prerequisite
 import json
 
 class Course(db.Model):
@@ -8,9 +8,9 @@ class Course(db.Model):
     prereqID = db.Column(db.Integer, db.ForeignKey('prerequisite.prereqID'))
     courseName = db.Column(db.String(100), nullable=False)
     credits = db.Column(db.Integer, nullable=False, )
-    difficulty = db.Column(db.Integer(20), nullable=False)
+    difficulty = db.Column(db.Integer, nullable=False)
     
-    prerequisites = relationship('Prerequisite', backref=db.backref('course',lazy='joined'))
+    prerequisites = db.relationship('Prerequisite', backref=db.backref('course',lazy='joined'))
 
     def __init__(self, courseCode, prereqID, courseName, credits, difficulty):
         self.courseCode = courseCode
@@ -20,7 +20,7 @@ class Course(db.Model):
         self.difficulty = difficulty
 
 
-   def add_prerequisite(self, prerequisite_code): 
+    def add_prerequisite(self, prerequisite_code): 
         prerequisite_course = Course.query.get(prerequisite_code)
         if prerequisite_course:
             self.prerequisites.append(prerequisite_course)
@@ -33,9 +33,13 @@ class Course(db.Model):
         self.difficulty = difficulty
         db.session.commit()
 
-    def __repr__(self):
-        return f"<Course {self.courseCode} - {self.courseName}>"
-    
-
+    def get_json(self):
+        courses = [c.get_json() in self.courses]
+        return{
+            'Course Code': self.courseCode,
+            'Course Name': self.courseName,
+            'Credits': self.credits,
+            'Difficulty': self.difficulty
+        }
     
     
