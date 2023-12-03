@@ -1,6 +1,6 @@
 import pytest, unittest
 from App.models import Course, Prerequisite, CourseHistory
-from App.controllers import create_course, courses_Sorted_byRating_Objects, get_course_by_courseCode, create_prereq, getPrereqCodes
+from App.controllers import *
 from App.main import create_app
 from App.database import db, create_db
 

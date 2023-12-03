@@ -1,8 +1,9 @@
-import os, tempfile, pytest, logging, unittest
+import unittest, pytest
 from App.main import create_app
 from App.database import db, create_db
 from App.models import Staff
-from werkzeug.security import generate_password_has
+from App.controllers import *
+from werkzeug.security import generate_password_hash
 
 '''
 Staff Unit Tests 

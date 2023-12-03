@@ -1,5 +1,5 @@
 import os, tempfile, pytest, logging, unittest
-from App.models import Program, ProgramCourses
+from App.models import Program, ProgramCourse
 from App.main import create_app
 from App.database import db, create_db
 

@@ -8,21 +8,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from App.main import create_app
 from App.database import db, create_db
 from App.models import User, Student, Program, StudentCourseHistory
-from App.controllers import (
-    create_user,
-    get_all_users_json,
-    login,
-    get_user,
-    update_user,
-    create_student,
-    addCoursetoHistory,
-    create_program,
-    create_course,
-    enroll_in_programme,
-    get_all_students_json,
-    update_student,
-    getCompletedCourses,
-)
+from App.controllers import *
 
 
 LOGGER = logging.getLogger(__name__)
