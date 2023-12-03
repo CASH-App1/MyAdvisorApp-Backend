@@ -3,7 +3,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from App.main import create_app
 from App.database import db, create_db
-from App.models import User, Student, Program, StudentCourseHistory, StudentProgram
+from App.models import User, Student, Program, StudentProgram
 
 
 
@@ -34,7 +34,7 @@ class StudentUnitTests(unittest.TestCase):
         newStudent = Student(816030212, password, "Jane", "Doe", "jan@email.com")
         assert newStudent.check_password(password) 
 
-class StudentProgramUnitTests(self):
+class StudentProgramUnitTests(unittest.TestCase):
 
     def test_new_student_program(self):
         newStudentProgram = StudentProgram("816030870", "30")
