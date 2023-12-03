@@ -1,7 +1,6 @@
 import click, pytest, sys
 import csv
 from flask import Flask
-from App.controllers.student import create_student
 from flask.cli import with_appcontext, AppGroup
 
 from App.database import db, get_migrate
@@ -28,61 +27,56 @@ def initialize():
     with open('Mock Data/Department Data.csv') as file:
         reader = csv.DictReader(file)
         for row in reader:
-            newDept = Department(departmentCode =row['departmentCode'], departmentName = row['departmentName'])
-            db.session.add(newDept)
+            newDept = create_department(departmentCode =row['departmentCode'], departmentName = row['departmentName'])
+            if newDept:
+                db.session.add(newDept)
     db.session.commit() 
 
     with open('Mock Data/Staff Data.csv') as file:
         reader = csv.DictReader(file)
         for row in reader:
-            newStaff = Staff(staffID = row['staffID'], departmentCode = row['departmentCode'], firstName = row['firstName'], lastName = row['lastName'], email = row['email'], username = row['username'], password = row['password'])
-            department = Department.query.get(row['departmentCode']).first()
-            department.staffMembers.append(newStaff)
-            db.session.add(newStaff)
+            newStaff = new_staff(staffID = row['staffID'], departmentCode = row['departmentCode'], firstName = row['firstName'], lastName = row['lastName'], email = row['email'], username = row['username'], password = row['password'])
+            if newStaff:
+                db.session.add(newStaff)
     db.session.commit() 
 
 
     with open('Mock Data/Program Data.csv') as file:
         reader = csv.DictReader(file)
         for row in reader:
-            newProgram = Program(department_code = row['departmentCode'], program_name = row['programName'], core_credits = row['coreCredits'], elective_credits = row['electiveCredits'], foun_credits = row['founCredits'])
-            department = Department.query.get(row['departmentCode']).first()
-            department.programs.append(newProgram)
-            db.session.add(newProgram)
+            newProgram = create_program(department_code = row['departmentCode'], program_name = row['programName'], core_credits = row['coreCredits'], elective_credits = row['electiveCredits'], foun_credits = row['founCredits'])
+            if newProgram:
+                db.session.add(newProgram)
     db.session.commit() 
+
 
     with open('Mock Data/Course Data.csv') as file:
         reader = csv.DictReader(file)
         for row in reader:
-            prereq = Prerequisite(row['courseCode'])
-            newCourse = Course(courseCode = row['courseCode'], prereqID = prereq.prereqID, courseName = row['courseName'], credits = row['credits'], difficulty = row['difficulty'])
-            db.session.add(newCourse)
+            newCourse = create_course(row['courseCode'], row['courseName'], row['credits'], row['difficulty'])
+            if newCourse:
+                db.session.add(newCourse)
     db.session.commit() 
+
 
     with open('Mock Data/Program Requirements Data.csv') as file:
         reader = csv.DictReader(file)
         for row in reader:
-            program = Program.query.filter_by(programName = row['programName'])
-            program.add_course(row['courseCode'], row['courseType'])
-    db.session.commit() 
+            check = check_prerequisite_exists(row['programName'], row['courseCode'])
+            if check:
+                add_program_prerequisites(row['programName'], row['courseCode'], row['courseType'])
+        db.session.commit() 
 
 
     with open('Mock Data/Student Data.csv') as file:
         reader = csv.DictReader(file)
         for row in reader:
-            newStudent = Student(id = row['studentID'], firstName = row['firstName'], lastName = row['lastName'], email = row['email'], username = row['username'], password = row['password'])
-            
-            program = Program.query.filter_by(programName = row['program1'])
-            newStudent.programs.append(program)
-
-            program = Program.query.filter_by(programName = row['program2'])
-            if program:
-                newStudent.programs.append(program)
-
-            db.session.add(newStudent)
+            newStudent = add_student(id = row['studentID'], firstName = row['firstName'], lastName = row['lastName'], email = row['email'], username = row['username'], password = row['password'], program1 = row['program1'], program2 = row['program2'])
+            if newStudent:
+                db.session.add(newStudent)
     db.session.commit() 
 
-    print('database intialized')
+    return jsonify({'database intialized'})
 
 '''
 User Commands

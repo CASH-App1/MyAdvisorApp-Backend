@@ -5,5 +5,5 @@ from .auth import auth_views
 from .staff import staff_views
 from .student import student_views
 
-views = [ndex_views, auth_views, staff_views, student_views] 
+views = [index_views, auth_views, staff_views, student_views] 
 # blueprints must be added to this list
