@@ -2,7 +2,7 @@ import unittest, pytest
 from App.models import Program, ProgramCourses
 from App.main import create_app
 from App.database import db, create_db
-from App.controllers import create_program, get_program_by_name,create_course, create_programCourse, get_all_programCourses, programCourses_SortedbyRating,programCourses_SortedbyHighestCredits
+from App.controllers import *
 
 class ProgramUnitTests(unittest.TestCase):
 
@@ -54,27 +54,37 @@ def empty_db():
     db.drop_all()
 
 class ProgramIntegrationTests(unittest.TestCase):
+
     def test_create_program(self):
-        program = create_program("IT", 69, 15, 9)
-        assert get_program_by_name("IT") != None
+        program = create_program("DCIT", "Computer Science Special", 69, 15, 9)
+        retrieved_program = get_program_by_id(program.id)
 
-    def test_create_program_requirement(self):
-        create_course("MATH1115", "Fundamental Mathematics for the General Sciences 1",1,6,[])
-        create_course("MATH2250", "Industrial Statistics",4,3,[])
-        create_course("INFO2606", "Internship",1,6,[])
+        self.assertEqual((retrieved_program.department_code, retrieved_program.program_name, 
+                        retrieved_program.core_credits, retrieved_program.elective_credits, 
+                        retrieved_program.foun_credits),
+                         ("DCIT", "Computer Science Special", 69, 15, 9))
 
-        create_programCourse("IT","MATH1115",1)
-        program_courses=get_all_programCourses("IT")
-        assert any(course.code == "MATH1115" for course in program_courses)
+    def test_add_program_prerequisites(self):
+        # Test data for the program and course
+        department_code = "DCIT"
+        program_name = "Computer Science with Management "
+        core_credits = 30
+        elective_credits = 15
+        foun_credits = 12
 
-    def test_programCourses_sorted_by_credits(self):        
-        create_programCourse("IT","INFO2606",2)
-        program=get_program_by_name("IT")
-        credits_sorted=programCourses_SortedbyHighestCredits(program.id)
-        self.assertListEqual(credits_sorted,['INFO2606', 'MATH1115'])   
+        course_code = "COMP 2605"
+        course_name = "Enterprise Database Systems"
+        credits = 3
+        difficulty = 6
 
-    def test_programCourses_sorted_by_rating(self):
-        create_programCourse("IT","MATH2250",1)
-        program=get_program_by_name("IT")
-        rating_list=programCourses_SortedbyRating(program.id)
-        self.assertListEqual(rating_list,['MATH1115', 'INFO2606', 'MATH2250'])
+        created_program = create_program(department_code, program_name, core_credits, elective_credits, foun_credits)
+        created_course = create_course(course_code, course_name, credits, difficulty)
+        self.assertIsNotNone(created_program)
+        self.assertIsNotNone(created_course)
+
+        add_program_prerequisites(program_name, course_code, "core")
+        prerequisite_exists = check_prerequisite_exists(program_name, course_code)
+        self.assertIsNotNone(prerequisite_exists)
+       
+        all_program_courses = get_all_program_courses(program_name)
+        self.assertTrue(any(course.course_code == course_code for course in all_program_courses))

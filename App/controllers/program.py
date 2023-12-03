@@ -8,8 +8,6 @@ def create_program(name, core, elective, foun):
     db.session.commit()
     return newProgram
     
-    
-
 def get_program_by_name(programName):
     return Program.query.filter_by(name=programName).first()
 
