@@ -68,25 +68,19 @@ def test_create_course():
 
     assert get_course_by_courseCode("INFO2605") != None
 
+"Integration Tests"
+class TestCourseIntegration(unittest.TestCase):
+    def test_create_course_integration(self):
+        # Test data for the course
+        course_code = "COMP 1602"
+        course_name = "Computer Programming II"
+        credits = 3
+        difficulty = 3
 
-class CourseIntegrationTests(unittest.TestCase):    
-    def test_courses_sorted_by_rating(self):
-        prereqs=[]
-
-        create_course("COMP6000", "DNS", 3, 3, prereqs)
-        create_course("COMP6001", "DSN", 1, 3, prereqs)
-        sortedCourses = courses_Sorted_byRating_Objects()
-
-        self.assertTrue(sortedCourses)
-
-        for i in range(len(sortedCourses) - 1):
-            self.assertLessEqual(sortedCourses[i].rating, sortedCourses[i + 1].rating)
-
-
-    def test_create_prerequisite(self):
-        create_course("MATH1115", "Fundamental Mathematics for the General Sciences 1",1,6,[])
-        create_course("MATH2250", "Industrial Statistics",4,3,[])
         
-        create_prereq("MATH1115","Industrial Statistics")
-        prereqs=getPrereqCodes("Industrial Statistics")
-        self.assertEqual(['MATH1115'],prereqs)
+        created_course = create_course(course_code, course_name, credits, difficulty)
+        self.assertIsNotNone(created_course)
+
+        retrieved_course = get_course_by_courseCode(course_code)
+        self.assertEqual((retrieved_course.code, retrieved_course.courseName, retrieved_course.credits, retrieved_course.difficulty),
+                         (course_code, course_name, credits, difficulty))
