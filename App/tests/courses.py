@@ -70,7 +70,7 @@ def test_create_course():
 
 "Integration Tests"
 class TestCourseIntegration(unittest.TestCase):
-    def test_create_course_integration(self):
+    def test_create_course(self):
         # Test data for the course
         course_code = "COMP 1602"
         course_name = "Computer Programming II"
