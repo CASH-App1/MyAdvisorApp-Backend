@@ -80,8 +80,9 @@ class Student(User):
 
     def get_json(self):
         return{'Student ID': self.studentID,
-            'Name': self.firstName + self.lastName,
+            'First Name': self.firstName,
+            'Last Name': self.lastName,
             'Email' : self.email,
-            'Degree Program(s)': self.programs
+            'Username': self.username
         }
 

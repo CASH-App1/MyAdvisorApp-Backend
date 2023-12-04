@@ -4,9 +4,12 @@ from App.models import *
 class EasiestCourses(CoursePlanBuilder):
     easiestCourseID = db.Column(db.Integer, primary_key=True)
     easiestPlan = db.Column(db.Integer,  db.ForeignKey(CoursePlan.planID), nullable=False)
+    semesterID = db.Column(db.Integer,  db.ForeignKey(Semester.semesterID))
+    programID = db.Column(db.Integer, db.ForeignKey(Program.programID))
 
-    def __init__(self, studentID):
-        self.reset(studentID)
+    def __init__(self, semesterID, programID):
+        self.semesterID = semesterID
+        self.programID = programID
 
     def reset(self, studentID):
         plan = CoursePlan(studentID)
@@ -51,8 +54,9 @@ class EasiestCourses(CoursePlanBuilder):
 
     def get_json(self):
         return{
-            'Degree Plan ID': self.easiestCourseID,
-            'Plan': self.easiestPlan
+            'Easiest Courses ID': self.easiestCourseID,
+            'Semester ID': self.semesterID,
+            'Program ID': self.programID
         }
     
     def sortKey(self, courses):

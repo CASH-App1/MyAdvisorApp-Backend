@@ -2,7 +2,7 @@ import unittest, pytest
 from App.main import create_app
 from App.database import db, create_db
 from App.models import Staff
-from App.controllers import *
+from App.controllers import create_staff, get_staff_by_id, update_staff
 from werkzeug.security import generate_password_hash
 
 '''
@@ -33,7 +33,17 @@ class StaffUnitTests(unittest.TestCase):
         newStaff = Staff(101, "DCIT", "Bobby", "Smith", "bob@mail.com", "bob", password)
         assert newStaff.check_password(password) 
 
-"Integration Tests"
+'''
+Staff Integration Tests
+'''
+
+@pytest.fixture(autouse=True, scope="module")
+def empty_db():
+    app = create_app({'TESTING': True, 'SQLALCHEMY_DATABASE_URI': 'sqlite:///test.db'})
+    create_db()
+    yield app.test_client()
+    db.drop_all()
+
 class StaffIntegrationTests(unittest.TestCase):
 
     def test_create_staff(self):
