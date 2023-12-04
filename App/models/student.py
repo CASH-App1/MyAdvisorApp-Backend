@@ -3,15 +3,14 @@ from App.database import db
 
 class Student(User):
     studentID = db.Column(db.Integer, primary_key=True)
-    programs = db.relationship('SemesterProgram', secondary = 'student_programs', backref = 'studentID', lazy = True)
+    programs = db.relationship('Program', secondary = 'student_programs', backref = 'studentProgram', lazy = True)
     studentHistory = db.relationship('SemesterHistory', backref='student', lazy = True)
     coursePlans = db.relationship('CoursePlan', backref='student', lazy = True)
-    userID = db.Column(db.Integer, db.ForeignKey('user.id'))
+    userID = db.Column(db.Integer, db.ForeignKey(User.id))
 
     def __init__(self, id, firstName, lastName, email, username, password):
-        user = super().__init__(username, password, firstName, lastName, email)
+        super().__init__(username, password, firstName, lastName, email)
         self.studentID = id
-        self.user = user.id
 
     def autogenerateCoursePlan(self, category, degreeType, programID, semesterID):
         director = CoursePlanDirector()

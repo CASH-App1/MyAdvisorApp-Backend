@@ -4,7 +4,7 @@ from App.models import *
 class CourseHistory(db.Model):
     courseHistoryID = db.Column(db.Integer, primary_key=True)
     courseCode = db.Column(db.String(50), db.ForeignKey('course.courseCode'))
-    #semesterID = db.Column(db.Integer, db.ForeignKey('SemesterHistory.historyID'))
+    semesterID = db.Column(db.Integer, db.ForeignKey(SemesterHistory.historyID))
     gradeLetter = db.Column(db.String(2), nullable = False)
     percent = db.Column(db.Float, nullable= False)
     courseType = db.Column(db.String(50), nullable = False)

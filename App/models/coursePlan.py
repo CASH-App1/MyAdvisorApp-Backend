@@ -3,14 +3,13 @@ from App.models import *
 
 class CoursePlan(db.Model):
     planID = db.Column(db.Integer, primary_key=True)
-    studentID = db.Column(db.Integer,  db.ForeignKey('student.studentID'), nullable=False)
-    semesterID = db.Column(db.Integer,  db.ForeignKey('semester.semesterID'))
-    program = db.Column(db.Integer, db.ForeignKey('program.programID'))
-    courses = db.relationship('Course', secondary = 'CoursePlanCourses', backref = 'coursePlanID', lazy = True)
+    studentID = db.Column(db.Integer,  db.ForeignKey(Student.studentID), nullable=False)
+    semesterID = db.Column(db.Integer,  db.ForeignKey(Semester.semesterID))
+    program = db.Column(db.Integer, db.ForeignKey(Program.programID))
+    courses = db.relationship('Course', secondary = 'course_plan_courses', backref = 'coursePlan', lazy = True)
 
     def __init__(self, studentid):
         self.studentId = studentid
-        self.semesterID = semesterID
         
 
     def get_json(self):

@@ -1,14 +1,14 @@
-from App.models import Course, Prerequisite
-from App.controllers.program import *
+from App.models import *
+from App.controllers import *
 from App.database import db
 import json, csv
 
 
 def create_course(code, courseName, credits, difficulty):
-    course = Course.query.get(courseCode = code).first()
+    course = Course.query.get(code)
     if not course:
-        prereqID = Prerequisite(code)
-        course = Course(code, prereqID, courseName, credits, difficulty)    
+        #prereqID = Prerequisite(code)
+        course = Course(code,courseName, credits, difficulty)    
         db.session.add(course)
         db.session.commit()
         return course
@@ -16,19 +16,19 @@ def create_course(code, courseName, credits, difficulty):
 
     
 def get_course_by_courseCode(code):
-    return Course.query.get(code).first()
+    return Course.query.get(code)
    
 
 def check_prerequisites(course, student):
     qualify =0
-    prereq = Prerequisite.query.get(course.prereqID).first()
-    if prereq.prerequisiteCourses.count() > 0:
-        for p in prereq.prerequisiteCourses:
+    #prereq = Prerequisite.query.get(course.prereqID).first()
+    if course.prerequisites.count() > 0:
+        for p in course.prerequisites:
             for s in student.studentHistory:
                 for c in s.courses:
                     if p.courseCode == c.courseCode:
                         qualify += 1
     
-    if prereq.prerequisiteCourses.count() == 0 or prereq.prerequisiteCourses.count() == qualify:
+    if course.prerequisites.count() == 0 or course.prerequisites.count() == qualify:
         return True
     return False

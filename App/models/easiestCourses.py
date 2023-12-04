@@ -3,7 +3,7 @@ from App.models import *
 
 class EasiestCourses(CoursePlanBuilder):
     easiestCourseID = db.Column(db.Integer, primary_key=True)
-    easiestPlan = db.Column(db.Integer,  db.ForeignKey('courseplan.planID'), nullable=False)
+    easiestPlan = db.Column(db.Integer,  db.ForeignKey(CoursePlan.planID), nullable=False)
 
     def __init__(self, studentID):
         self.reset(studentID)

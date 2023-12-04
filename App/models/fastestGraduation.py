@@ -3,7 +3,7 @@ from App.models import *
 
 class FastestGraduation(CoursePlanBuilder):
     fastestGraduationID = db.Column(db.Integer, primary_key=True)
-    fastestPlan = db.Column(db.Integer,  db.ForeignKey('courseplan.planID'), nullable=False)
+    fastestPlan = db.Column(db.Integer,  db.ForeignKey(CoursePlan.planID), nullable=False)
 
     def __init__(self, studentID):
         self.reset(studentID)

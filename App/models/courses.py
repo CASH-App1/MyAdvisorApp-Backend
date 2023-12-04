@@ -5,16 +5,14 @@ import json
 class Course(db.Model):
     
     courseCode = db.Column(db.String(8), primary_key=True)
-    prereqID = db.Column(db.Integer, db.ForeignKey('prerequisite.prereqID'))
     courseName = db.Column(db.String(100), nullable=False)
     credits = db.Column(db.Integer, nullable=False, )
     difficulty = db.Column(db.Integer, nullable=False)
     
-    prerequisites = db.relationship('Prerequisite', backref=db.backref('course',lazy='joined'))
+    prerequisites = db.relationship('Course', secondary='course_prereq', primaryjoin='Course.courseCode == course_prereq.c.courseID', secondaryjoin='Course.courseCode == course_prereq.c.prereqID', backref=db.backref('prerequisite_for', lazy='dynamic'))
 
-    def __init__(self, courseCode, prereqID, courseName, credits, difficulty):
+    def __init__(self, courseCode, courseName, credits, difficulty):
         self.courseCode = courseCode
-        self.prereqID = prereqID
         self.courseName = courseName
         self.credits = credits
         self.difficulty = difficulty

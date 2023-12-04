@@ -1,19 +1,19 @@
-from App.models import Student, CoursePlan, Program
-from App.controllers import (get_program_by_name)
+from App.models import *
+from App.controllers import *
 from App.database import db
 
 # Controller to add a new student
 def add_student(studentID, first_name, last_name, email, username, password, program1, program2):
     user = User.query.filter_by(username = username).first()
     if not user:
-        new_student = Student(studentID=studentID, firstName=first_name, lastName=last_name, email=email)
-        program = Program.query.filter_by(programName = row['program1'])
+        new_student = Student(studentID, first_name,last_name,email, username, password)
+        program = Program.query.filter_by(programName =program1).first()
         if program:
             new_student.programs.append(program)
 
-            program = Program.query.filter_by(programName = row['program2'])
+            program = Program.query.filter_by(programName = program2).first()
             if program:
-                newStudent.programs.append(program)
+              new_student.programs.append(program)
             
             db.session.add(new_student)
             db.session.commit()

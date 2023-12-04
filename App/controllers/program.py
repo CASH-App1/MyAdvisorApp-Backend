@@ -1,4 +1,5 @@
-from App.models import Program
+from App.models import *
+from App.controllers import *
 from App.database import db
 
 def create_program(department_code, program_name, core_credits, elective_credits, foun_credits):
@@ -7,7 +8,7 @@ def create_program(department_code, program_name, core_credits, elective_credits
         return None
 
     newProgram = Program(department_code, program_name, core_credits, elective_credits, foun_credits)
-    department = Department.query.get(department_code).first()
+    department = Department.query.get(department_code)
     if department:
         department.programs.append(newProgram)
         db.session.add(newProgram)
@@ -29,10 +30,10 @@ def get_all_programCourses(programName):
     return None
 
 def check_prerequisite_exists(programName, courseCode):
-    program = Program.query.filter_by(programName = program_name).first()
-    course = Course.query.get(courseCode = courseCode).first()
+    program = Program.query.filter_by(programName = programName).first()
+    course = Course.query.get(courseCode)
     if course and program:
-        return ProgramCourses.query.filter_by(program_id= program.programID, course_code = courseCode).first()
+        return ProgramCourse.query.filter_by(programID= program.programID, courseCode = courseCode).first()
     return None
     
 

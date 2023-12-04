@@ -8,7 +8,7 @@ class Department(db.Model):
     departmentName = Column(db.String(100), nullable=False)
 
     programs = relationship('Program', backref='department')
-    staffMembers = relationship('Staff', backref='department')
+    staffMembers = relationship('Staff', backref='staffDepartment')
 
     def __repr__(self):
         return f"<Department {self.departmentCode} - {self.departmentName}>"

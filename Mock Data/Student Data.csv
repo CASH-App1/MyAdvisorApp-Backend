@@ -1,100 +1,97 @@
-studentID,firstName,lastName,username,password,email,program1,program2
-816032152,Nicolle,Leupoldt,nicolle.leupoldt,dP5&2NpF2N},Q,nleupoldt1@tinyurl.com,Chemistry,Electronics Minor
-816032527,Veronica,Syde,veronica.syde,oZ3!8}E4.s7,vsyde2@bbc.co.uk,Business Administration,Biochemistry Minor
-816036511,Craggy,Gamil,craggy.gamil,hR9/$ILeT,cgamil3@cisco.com,Actuarial Science,Political Science Minor
-816030130,Harold,Farndale,harold.farndale,aX2.|@>tJl8HAE,hfarndale4@adobe.com,Agriculture,
-816034522,Stanleigh,Drever,stanleigh.drever,tD1=987U,sdrever5@biblegateway.com,Geography Major,Electronics Minor
-816036025,Buddie,Seacombe,buddie.seacombe,bK7.xYe)4W),bseacombe6@dion.ne.jp,Education Primary General,
-816035412,Ermin,Dussy,ermin.dussy,aZ5=%1bOrN(oC,,edussy7@pinterest.com,Mechanical Engineering,Chemistry Minor
-816038171,Linet,Balas,linet.balas,lT6(NBuE,lbalas8@linkedin.com,Physics,
-816034245,Sallee,Semarke,sallee.semarke,eJ4|<mZ/r2,,ssemarke9@chronoengine.com,Environmental Science,Biochemistry Minor
-816030727,Gabi,Cavy,gabi.cavy,jM3iOQJZ/,gcavya@ycombinator.com,Chemistry,
-816038820,Petronilla,Hullock,petronilla.hullock,wK2#x1O_/I,phullockb@businessweek.com,History,
-816037860,Agustin,Oaten,agustin.oaten,wE2+?3*WE{T$,aoatenc@ox.ac.uk,History,Chemistry Minor
-816037210,Tiebout,Warmisham,tiebout.warmisham,mG2~k3e\/WuB%,twarmishamd@umn.edu,Electrical Engineering,
+studentID,firstName,lastName,username,password,email,program1,program2,
+816032152,Nicolle,Leupoldt,nicolle.leupoldt,dP5&2NpF2N,Q,nleupoldt1@tinyurl.com,Chemistry,Electronics Minor
+816032527,Veronica,Syde,veronica.syde,oZ3!8E4.s7,vsyde2@bbc.co.uk,Business Administration,Biochemistry Minor,
+816036511,Craggy,Gamil,craggy.gamil,hR9$ILeT,cgamil3@cisco.com,Actuarial Science,Political Science Minor,
+816030130,Harold,Farndale,harold.farndale,aX2.|@>tJl8HAE,hfarndale4@adobe.com,Agriculture,,
+816034522,Stanleigh,Drever,stanleigh.drever,tD1=987U,sdrever5@biblegateway.com,Geography Major,Electronics Minor,
+816036025,Buddie,Seacombe,buddie.seacombe,bK7.xYe4W,bseacombe6@dion.ne.jp,Education Primary General,,
+816035412,Ermin,Dussy,ermin.dussy,aZ5=%1bOrNoC,,edussy7@pinterest.com,Mechanical Engineering,Chemistry Minor
+816038171,Linet,Balas,linet.balas,lT6NBuE,lbalas8@linkedin.com,Physics,,
+816034245,Sallee,Semarke,sallee.semarke,eJ4|<mZr2,,ssemarke9@chronoengine.com,Environmental Science,Biochemistry Minor
+816030727,Gabi,Cavy,gabi.cavy,jM3iOQJZ,gcavya@ycombinator.com,Chemistry,,
+816038820,Petronilla,Hullock,petronilla.hullock,wK2#x1O_I,phullockb@businessweek.com,History,,
+816037860,Agustin,Oaten,agustin.oaten,wE2+?3*WET$,aoatenc@ox.ac.uk,History,Chemistry Minor,
+816037210,Tiebout,Warmisham,tiebout.warmisham,mG2~k3eWuB%,twarmishamd@umn.edu,Electrical Engineering,,
 816039910,Neille,Reddin,neille.reddin,nJ4,EPhWIzDdJF,nreddine@exblog.jp,Agriculture,Mathematics Minor
-816030717,Karlen,Bruster,karlen.bruster,gM1OPz_*,kbrusterf@homestead.com,Computer Science Special,Biochemistry Minor
-816031133,Friedrich,Arkin,friedrich.arkin,eT7#h1lrL,farking@berkeley.edu,Geography Major,
-816036242,Florida,Humm,florida.humm,xC0=?O@cBOa,fhummh@de.vu,Psychology Major,
-816034751,Maxie,Greeson,maxie.greeson,yP6e2OJd/h*RqV,mgreesoni@drupal.org,Art History,Political Science Minor
-816030097,Ursula,Puddan,ursula.puddan,gF7.4e5ca*Ob4,upuddanj@forbes.com,Agriculture,
-816036355,Beatrix,Lumber,beatrix.lumber,iH5_Dc?_}UKHM<,blumberk@cdbaby.com,Agriculture,
-816035854,Cecelia,Osgardby,cecelia.osgardby,jK6\$SxPm0H7},cosgardbyl@fastcompany.com,Biomedical Technology Special,Electronics Minor
-816039942,Manuel,Laffan,manuel.laffan,sQ7.S=GHJ2,mlaffanm@census.gov,Nursing,
+816030717,Karlen,Bruster,karlen.bruster,gM1OPz_*,kbrusterf@homestead.com,Computer Science Special,Biochemistry Minor,
+816031133,Friedrich,Arkin,friedrich.arkin,eT7#h1lrL,farking@berkeley.edu,Geography Major,,
+816036242,Florida,Humm,florida.humm,xC0=?O@cBOa,fhummh@de.vu,Psychology Major,,
+816034751,Maxie,Greeson,maxie.greeson,yP6e2OJdh*RqV,mgreesoni@drupal.org,Art History,Political Science Minor,
+816030097,Ursula,Puddan,ursula.puddan,gF7.4e5ca*Ob4,upuddanj@forbes.com,Agriculture,,
+816036355,Beatrix,Lumber,beatrix.lumber,iH5_Dc?_UKHM<,blumberk@cdbaby.com,Agriculture,,
+816035854,Cecelia,Osgardby,cecelia.osgardby,jK6$SxPm0H7,cosgardbyl@fastcompany.com,Biomedical Technology Special,Electronics Minor,
+816039942,Manuel,Laffan,manuel.laffan,sQ7.S=GHJ2,mlaffanm@census.gov,Nursing,,
 816032957,Jill,Iwanowicz,jill.iwanowicz,aC3,>AvZsY3?ASeI,jiwanowiczn@usnews.com,Marketing Major,
-816033406,Vasilis,Andrzejak,vasilis.andrzejak,uI3\_EGJ4c,vandrzejako@microsoft.com,History,
-816037616,Pavia,Franzonello,pavia.franzonello,wJ8?Dd%Yc`gm#~L,pfranzonellop@geocities.jp,Physics,Chemistry Minor
-816033847,Shir,Skewis,shir.skewis,zQ9<#R|79>P$,sskewisq@csmonitor.com,Nursing,
-816037400,Robby,Jeskins,robby.jeskins,eQ1~n5R|CiBNm~,rjeskinsr@nasa.gov,Geography Major,
-816031135,Kylie,Pattisson,kylie.pattisson,nM2@y=JP#,kpattissons@msu.edu,Nursing,Electronics Minor
-816038127,Valerie,Kellick,valerie.kellick,vN1+#y}j,vkellickt@list-manage.com,Electrical Engineering,Mathematics Minor
-816038498,Myrilla,Partridge,myrilla.partridge,xO1=/)4hS,mpartridgeu@mozilla.com,History,Biochemistry Minor
-816039707,Weylin,Allard,weylin.allard,aN1=VM\gaNQ$C4>u,wallardv@opensource.org,Business Administration,
-816035348,Cati,Wyllis,cati.wyllis,uD1&/O#X!<cH!cBu,cwyllisw@myspace.com,Marketing Major,
-816039482,Averyl,Lovett,averyl.lovett,qW4~j(/CCuyPxG,alovettx@newsvine.com,Computer Science Special,
-816030098,Benton,Barbery,benton.barbery,zE1#rl>3@8\m!N,bbarberyy@163.com,Economics,Electronics Minor
-816030619,Merill,Skillicorn,merill.skillicorn,qI0{K}V+2,mskillicornz@prnewswire.com,Psychology Major,Chemistry Minor
-816033563,Nessie,Myner,nessie.myner,fI4?{vrn,nmyner10@google.com.au,Mechanical Engineering,
-816033721,Court,Obin,court.obin,lW5?|pDE}01W&e,cobin11@bloomberg.com,Political Science,
-816038148,Frederica,Acres,frederica.acres,yD4+resi!,facres12@tumblr.com,Psychology Major,
-816037549,Jonie,Scatcher,jonie.scatcher,bZ7{>=>@,jscatcher13@intel.com,Sociology,
-816034108,Iseabal,Beadman,iseabal.beadman,hX9#/k9%7bUD,ibeadman14@arizona.edu,Business Administration,Chemistry Minor
-816033136,Irv,Biffin,irv.biffin,vR9@*e@h,ibiffin15@soundcloud.com,Agriculture,
-816039241,Leigh,McKibben,leigh.mckibben,gN5%w<PJkf4b=>{,lmckibben16@cnbc.com,History,Chemistry Minor
-816037355,Selestina,Lander,selestina.lander,mI9=$\FAO4e,slander17@mapy.cz,Biomedical Technology Special,Mathematics Minor
+816033406,Vasilis,Andrzejak,vasilis.andrzejak,uI3_EGJ4c,vandrzejako@microsoft.com,History,,
+816037616,Pavia,Franzonello,pavia.franzonello,wJ8?Dd%Yc`gm#~L,pfranzonellop@geocities.jp,Physics,Chemistry Minor,
+816033847,Shir,Skewis,shir.skewis,zQ9<#R|79>P$,sskewisq@csmonitor.com,Nursing,,
+816037400,Robby,Jeskins,robby.jeskins,eQ1~n5R|CiBNm~,rjeskinsr@nasa.gov,Geography Major,,
+816031135,Kylie,Pattisson,kylie.pattisson,nM2@y=JP#,kpattissons@msu.edu,Nursing,Electronics Minor,
+816038127,Valerie,Kellick,valerie.kellick,vN1+#yj,vkellickt@list-manage.com,Electrical Engineering,Mathematics Minor,
+816038498,Myrilla,Partridge,myrilla.partridge,xO1=4hS,mpartridgeu@mozilla.com,History,Biochemistry Minor,
+816039707,Weylin,Allard,weylin.allard,aN1=VMgaNQ$C4>u,wallardv@opensource.org,Business Administration,,
+816035348,Cati,Wyllis,cati.wyllis,uD1&O#X!<cH!cBu,cwyllisw@myspace.com,Marketing Major,,
+816039482,Averyl,Lovett,averyl.lovett,qW4~jCCuyPxG,alovettx@newsvine.com,Computer Science Special,,
+816030098,Benton,Barbery,benton.barbery,zE1#rl>3@8m!N,bbarberyy@163.com,Economics,Electronics Minor,
+816030619,Merill,Skillicorn,merill.skillicorn,qI0KV+2,mskillicornz@prnewswire.com,Psychology Major,Chemistry Minor,
+816033563,Nessie,Myner,nessie.myner,fI4?vrn,nmyner10@google.com.au,Mechanical Engineering,,
+816033721,Court,Obin,court.obin,lW5?|pDE01W&e,cobin11@bloomberg.com,Political Science,,
+816038148,Frederica,Acres,frederica.acres,yD4+resi!,facres12@tumblr.com,Psychology Major,,
+816037549,Jonie,Scatcher,jonie.scatcher,bZ7>=>@,jscatcher13@intel.com,Sociology,,
+816034108,Iseabal,Beadman,iseabal.beadman,hX9#k9%7bUD,ibeadman14@arizona.edu,Business Administration,Chemistry Minor,
+816033136,Irv,Biffin,irv.biffin,vR9@*e@h,ibiffin15@soundcloud.com,Agriculture,,
+816039241,Leigh,McKibben,leigh.mckibben,gN5%w<PJkf4b=>,lmckibben16@cnbc.com,History,Chemistry Minor,
+816037355,Selestina,Lander,selestina.lander,mI9=$FAO4e,slander17@mapy.cz,Biomedical Technology Special,Mathematics Minor,
 816030681,Agatha,Widger,agatha.widger,nM6,h2Hq=B,awidger18@simplemachines.org,Psychology Major,
-816039043,Nadiya,Kearley,nadiya.kearley,sY6`\|>o5>S},nkearley19@pen.io,Psychology Major,Biochemistry Minor
-816030671,Analiese,Stubbington,analiese.stubbington,jJ6+|UAP|,astubbington1a@storify.com,Psychology Major,
-816033496,Enid,Starten,enid.starten,dN0)GWqoe,estarten1b@purevolume.com,Computer Science Special,Electronics Minor
-816038188,Kordula,Tettersell,kordula.tettersell,wJ5%tv%R6=1q_,ktettersell1c@theatlantic.com,Veterinary Medicine,
-816032143,Jeffrey,Lawlance,jeffrey.lawlance,cG4+I$=p,jlawlance1d@newsvine.com,Biomedical Technology Special,Chemistry Minor
-816038043,Lon,Meadowcroft,lon.meadowcroft,jO8.LMj*t,lmeadowcroft1e@virginia.edu,Biomedical Technology Special,Electronics Minor
-816036322,Andras,Easun,andras.easun,eD1*Z=9PWd5OJEeI,aeasun1f@nytimes.com,Actuarial Science,
-816034272,Randi,Wigzell,randi.wigzell,hM1*FWwh9OG~0,rwigzell1g@pen.io,Actuarial Science,Mathematics Minor
-816033163,Morgan,Novotni,morgan.novotni,bQ7)%di+`*|,mnovotni1h@mozilla.com,Agriculture,
-816037829,Frank,Sowten,frank.sowten,aQ9++L6GW&S4h/,fsowten1i@sina.com.cn,Business Administration,Electronics Minor
-816037458,Rosaleen,Leadbeatter,rosaleen.leadbeatter,uP5=~RG/40b8wdc,rleadbeatter1j@tinypic.com,Political Science,Political Science Minor
-816036349,Gwynne,Chiswell,gwynne.chiswell,mG0*QR_N|,gchiswell1k@ebay.co.uk,Education Primary General,Electronics Minor
-816033970,Kelby,Cammack,kelby.cammack,iK9(q&O2|cb,kcammack1l@ed.gov,Actuarial Science,Electronics Minor
-816038080,Lucius,Barchrameev,lucius.barchrameev,bH2!xy#*(L4{,lbarchrameev1m@nymag.com,Physics,
-816034455,Jeanne,Jado,jeanne.jado,dZ0`.N~I,jjado1n@chron.com,Veterinary Medicine,
-816038060,Coraline,Scrowston,coraline.scrowston,vR0&@WWuz+3,cscrowston1o@army.mil,Physics,
-816038902,Laurella,Ianni,laurella.ianni,pZ4$whk*dRK8C,lianni1p@fc2.com,Computer Science Special,
-816039910,Aridatha,Beese,aridatha.beese,lI3?/+QI,abeese1q@sourceforge.net,Political Science,Chemistry Minor
-816039027,Brit,Blewmen,brit.blewmen,wU4.1O~mv&,bblewmen1r@state.gov,Education Primary General,
-816037183,Bridie,Walding,bridie.walding,nY5+ICItM,bwalding1s@aboutads.info,Mechanical Engineering,Biochemistry Minor
-816039026,Josias,Jankovsky,josias.jankovsky,fF4=&_pnV,jjankovsky1t@accuweather.com,History,
-816039310,Alfy,Held,alfy.held,iX5\4i@&{VQDx,aheld1u@alexa.com,Computer Science Special,
+816039043,Nadiya,Kearley,nadiya.kearley,sY6`|>o5>S,nkearley19@pen.io,Psychology Major,Biochemistry Minor,
+816030671,Analiese,Stubbington,analiese.stubbington,jJ6+|UAP|,astubbington1a@storify.com,Psychology Major,,
+816033496,Enid,Starten,enid.starten,dN0GWqoe,estarten1b@purevolume.com,Computer Science Special,Electronics Minor,
+816038188,Kordula,Tettersell,kordula.tettersell,wJ5%tv%R6=1q_,ktettersell1c@theatlantic.com,Veterinary Medicine,,
+816032143,Jeffrey,Lawlance,jeffrey.lawlance,cG4+I$=p,jlawlance1d@newsvine.com,Biomedical Technology Special,Chemistry Minor,
+816038043,Lon,Meadowcroft,lon.meadowcroft,jO8.LMj*t,lmeadowcroft1e@virginia.edu,Biomedical Technology Special,Electronics Minor,
+816036322,Andras,Easun,andras.easun,eD1*Z=9PWd5OJEeI,aeasun1f@nytimes.com,Actuarial Science,,
+816034272,Randi,Wigzell,randi.wigzell,hM1*FWwh9OG~0,rwigzell1g@pen.io,Actuarial Science,Mathematics Minor,
+816033163,Morgan,Novotni,morgan.novotni,bQ7%di+`*|,mnovotni1h@mozilla.com,Agriculture,,
+816037829,Frank,Sowten,frank.sowten,aQ9++L6GW&S4h,fsowten1i@sina.com.cn,Business Administration,Electronics Minor,
+816037458,Rosaleen,Leadbeatter,rosaleen.leadbeatter,uP5=~RG40b8wdc,rleadbeatter1j@tinypic.com,Political Science,Political Science Minor,
+816036349,Gwynne,Chiswell,gwynne.chiswell,mG0*QR_N|,gchiswell1k@ebay.co.uk,Education Primary General,Electronics Minor,
+816033970,Kelby,Cammack,kelby.cammack,iK9q&O2|cb,kcammack1l@ed.gov,Actuarial Science,Electronics Minor,
+816038080,Lucius,Barchrameev,lucius.barchrameev,bH2!xy#*L4,lbarchrameev1m@nymag.com,Physics,,
+816034455,Jeanne,Jado,jeanne.jado,dZ0`.N~I,jjado1n@chron.com,Veterinary Medicine,,
+816038060,Coraline,Scrowston,coraline.scrowston,vR0&@WWuz+3,cscrowston1o@army.mil,Physics,,
+816038902,Laurella,Ianni,laurella.ianni,pZ4$whk*dRK8C,lianni1p@fc2.com,Computer Science Special,,
+816039027,Brit,Blewmen,brit.blewmen,wU4.1O~mv&,bblewmen1r@state.gov,Education Primary General,,
+816037183,Bridie,Walding,bridie.walding,nY5+ICItM,bwalding1s@aboutads.info,Mechanical Engineering,Biochemistry Minor,
+816039026,Josias,Jankovsky,josias.jankovsky,fF4=&_pnV,jjankovsky1t@accuweather.com,History,,
+816039310,Alfy,Held,alfy.held,iX54i@&VQDx,aheld1u@alexa.com,Computer Science Special,,
 816037756,Sergeant,Kisbey,sergeant.kisbey,nQ8,P!V*r#TIsoNC,skisbey1v@reference.com,Nursing,
 816036316,Booth,Dowdney,booth.dowdney,yJ3=ELI>x*,TI,bdowdney1w@google.com,Sociology,
-816031799,Francoise,Hinrichsen,francoise.hinrichsen,tD3}eO$}L,fhinrichsen1x@live.com,Art History,Political Science Minor
-816030097,Arabele,Benterman,arabele.benterman,hI0~oOe(7yJzx&1,abenterman1y@furl.net,Mechanical Engineering,
+816031799,Francoise,Hinrichsen,francoise.hinrichsen,tD3eO$L,fhinrichsen1x@live.com,Art History,Political Science Minor,
 816035970,Pavel,Lynde,pavel.lynde,eW9,gINS,plynde1z@imdb.com,Mechanical Engineering,
-816032348,Juieta,Ebbage,juieta.ebbage,vZ3)d{d$9X/~6!c,jebbage20@mtv.com,Political Science,Biochemistry Minor
-816030852,Kala,Brute,kala.brute,cV5@Ruan)$m~q9,kbrute21@deliciousdays.com,Psychology Major,Political Science Minor
-816030286,Sonny,Tremouille,sonny.tremouille,mC0`2Z>f,stremouille22@acquirethisname.com,History,
+816032348,Juieta,Ebbage,juieta.ebbage,vZ3dd$9X~6!c,jebbage20@mtv.com,Political Science,Biochemistry Minor,
+816030852,Kala,Brute,kala.brute,cV5@Ruan$m~q9,kbrute21@deliciousdays.com,Psychology Major,Political Science Minor,
+816030286,Sonny,Tremouille,sonny.tremouille,mC0`2Z>f,stremouille22@acquirethisname.com,History,,
 816035054,Allys,Axby,allys.axby,aJ9*!R,k7>a,aaxby23@exblog.jp,Political Science,Mathematics Minor
-816032698,Alie,Travers,alie.travers,fA0&0i&_,atravers24@etsy.com,Art History,
-816037482,Giulio,Barlie,giulio.barlie,oG2&5j>Jk_L,gbarlie25@baidu.com,Mechanical Engineering,Mathematics Minor
-816031600,Conroy,Cargon,conroy.cargon,mS8?cfMfz=*=s_,ccargon26@blogspot.com,Chemistry,
-816035854,Duane,Lates,duane.lates,kP1{wbMB,dlates27@tamu.edu,Art History,Chemistry Minor
-816039298,Domini,Miller,domini.miller,oH0`)a`Ue@#yMW,dmiller28@sina.com.cn,Electrical Engineering,Mathematics Minor
-816037035,Sonny,Jouannin,sonny.jouannin,rQ1<dU>x,sjouannin29@buzzfeed.com,Marketing Major,
-816035788,Minne,Reboul,minne.reboul,aE0\kNWI5,mreboul2a@nps.gov,Environmental Science,
-816033354,Edmon,Presley,edmon.presley,bB2&8b~0*oz,epresley2b@cbsnews.com,Mechanical Engineering,
-816038528,Terence,Kenefick,terence.kenefick,hS1}i0.2,tkenefick2c@state.tx.us,Economics,
-816038763,Loni,Grzeszczak,loni.grzeszczak,oF8#6F}`@IxhVT,lgrzeszczak2d@bandcamp.com,Biomedical Technology Special,Electronics Minor
-816034848,Dorris,Beaglehole,dorris.beaglehole,dT5wCRXR>+$Ka},dbeaglehole2e@hao123.com,Actuarial Science,
-816037562,Rivalee,Marlen,rivalee.marlen,jR0$8bvhCO#,rmarlen2f@ucsd.edu,Biomedical Technology Special,
-816031247,Korella,Veregan,korella.veregan,gZ7>Zw/Pvw,kveregan2g@xing.com,Economics,
-816032804,Jessalyn,Tother,jessalyn.tother,zU0$36k(,jtother2h@about.com,Marketing Major,
-816038842,Efren,Dissman,efren.dissman,lV9~(jG6D3um,edissman2i@zimbio.com,Business Administration,
-816038311,Odelia,Sloley,odelia.sloley,tC1(.4.eVU@NpR,osloley2j@wix.com,Marketing Major,
-816039231,Jordana,Prestie,jordana.prestie,lJ3,GC}#G0,jprestie2k@imdb.com,Agriculture,
-816036367,Piggy,Rosa,piggy.rosa,vQ0..c`7j,prosa2l@blog.com,Geography Major,
-816036113,Gherardo,Mawtus,gherardo.mawtus,jW4{6KKv,gmawtus2m@51.la,Sociology,
-816030522,Marcus,Minkin,marcus.minkin,cE5`%=I~#I.(Aufe,mminkin2n@tuttocitta.it,Marketing Major,
-816033978,Chris,Mildner,chris.mildner,uD2+bCf?p,cmildner2o@miibeian.gov.cn,Mechanical Engineering,Biochemistry Minor
-816037851,Urban,Blance,urban.blance,rT5+@DTd,ublance2p@narod.ru,Biomedical Technology Special,Mathematics Minor
-816039603,Ailbert,Dole,ailbert.dole,vF7`t+UsGBE,adole2q@addthis.com,Political Science,
-816030022,Addison,Grunwall,addison.grunwall,oO3?!tINBTk,agrunwall2r@discovery.com,Environmental Science,
+816032698,Alie,Travers,alie.travers,fA0&0i&_,atravers24@etsy.com,Art History,,
+816037482,Giulio,Barlie,giulio.barlie,oG2&5j>Jk_L,gbarlie25@baidu.com,Mechanical Engineering,Mathematics Minor,
+816031600,Conroy,Cargon,conroy.cargon,mS8?cfMfz=*=s_,ccargon26@blogspot.com,Chemistry,,
+816039298,Domini,Miller,domini.miller,oH0`a`Ue@#yMW,dmiller28@sina.com.cn,Electrical Engineering,Mathematics Minor,
+816037035,Sonny,Jouannin,sonny.jouannin,rQ1<dU>x,sjouannin29@buzzfeed.com,Marketing Major,,
+816035788,Minne,Reboul,minne.reboul,aE0kNWI5,mreboul2a@nps.gov,Environmental Science,,
+816033354,Edmon,Presley,edmon.presley,bB2&8b~0*oz,epresley2b@cbsnews.com,Mechanical Engineering,,
+816038528,Terence,Kenefick,terence.kenefick,hS1i0.2,tkenefick2c@state.tx.us,Economics,,
+816038763,Loni,Grzeszczak,loni.grzeszczak,oF8#6F`@IxhVT,lgrzeszczak2d@bandcamp.com,Biomedical Technology Special,Electronics Minor,
+816034848,Dorris,Beaglehole,dorris.beaglehole,dT5wCRXR>+$Ka,dbeaglehole2e@hao123.com,Actuarial Science,,
+816037562,Rivalee,Marlen,rivalee.marlen,jR0$8bvhCO#,rmarlen2f@ucsd.edu,Biomedical Technology Special,,
+816031247,Korella,Veregan,korella.veregan,gZ7>ZwPvw,kveregan2g@xing.com,Economics,,
+816032804,Jessalyn,Tother,jessalyn.tother,zU0$36k,jtother2h@about.com,Marketing Major,,
+816038842,Efren,Dissman,efren.dissman,lV9~jG6D3um,edissman2i@zimbio.com,Business Administration,,
+816038311,Odelia,Sloley,odelia.sloley,tC1.4.eVU@NpR,osloley2j@wix.com,Marketing Major,,
+816039231,Jordana,Prestie,jordana.prestie,lJ3,GC#G0,jprestie2k@imdb.com,Agriculture,
+816036367,Piggy,Rosa,piggy.rosa,vQ0..c`7j,prosa2l@blog.com,Geography Major,,
+816036113,Gherardo,Mawtus,gherardo.mawtus,jW46KKv,gmawtus2m@51.la,Sociology,,
+816030522,Marcus,Minkin,marcus.minkin,cE5`%=I~#I.Aufe,mminkin2n@tuttocitta.it,Marketing Major,,
+816033978,Chris,Mildner,chris.mildner,uD2+bCf?p,cmildner2o@miibeian.gov.cn,Mechanical Engineering,Biochemistry Minor,
+816037851,Urban,Blance,urban.blance,rT5+@DTd,ublance2p@narod.ru,Biomedical Technology Special,Mathematics Minor,
+816039603,Ailbert,Dole,ailbert.dole,vF7`t+UsGBE,adole2q@addthis.com,Political Science,,
+816030022,Addison,Grunwall,addison.grunwall,oO3?!tINBTk,agrunwall2r@discovery.com,Environmental Science,,

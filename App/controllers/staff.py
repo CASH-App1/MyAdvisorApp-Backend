@@ -1,12 +1,13 @@
-from App.models import Program, Course, Staff
+from App.models import *
+from App.controllers import *
 from App.database import db
 
 
 def create_staff(staff_id, department_code, first_name, last_name, email, username, password):
     user = User.query.filter_by(username = username).first()
     if not user:
-        new_staff = Staff(staffID=staff_id, departmentCode= department_code, firstName=first_name, lastName=last_name, email=email, username = username, password = password)
-        department = Department.query.get(row['departmentCode']).first()
+        new_staff = Staff(staff_id, department_code,first_name,last_name, email, username, password)
+        department = Department.query.get(department_code)
         if department:
             department.staffMembers.append(new_staff)
             db.session.add(new_staff)
@@ -15,7 +16,7 @@ def create_staff(staff_id, department_code, first_name, last_name, email, userna
     return None
 
 def get_staff_by_id(ID):
-    staff = Staff.query.get(ID).first()
+    staff = Staff.query.get(ID)
     if staff:
         return staff
     return None

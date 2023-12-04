@@ -3,7 +3,7 @@ from App.models import *
 
 class ElectivePriority(CoursePlanBuilder):
     electivePlanID = db.Column(db.Integer, primary_key=True)
-    electivePlan = db.Column(db.Integer,  db.ForeignKey('courseplan.planID'), nullable=False)
+    electivePlan = db.Column(db.Integer,  db.ForeignKey(CoursePlan.planID), nullable=False)
 
     def __init__(self, studentID):
         self.reset(studentID)

@@ -7,8 +7,8 @@ class ProgramCourse(db.Model):
     __tablename__ = 'program_courses'
 
     programCourseID = Column(db.Integer, primary_key=True)
-    courseCode = Column(db.String(8), ForeignKey('course.courseCode'), nullable=False)
-    programID = Column(db.Integer, ForeignKey('program.programID'), nullable=False)
+    courseCode = Column(db.String(8), ForeignKey(Course.courseCode), nullable=False)
+    programID = Column(db.Integer, ForeignKey(Program.programID), nullable=False)
 
     program = relationship('Program', backref=db.backref('program_courses'))
     course = relationship('Course', backref=db.backref('program_courses'))

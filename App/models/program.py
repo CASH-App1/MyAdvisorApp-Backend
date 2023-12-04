@@ -5,15 +5,15 @@ from App.models import *
 
 class Program(db.Model):
     programID = Column(db.Integer, primary_key=True)
-    departmentCode = Column(db.String(10), ForeignKey('department.departmentCode'), nullable=False)
+    departmentCode = Column(db.String(10), ForeignKey(Department.departmentCode), nullable=False)
     programName = Column(db.String, nullable=False)
     coreCredits = Column(db.Integer, nullable=False)
     electiveCredits = Column(db.Integer, nullable=False)
     founCredits = Column(db.Integer, nullable=False)
 
-    coreCourses = db.relationship('Course', secondary = 'program_courses', backref=db.backref('course', lazy='joined'))
-    electiveCourses = db.relationship('Course', secondary = 'program_courses', backref=db.backref('course', lazy='joined'))
-    founCourses = db.relationship('Course', secondary = 'program_courses', backref=db.backref('course', lazy='joined'))
+    coreCourses = db.relationship('Course', secondary = 'program_courses', backref=db.backref('coreProgram', lazy='joined'))
+    electiveCourses = db.relationship('Course', secondary = 'program_courses', backref=db.backref('electiveProgram', lazy='joined'))
+    founCourses = db.relationship('Course', secondary = 'program_courses', backref=db.backref('founProgram', lazy='joined'))
 
     def __init__(self, department_code, program_name, core_credits, elective_credits, foun_credits):
         self.departmentCode = department_code
@@ -22,7 +22,6 @@ class Program(db.Model):
         self.electiveCredits = elective_credits
         self.founCredits = foun_credits
         
-    students = relationship('Student', backref='program')
 
     def add_course(self, course_code, course_type):
         

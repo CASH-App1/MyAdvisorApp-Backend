@@ -3,7 +3,7 @@ from App.models import *
 
 class SemesterHistory(db.Model):
     historyID = db.Column(db.Integer, primary_key=True)
-    studentID = db.Column(db.Integer, db.ForeignKey('student.studentID'))
+    studentID = db.Column(db.Integer, db.ForeignKey(Student.studentID))
     year = db.Column(db.Integer, nullable = False)
     semeterType = db.Column(db.Integer, nullable= False)
     courses = db.relationship('CourseHistory', backref = 'semesterHistory', lazy = True)

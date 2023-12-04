@@ -5,7 +5,7 @@ from App.models import *
 
 class Semester(db.Model):
     semesterID= db.Column(db.Integer, primary_key = True) 
-    courses= db.relationship('SemesterCourse', backref=db.backref('course', lazy='joined'))
+    courses= db.relationship('SemesterCourse', backref=db.backref('semester', lazy='joined'))
     year = db.Column(db.Integer, nullable = False)
     semesterType= db.Column(db.Integer, nullable = False)
 
