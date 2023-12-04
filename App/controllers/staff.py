@@ -2,6 +2,12 @@ from App.models import *
 from App.controllers import *
 from App.database import db
 
+def verify_staff(username):
+  staff=Staff.query.get(username)
+  if staff:
+      return True
+  return False
+
 
 def create_staff(staff_id, department_code, first_name, last_name, email, username, password):
     user = User.query.filter_by(username = username).first()

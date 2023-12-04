@@ -32,7 +32,7 @@ class Course(db.Model):
         db.session.commit()
 
     def get_json(self):
-        courses = [c.get_json() in self.courses]
+
         return{
             'Course Code': self.courseCode,
             'Course Name': self.courseName,

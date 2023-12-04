@@ -2,6 +2,12 @@ from App.models import *
 from App.controllers import *
 from App.database import db
 
+def verify_student(username):
+  student=Student.query.get(username)
+  if student:
+      return True
+  return False
+
 # Controller to add a new student
 def add_student(studentID, first_name, last_name, email, username, password, program1, program2):
     user = User.query.filter_by(username = username).first()

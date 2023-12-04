@@ -19,8 +19,7 @@ def get_all_semesters():
 
 
 def get_courses_in_semester(year, semesterType):
-  semester = Semester.query.filter_by(year=year,
-                                      semesterType=semesterType).first()
+  semester = Semester.query.filter_by(year=year, semesterType=semesterType).first()
   if semester:
     return semester.courses
   return None

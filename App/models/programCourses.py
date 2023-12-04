@@ -10,8 +10,8 @@ class ProgramCourse(db.Model):
     courseCode = Column(db.String(8), ForeignKey(Course.courseCode), nullable=False)
     programID = Column(db.Integer, ForeignKey(Program.programID), nullable=False)
 
-    program = relationship('Program', backref=db.backref('program_courses'))
-    course = relationship('Course', backref=db.backref('program_courses'))
+    # program = relationship('Program', backref=db.backref('program_courses'))
+    # course = relationship('Course', backref=db.backref('program_courses'))
 
     def __init__(self, course_code, program_id):
         self.courseCode = course_code
