@@ -42,6 +42,14 @@ class Staff(User):
             
     def __repr__(self):
         return f"<Staff {self.staffID} - {self.firstName} {self.lastName}>"
-       
+    
+    def get_json(self):
+        return{'Staff ID': self.staffID,
+            'First Name': self.firstName,
+            'Last Name': self.lastName,
+            'Email' : self.email,
+            'Department Code': self.departmentCode,
+            'Username': self.username
+        }
 
        

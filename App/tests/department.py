@@ -3,6 +3,7 @@ import os, tempfile, pytest, logging, unittest
 from App.models import Department
 from App.main import create_app
 from App.database import db, create_db
+from App.controllers import create_department, get_department_by_code
 
 
 class DepartmentUnitTests(unittest.TestCase):

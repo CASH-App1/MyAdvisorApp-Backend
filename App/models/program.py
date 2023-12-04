@@ -37,3 +37,13 @@ class Program(db.Model):
 
     def __repr__(self):
         return f"<Program {self.programID} - {self.programName}>"
+
+    def get_json(self):
+        return{
+            'Program ID': self.programID,
+            'Department Code': self.departmentCode,
+            'Program Name': self.programName,
+            'Core Credits' : self.coreCredits,
+            'Elective Credits': self.electiveCredits,
+            'Foundation Credits': self.founCredits
+        }

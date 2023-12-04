@@ -23,3 +23,15 @@ class Semester(db.Model):
         self.courses.remove(course)
         db.session.commit()
         return True
+
+    def get_json(self):
+        courseInfo = []
+        for c in self.courses:
+            courseInfo.append(c.get_json())
+
+        return{
+            'Semester ID': self.semesterID,
+            'Courses': courseInfo,
+            'Semester Year':self.year,
+            'Semester Type': self.semesterType
+        }

@@ -6,13 +6,13 @@ from App.database import db, create_db
 
 class CoursePlanUnitTests(unittest.TestCase):
     
-    def test_new_course_plan (self):
-        newCoursePlan = CoursePlan("816031123", "SEMI2K23")
-        assert(newCoursePlan.studentID, newCoursePlan.semesterID) == ("816031123", "SEMI2K23") 
+    def test_new_course_plan(self):
+        newCoursePlan = CoursePlan(816031123, "SEMI2K23")
+        assert (newCoursePlan.studentID, newCoursePlan.semesterID) == (816031123, "SEMI2K23")
     
     def test_course_plan_toJSON (self):
-        newCoursePlan = CoursePlan("816031123", "SEMI2K23")
-        self.assertDictEqual(newCoursePlan.get_json(), {"Plan ID":"1", "Student ID":"816031123", "Semester ID":"SEMI2k23"})
+        newCoursePlan = CoursePlan(816031123, "SEMI2K23")
+        self.assertDictEqual(newCoursePlan.get_json(), {"Plan ID":"1", "Student ID":816031123, "Semester ID":"SEMI2k23", "Program ID":"32", "Courses":[{"Course Code":"MATH202"}]})
 
 
        

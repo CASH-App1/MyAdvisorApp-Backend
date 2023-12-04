@@ -20,10 +20,10 @@ class UserUnitTests(unittest.TestCase):
         assert newUser.username == "bob"
 
     # pure function no side effects or integrations called
-    def test_user_json(self):
+    def test_user_toJSON(self):
         user = User("bob", "bobpass")
         user_json = user.get_json()
-        self.assertDictEqual(user_json, {"id": "101", "username": "bob"})
+        self.assertDictEqual(user_json, {"id": 101, "username": "bob"})
 
     def test_hashed_password(self):
         password = "mypass"

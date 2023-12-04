@@ -1,5 +1,5 @@
 import pytest, unittest
-from App.models import Course, Prerequisite, CourseHistory
+from App.models import Course, CourseHistory
 from App.controllers import *
 from App.main import create_app
 from App.database import db, create_db

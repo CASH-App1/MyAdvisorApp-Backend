@@ -13,5 +13,9 @@ class StudentProgram(db.Model):
     # program = relationship('Program', backref='student_programs')
     # student = relationship('Student', backref='student_programs')
 
+  def __init__(self, studentID, programID):
+        self.studentID = studentID
+        self.programID = programID
+
   def __repr__(self):
     return f"<StudentProgram {self.studentProgramID}>"

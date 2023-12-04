@@ -10,5 +10,15 @@ class Department(db.Model):
     programs = relationship('Program', backref='department')
     staffMembers = relationship('Staff', backref='staffDepartment')
 
+    def __init__(self, departmentCode, departmentName):
+        self.departmentCode = departmentCode
+        self.departmentName = departmentName
+
     def __repr__(self):
         return f"<Department {self.departmentCode} - {self.departmentName}>"
+
+    def get_json(self):
+        return{
+            'Department Code': self.departmentCode,
+            'Department Name': self.departmentName,
+        }

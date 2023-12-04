@@ -4,9 +4,12 @@ from App.models import *
 class ElectivePriority(CoursePlanBuilder):
     electivePlanID = db.Column(db.Integer, primary_key=True)
     electivePlan = db.Column(db.Integer,  db.ForeignKey(CoursePlan.planID), nullable=False)
+    semesterID = db.Column(db.Integer,  db.ForeignKey(Semester.semesterID))
+    programID = db.Column(db.Integer, db.ForeignKey(Program.programID))
 
-    def __init__(self, studentID):
-        self.reset(studentID)
+    def __init__(self, semesterID, programID):
+        self.semesterID = semesterID
+        self.programID = programID
 
     def reset(self, studentID):
         plan = CoursePlan(studentID)
