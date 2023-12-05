@@ -1,8 +1,9 @@
-from App.models import Department
+from App.models import *
+from App.controllers import *
 from App.database import db
 
 def create_department(department_code, department_name):
-    department = Department.query.get(department_code).first()
+    department = Department.query.get(department_code)
     if department:
         return None
 
@@ -14,4 +15,5 @@ def create_department(department_code, department_name):
 def get_all_departments():
     return Department.query.all()
 
-
+def get_department_by_code(department_code):
+    return Department.query.get(department_code)

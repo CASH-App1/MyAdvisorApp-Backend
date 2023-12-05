@@ -1,12 +1,15 @@
 from App.database import db
-from App.models import CoursePlanBuilder
+from App.models import *
 
 class EasiestCourses(CoursePlanBuilder):
-    easiestCourseID = db.Column(db.Integer, primary_key=True),
-    easiestPlan = db.Column(db.Integer,  db.ForeignKey('courseplan.planID'), nullable=False),
+    easiestCourseID = db.Column(db.Integer, primary_key=True)
+    easiestPlan = db.Column(db.Integer,  db.ForeignKey(CoursePlan.planID), nullable=False)
+    semesterID = db.Column(db.Integer,  db.ForeignKey(Semester.semesterID))
+    programID = db.Column(db.Integer, db.ForeignKey(Program.programID))
 
-    def __init__(self, studentID):
-        self.reset(studentID)
+    def __init__(self, semesterID, programID):
+        self.semesterID = semesterID
+        self.programID = programID
 
     def reset(self, studentID):
         plan = CoursePlan(studentID)
@@ -24,8 +27,8 @@ class EasiestCourses(CoursePlanBuilder):
         plan = CoursePlan.query.get(easiestPlan).first()
 
         program = Program.query.get(self.easiestPlan.programID).first()
-        semesterCourses = SemesterCourse.query.get(self.easiestPlan.semesterID).all()
-        programCourses = ProgramCourse.query.filter_by(programID = self.fastestPlan.programID).all()
+        semesterCourses = SemesterCourse.query.filter_by(self.easiestPlan.semesterID).all()
+        programCourses = ProgramCourse.query.filter_by(programID = self.easiestPlan.programID).all()
         courses = [course for course in programCourses if course in semesterCourses]
         courses.sort(key = sortKey)
 
@@ -51,8 +54,9 @@ class EasiestCourses(CoursePlanBuilder):
 
     def get_json(self):
         return{
-            'Degree Plan ID': self.easiestCourseID,
-            'Plan': self.easiestPlan
+            'Easiest Courses ID': self.easiestCourseID,
+            'Semester ID': self.semesterID,
+            'Program ID': self.programID
         }
     
     def sortKey(self, courses):

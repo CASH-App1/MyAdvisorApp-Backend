@@ -1,12 +1,15 @@
 from App.database import db
-from App.models import CoursePlanBuilder
+from App.models import *
 
 class ElectivePriority(CoursePlanBuilder):
-    electivePlanID = db.Column(db.Integer, primary_key=True),
-    electivePlan = db.Column(db.Integer,  db.ForeignKey('courseplan.planID'), nullable=False),
+    electivePlanID = db.Column(db.Integer, primary_key=True)
+    electivePlan = db.Column(db.Integer,  db.ForeignKey(CoursePlan.planID), nullable=False)
+    semesterID = db.Column(db.Integer,  db.ForeignKey(Semester.semesterID))
+    programID = db.Column(db.Integer, db.ForeignKey(Program.programID))
 
-    def __init__(self, studentID):
-        self.reset(studentID)
+    def __init__(self, semesterID, programID):
+        self.semesterID = semesterID
+        self.programID = programID
 
     def reset(self, studentID):
         plan = CoursePlan(studentID)
@@ -49,7 +52,8 @@ class ElectivePriority(CoursePlanBuilder):
 
     def get_json(self):
         return{
-            'Degree Plan ID': self.electivePlanID,
-            'Plan': self.electivePlan
+            'Elective Priority ID': self.electivePlanID,
+            'Semester ID': self.semesterID,
+            'Program ID': self.programID
         }
     

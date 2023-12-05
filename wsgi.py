@@ -1,8 +1,8 @@
 import click, pytest, sys
 import csv
 from flask import Flask
-from App.controllers.student import create_student
 from flask.cli import with_appcontext, AppGroup
+from flask import jsonify
 
 from App.database import db, get_migrate
 from App.main import create_app
@@ -27,61 +27,56 @@ def initialize():
     with open('Mock Data/Department Data.csv') as file:
         reader = csv.DictReader(file)
         for row in reader:
-            newDept = Department(departmentCode =row['departmentCode'], departmentName = row['departmentName'])
-            db.session.add(newDept)
+            newDept = create_department(row['departmentCode'], row['departmentName'])
+            if newDept:
+                db.session.add(newDept)
     db.session.commit() 
 
     with open('Mock Data/Staff Data.csv') as file:
         reader = csv.DictReader(file)
         for row in reader:
-            newStaff = Staff(staffID = row['staffID'], departmentCode = row['departmentCode'], firstName = row['firstName'], lastName = row['lastName'], email = row['email'], username = row['username'], password = row['password'])
-            department = Department.query.get(row['departmentCode']).first()
-            department.staffMembers.append(newStaff)
-            db.session.add(newStaff)
+            newStaff = create_staff(row['staffID'], row['departmentCode'],row['firstName'], row['lastName'], row['email'],row['username'], row['password'])
+            if newStaff:
+                db.session.add(newStaff)
     db.session.commit() 
 
 
     with open('Mock Data/Program Data.csv') as file:
         reader = csv.DictReader(file)
         for row in reader:
-            newProgram = Program(department_code = row['departmentCode'], program_name = row['programName'], core_credits = row['coreCredits'], elective_credits = row['electiveCredits'], foun_credits = row['founCredits'])
-            department = Department.query.get(row['departmentCode']).first()
-            department.programs.append(newProgram)
-            db.session.add(newProgram)
+            newProgram = create_program(row['departmentCode'],row['programName'], row['coreCredits'], row['electiveCredits'],row['founCredits'])
+            if newProgram:
+                db.session.add(newProgram)
     db.session.commit() 
+
 
     with open('Mock Data/Course Data.csv') as file:
         reader = csv.DictReader(file)
         for row in reader:
-            prereq = Prerequisite(row['courseCode'])
-            newCourse = Course(courseCode = row['courseCode'], prereqID = prereq.prereqID, courseName = row['courseName'], credits = row['credits'], difficulty = row['difficulty'])
-            db.session.add(newCourse)
+            newCourse = create_course(row['courseCode'], row['courseName'], row['credits'], row['difficulty'])
+            if newCourse:
+                db.session.add(newCourse)
     db.session.commit() 
+
 
     with open('Mock Data/Program Requirements Data.csv') as file:
         reader = csv.DictReader(file)
         for row in reader:
-            program = Program.query.filter_by(programName = row['programName'])
-            program.add_course(row['courseCode'], row['courseType'])
-    db.session.commit() 
+            check = check_prerequisite_exists(row['programName'], row['courseCode'])
+            if check:
+                add_program_prerequisites(row['programName'], row['courseCode'], row['courseType'])
+        db.session.commit() 
 
 
     with open('Mock Data/Student Data.csv') as file:
         reader = csv.DictReader(file)
         for row in reader:
-            newStudent = Student(id = row['studentID'], firstName = row['firstName'], lastName = row['lastName'], email = row['email'], username = row['username'], password = row['password'])
-            
-            program = Program.query.filter_by(programName = row['program1'])
-            newStudent.programs.append(program)
-
-            program = Program.query.filter_by(programName = row['program2'])
-            if program:
-                newStudent.programs.append(program)
-
-            db.session.add(newStudent)
+            newStudent = add_student(row['studentID'], row['firstName'],row['lastName'], row['email'], row['username'],row['password'], row['program1'], row['program2'])
+            if newStudent:
+                db.session.add(newStudent)
     db.session.commit() 
 
-    print('database intialized')
+    return jsonify('database intialized')
 
 '''
 User Commands
@@ -210,20 +205,14 @@ test = AppGroup('test', help='Testing commands')
 def user_tests_command(type):
     if type == "unit":
         sys.exit(pytest.main(["-k", "UserUnitTests"]))
-    elif type == "int":
-        sys.exit(pytest.main(["-k", "UserIntegrationTests"]))
     else:
         sys.exit(pytest.main(["-k", "App"]))
 
-@test.command("course", help="Run Course tests")
+@test.command("courses", help="Run Course tests")
 @click.argument("type", default="all")
 def courses_tests_command(type):
     if type == "unit":
         sys.exit(pytest.main(["App/tests/courses.py::CourseUnitTests"]))
-
-    elif type == "int":
-        sys.exit(pytest.main(["App/tests/courses.py::CourseIntegrationTests"]))
-
     else:
         sys.exit(pytest.main(["App/tests/courses.py"]))
 
@@ -232,30 +221,14 @@ def courses_tests_command(type):
 def courses_tests_command(type):
     if type == "unit":
         sys.exit(pytest.main(["App/tests/coursePlan.py::CoursePlanUnitTests"]))
-    elif type == "int":
-        sys.exit(pytest.main(["App/tests/coursePlan.py::CoursePlanIntegrationTests"]))
     else:
         sys.exit(pytest.main(["App/tests/coursePlan.py"]))
-    
-#CoursesOfferedPerSemUnitTests
-@test.command("coursesOffered", help="Run Courses Offered Per Sem tests")
-@click.argument("type", default="all")
-def courses_tests_command(type):
-    if type == "unit":
-        sys.exit(pytest.main(["App/tests/coursesOfferedPerSem.py::CoursesOfferedPerSemUnitTests"]))
-    elif type == "int":
-        sys.exit(pytest.main(["App/tests/coursesOfferedPerSem.py::CoursesOfferedPerSemIntegrationTests"]))
-    else:
-        sys.exit(pytest.main(["App/tests/coursesOfferedPerSem.py"]))
-    
 
 @test.command("program", help="Run Program tests")
 @click.argument("type", default="all")
 def courses_tests_command(type):
     if type == "unit":
         sys.exit(pytest.main(["App/tests/program.py::ProgramUnitTests"]))
-    elif type == "int":
-        sys.exit(pytest.main(["App/tests/program.py::ProgramIntegrationTests"]))
     else:
         sys.exit(pytest.main(["App/tests/program.py"]))
 
@@ -265,8 +238,6 @@ def courses_tests_command(type):
 def courses_tests_command(type):
     if type == "unit":
         sys.exit(pytest.main(["App/tests/staff.py::StaffUnitTests"]))
-    elif type == "int":
-        sys.exit(pytest.main(["App/tests/staff.py::StaffIntegrationTests"]))
     else:
         sys.exit(pytest.main(["App/tests/staff.py"]))
 
@@ -275,21 +246,24 @@ def courses_tests_command(type):
 def courses_tests_command(type):
     if type == "unit":
         sys.exit(pytest.main(["App/tests/student.py::StudentUnitTest"]))
-    elif type == "int":
-        sys.exit(pytest.main(["App/tests/student.py::StudentIntegrationTests"]))
     else:
         sys.exit(pytest.main(["App/tests/student.py"]))
 
-@test.command("studentCH", help="Run Student Course History tests")
+@test.command("department", help="Run Department tests")
 @click.argument("type", default="all")
 def courses_tests_command(type):
     if type == "unit":
-        sys.exit(pytest.main(["App/tests/studentCourseHistory.py::CourseHistoryUnitTest"]))
-    elif type == "int":
-        sys.exit(pytest.main(["App/tests/studentCourseHistory.py::CourseHistoryIntegrationTests"]))
+        sys.exit(pytest.main(["App/tests/department.py::DepartmentUnitTests"]))
     else:
-        sys.exit(pytest.main(["App/tests/studentCourseHistory.py"]))
+        sys.exit(pytest.main(["App/tests/department.py"]))
 
+@test.command("semester", help="Run Semester tests")
+@click.argument("type", default="all")
+def courses_tests_command(type):
+    if type == "unit":
+        sys.exit(pytest.main(["App/tests/semester.py::SemesterUnitTests"]))
+    else:
+        sys.exit(pytest.main(["App/tests/semester.py"]))
 
 
 app.cli.add_command(test)

@@ -1,7 +1,8 @@
 import os, tempfile, pytest, logging, unittest
-from App.models import Program, ProgramCourses
+from App.models import Program, ProgramCourse
 from App.main import create_app
 from App.database import db, create_db
+from App.controllers import create_program, get_program_by_id, create_course
 
 
 class ProgramUnitTests(unittest.TestCase):
@@ -10,31 +11,22 @@ class ProgramUnitTests(unittest.TestCase):
         newProgram = Program("DCIT", "Computer Science Special", "24", "3", "12")
         assert(newProgram.departmentCode, newProgram.programName, newProgram.coreCredits, newProgram.electiveCredits, newProgram.founCredits) == ("DCIT", "Computer Science Special", "24", "3", "12")
     
-    def test_program_course_toDict (self):
+    def test_program_toJSON (self):
         newProgram = Program("DCIT", "Computer Science Special", "24", "3", "12")
-        self.assertDictEqual(newProgram.toDict(), {"Program ID":"CS100", "Department Code":"DCIT", "Program Name":"Computer Science Special", "Core Credits":"24", "Elective Credits":"3", "Foundation Credits":"12"})
+        self.assertDictEqual(newProgram.get_json(), {"Program ID":None, "Department Code":"DCIT", "Program Name":"Computer Science Special", "Core Credits":"24", "Elective Credits":"3", "Foundation Credits":"12"})
 
 class ProgramCourseUnitTests(unittest.TestCase):
 
     def test_new_program_course(self):
-        newProgramCourse = ProgramCourses("COMP307", "CS100")
+        newProgramCourse = ProgramCourse("COMP307", "CS100")
         assert(newProgramCourse.courseCode, newProgramCourse.programID) == ("COMP307", "CS100")
 
     def test_program_course_toJSON(self):
-        newProgramCourse = ProgramCourses("COMP307", "CS100")
-        self.assertDictEqual(newProgramCourse.get_json(), {"Program Course ID":"1", "Course Code":"COMP307", "Program ID":"CS100"})
+        newProgramCourse = ProgramCourse("COMP307", "CS100")
+        self.assertDictEqual(newProgramCourse.get_json(), {"Program Course ID":None, "Course Code":"COMP307", "Program ID":"CS100"})
 
 
-
-
-
-@pytest.fixture(autouse=True, scope="module")
-def empty_db():
-    app = create_app({'TESTING': True, 'SQLALCHEMY_DATABASE_URI': 'sqlite:///test.db'})
-    create_db()
-    yield app.test_client()
-    db.drop_all()
-
+"Integration Tests"
 class ProgramIntegrationTests(unittest.TestCase):
 
     def test_create_program(self):
@@ -70,4 +62,3 @@ class ProgramIntegrationTests(unittest.TestCase):
        
         all_program_courses = get_all_program_courses(program_name)
         self.assertTrue(any(course.course_code == course_code for course in all_program_courses))
-

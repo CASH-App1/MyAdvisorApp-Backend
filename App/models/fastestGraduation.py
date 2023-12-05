@@ -1,12 +1,15 @@
 from App.database import db
-from App.models import CoursePlanBuilder
+from App.models import *
 
 class FastestGraduation(CoursePlanBuilder):
-    fastestGraduationID = db.Column(db.Integer, primary_key=True),
-    fastestPlan = db.Column(db.Integer,  db.ForeignKey('courseplan.planID'), nullable=False),
+    fastestGraduationID = db.Column(db.Integer, primary_key=True)
+    fastestPlan = db.Column(db.Integer,  db.ForeignKey(CoursePlan.planID), nullable=False)
+    semesterID = db.Column(db.Integer,  db.ForeignKey(Semester.semesterID))
+    programID = db.Column(db.Integer, db.ForeignKey(Program.programID))
 
-    def __init__(self, studentID):
-        self.reset(studentID)
+    def __init__(self, semesterID, programID):
+        self.semesterID = semesterID
+        self.programID = programID
 
     def reset(self, studentID):
         plan = CoursePlan(studentID)
@@ -75,6 +78,7 @@ class FastestGraduation(CoursePlanBuilder):
         
     def get_json(self):
         return{
-            'Degree Plan ID': self.fastestGraduationID,
-            'Plan': self.fastestPlan
+            'Fastest Graduation ID': self.fastestGraduationID,
+            'Semester ID': self.semesterID,
+            'Program ID': self.programID
         }

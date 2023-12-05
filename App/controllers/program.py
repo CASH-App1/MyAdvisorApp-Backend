@@ -1,4 +1,5 @@
-from App.models import Program
+from App.models import *
+from App.controllers import *
 from App.database import db
 
 def create_program(department_code, program_name, core_credits, elective_credits, foun_credits):
@@ -7,7 +8,7 @@ def create_program(department_code, program_name, core_credits, elective_credits
         return None
 
     newProgram = Program(department_code, program_name, core_credits, elective_credits, foun_credits)
-    department = Department.query.get(department_code).first()
+    department = Department.query.get(department_code)
     if department:
         department.programs.append(newProgram)
         db.session.add(newProgram)
@@ -16,7 +17,7 @@ def create_program(department_code, program_name, core_credits, elective_credits
     return None
 
 def add_program_prerequisites(programName, courseCode, courseType):
-    program = Program.query.filter_by(programName = programName)
+    program = Program.query.filter_by(programName = programName).first()
     course = Course.query.filter_by(courseCode = courseCode).first()
     if program and course:
         program.add_course(courseCode, courseType)
@@ -29,10 +30,10 @@ def get_all_programCourses(programName):
     return None
 
 def check_prerequisite_exists(programName, courseCode):
-    program = Program.query.filter_by(programName = program_name).first()
-    course = Course.query.get(courseCode = courseCode).first()
+    program = Program.query.filter_by(programName = programName).first()
+    course = Course.query.get(courseCode)
     if course and program:
-        return ProgramCourses.query.filter_by(program_id= program.programID, course_code = courseCode).first()
+      return ProgramCourse.query.filter_by(programID= program.programID, courseCode = courseCode).first()
     return None
   
 
@@ -51,30 +52,41 @@ def get_program_by_id(program_id):
 def get_core_credits(program_id):
     program = get_program_by_id(program_id)
     if program:
-        return program.coreCredits else 0
+        return program.coreCredits 
+    return 0
 
 def get_core_courses(program_id):
     program = get_program_by_id(program_id)
     courses = program.coreCourses
-    return courses if program else []
+    if program: 
+        return courses
+    return 0
 
 def get_elective_credits(program_id):
     program = get_program_by_id(program_id)
-    return program.electiveCredits if program else 0
+    if program:
+        return program.electiveCredits  
+    return 0
 
 def get_elective_courses(program_id):
     program = get_program_by_id(program_id)
     courses = program.electiveCourses
-    return courses if program else []
+    if program:
+        return courses  
+    return 0
 
 def get_foun_credits(program_name):
     program = get_program_by_name(program_name)
-    return program.founCredits if program else 0
+    if program:
+        return program.founCredits 
+    return 0
 
 def get_foun_courses(program_name):
     program = get_program_by_name(program_name)
     courses = program.founCourses
-    return courses if program else []
+    if program: 
+        return courses 
+    return 0
 
 def get_all_courses(program_name):
     core_courses = get_core_courses(program_name)

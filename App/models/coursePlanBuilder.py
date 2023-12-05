@@ -1,4 +1,5 @@
 from App.database import db
+from App.models import *
 
 class CoursePlanBuilder(db.Model):
     __abstract__ = True

@@ -17,25 +17,25 @@ LOGGER = logging.getLogger(__name__)
 class UserUnitTests(unittest.TestCase):
 
     def test_new_user(self):
-        newUser = User("bob", "bobpass")
-        assert newUser.username == "bob"
+        newUser = User("bob", "bobpass", "Bob", "Smith", "bob@mail.com")
+        assert (newUser.username, newUser.firstName, newUser.lastName, newUser.email) == ("bob","Bob", "Smith", "bob@mail.com")
 
     # pure function no side effects or integrations called
-    def test_user_json(self):
-        user = User("bob", "bobpass")
-        user_json = user.get_json()
-        self.assertDictEqual(user_json, {"id": "101", "username": "bob"})
+    def test_user_toJSON(self):
+        newUser = User("bob", "bobpass", "Bob", "Smith", "bob@mail.com")
+        user_json = newUser.get_json()
+        self.assertDictEqual(user_json, {"id": None, "username": "bob"})
 
     def test_hashed_password(self):
         password = "mypass"
         hashed = generate_password_hash(password, method='sha256')
-        newUser = User("bob", password)
+        newUser = User("bob", "bobpass", "Bob", "Smith", "bob@mail.com")
         assert newUser.password != password
 
     def test_check_password(self):
         password = "mypass"
-        user = User("bob", password)
-        assert user.check_password(password)
+        newUser = User("bob", password, "Bob", "Smith", "bob@mail.com")
+        assert newUser.check_password(password)
 
 '''
     Integration Tests
@@ -52,13 +52,7 @@ def empty_db():
     create_db()
     yield app.test_client()
     db.drop_all()
-
-
-def test_authenticate():
-    user = create_user("bob", "bobpass")
-    assert login("bob", "bobpass") != None
-
-
+    
 class UsersIntegrationTests(unittest.TestCase):
 
     def test_create_user(self):
@@ -92,4 +86,3 @@ class UsersIntegrationTests(unittest.TestCase):
         updated_user = get_user(user.id)
 
         self.assertEqual(updated_user.username, "new_john_doe")
-

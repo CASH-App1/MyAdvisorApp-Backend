@@ -1,24 +1,23 @@
 from .user import User 
 from App.database import db
 from sqlalchemy import Column, Integer, Date, ForeignKey
-from App.models import Department, User
+from App.models import *
 
 class Staff(User):
     
     staffID = db.Column(db.Integer, primary_key=True)
-    departmentCode = db.Column(db.String(10), db.ForeignKey('department.departmentCode'), nullable = False)
-    userID = db.Column(db.Integer, db.ForeignKey('user.id'))
+    departmentCode = db.Column(db.String(10), db.ForeignKey(Department.departmentCode), nullable = False)
+    userID = db.Column(db.Integer, db.ForeignKey(User.id))
 
     department = db.relationship('Department', backref='staff_members')
-    created_programs = db.relationship('Program', backref=db.backref('program', lazy='joined'))
-    created_courses = db.relationship('Course', backref=db.backref('course', lazy='joined'))
-    created_semesters = db.relationship('Semester', backref=db.backref('semester', lazy='joined'))
+    # created_programs = db.relationship('Program', backref=db.backref('program', lazy='joined'))
+    # created_courses = db.relationship('Course', backref=db.backref('course', lazy='joined'))
+    # created_semesters = db.relationship('Semester', backref=db.backref('semester', lazy='joined'))
 
     def __init__(self, staffID, departmentCode, firstName, lastName, email, username, password):
-        user = super().__init__(username, password, firstName, lastName, email)
+        super().__init__(username, password, firstName, lastName, email)
         self.staffID = staffID
         self. departmentCode = departmentCode
-        self.userID = user.id
 
     def create_program(self, departmentCode, programName, coreCredits, electiveCredits, foundCredits):
         program = Program(self, departmentCode, programName, coreCredits, electiveCredits, foundCredits)
@@ -43,6 +42,14 @@ class Staff(User):
             
     def __repr__(self):
         return f"<Staff {self.staffID} - {self.firstName} {self.lastName}>"
-       
+    
+    def get_json(self):
+        return{'Staff ID': self.staffID,
+            'First Name': self.firstName,
+            'Last Name': self.lastName,
+            'Email' : self.email,
+            'Department Code': self.departmentCode,
+            'Username': self.username
+        }
 
        

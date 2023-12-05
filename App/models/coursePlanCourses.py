@@ -1,21 +1,11 @@
 from App.database import db
-from App.models import Course, CoursePlan
+from App.models import *
+from sqlalchemy import Column, Integer, Date, ForeignKey
 
 class CoursePlanCourses(db.Model):
-    coursePlanCourseID = db.Column(db.Integer, primary_key=True)
-    coursePlanID = db.Column(db.Integer, db.ForeignKey('courseplan.planID'))
-    courseCode = db.Column(db.Integer, db.ForeignKey('course.courseCode'))
-    coursePlan = db.relationship('CoursePlan', backref = 'courses', lazy = True)
-    course = db.relationship('Course', backref = 'coursePlans', lazy = True)
+  __tablename__ = 'course_plan_courses'
+  coursePlanCourseID = db.Column(db.Integer, primary_key=True)
+  coursePlanID = db.Column(db.Integer, db.ForeignKey(CoursePlan.planID))
+  courseCode = db.Column(db.Integer, db.ForeignKey(Course.courseCode))
 
-    def __init__(self, plan, courseCode):
-        self.coursePlanID = plan
-        self.courseCode = courseCode
-        
-
-    def get_json(self):
-        return{
-            'Course Plan ID': self.coursePlanID,
-            'Course': self.courseCode
-        }
 
