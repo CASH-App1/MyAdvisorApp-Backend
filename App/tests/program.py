@@ -13,7 +13,7 @@ class ProgramUnitTests(unittest.TestCase):
     
     def test_program_toJSON (self):
         newProgram = Program("DCIT", "Computer Science Special", "24", "3", "12")
-        self.assertDictEqual(newProgram.get_json(), {"Program ID":"CS100", "Department Code":"DCIT", "Program Name":"Computer Science Special", "Core Credits":"24", "Elective Credits":"3", "Foundation Credits":"12"})
+        self.assertDictEqual(newProgram.get_json(), {"Program ID":None, "Department Code":"DCIT", "Program Name":"Computer Science Special", "Core Credits":"24", "Elective Credits":"3", "Foundation Credits":"12"})
 
 class ProgramCourseUnitTests(unittest.TestCase):
 
@@ -23,7 +23,7 @@ class ProgramCourseUnitTests(unittest.TestCase):
 
     def test_program_course_toJSON(self):
         newProgramCourse = ProgramCourse("COMP307", "CS100")
-        self.assertDictEqual(newProgramCourse.get_json(), {"Program Course ID":"1", "Course Code":"COMP307", "Program ID":"CS100"})
+        self.assertDictEqual(newProgramCourse.get_json(), {"Program Course ID":None, "Course Code":"COMP307", "Program ID":"CS100"})
 
 
 "Integration Tests"

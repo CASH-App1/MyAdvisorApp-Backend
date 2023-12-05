@@ -12,45 +12,45 @@ class CoursePlanUnitTests(unittest.TestCase):
     
     def test_course_plan_toJSON (self):
         newCoursePlan = CoursePlan(816031123, "SEMI2K23")
-        self.assertDictEqual(newCoursePlan.get_json(), {"Plan ID":"1", "Student ID":816031123, "Semester ID":"SEMI2k23", "Program ID":"32", "Courses":[{"Course Code":"MATH202"}]})
+        self.assertDictEqual(newCoursePlan.get_json(), {"Plan ID":None, "Student ID":816031123, "Semester ID":"SEMI2K23", "Program ID":None, "Courses":[]})
 
 
        
 class EasiestCoursesUnitTests(unittest.TestCase):
 
     def test_new_easiest_courses(self):
-        newEasiestCourses = EasiestCourses("SEMI2k23", "30")
-        assert(newEasiestCourses.semesterID, newEasiestCourses.programID) == ("SEMI2k23", "30")
+        newEasiestCourses = EasiestCourses("SEMI2K23", "30")
+        assert(newEasiestCourses.semesterID, newEasiestCourses.programID) == ("SEMI2K23", "30")
 
     def test_easiest_courses_toJSON(self):
-        newEasiestCourses = EasiestCourses("SEMI2k23", "30")
-        self.assertDictEqual(newEasiestCourses.get_json(), {"Easiest Courses ID":"EC001", "Semester ID":"SEMI2K23", "Program ID":"30"})
+        newEasiestCourses = EasiestCourses("SEMI2K23", "30")
+        self.assertDictEqual(newEasiestCourses.get_json(), {"Easiest Courses ID":None, "Semester ID":"SEMI2K23", "Program ID":"30"})
 
 class FastestGraduationUnitTests(unittest.TestCase):
 
     def test_new_fastest_graduation(self):
-        newFastestGraduation = FastestGraduation("SEMI2k23", "31")
-        assert(newFastestGraduation.semesterID, newFastestGraduation.programID) == ("SEMI2k23", "31")
+        newFastestGraduation = FastestGraduation("SEMI2K23", "31")
+        assert(newFastestGraduation.semesterID, newFastestGraduation.programID) == ("SEMI2K23", "31")
 
     def test_fastest_graduation_toJSON (self):
-        newFastestGraduation = FastestGraduation("SEMI2k23", "31")
-        self.assertDictEqual(newFastestGraduation.get_json(), {"Fastest Graduation  ID":"EC001", "Semester ID":"SEMI2K23", "Program ID":"31"})
+        newFastestGraduation = FastestGraduation("SEMI2K23", "31")
+        self.assertDictEqual(newFastestGraduation.get_json(), {"Fastest Graduation ID":None, "Semester ID":"SEMI2K23", "Program ID":"31"})
 
 class ElectivePriorityUnitTests(unittest.TestCase):
 
-    def test_new_fastest_graduation(self):
-        newElectivePriority = ElectivePriority("SEMI2k23", "32")
-        assert(newElectivePriority.semesterID, newElectivePriority.programID) == ("SEMI2k23", "32")
+    def test_new_elective_priority (self):
+        newElectivePriority = ElectivePriority("SEMI2K23", "32")
+        assert(newElectivePriority.semesterID, newElectivePriority.programID) == ("SEMI2K23", "32")
 
-    def test_fastest_graduation_toJSON (self):
-        newElectivePriority = ElectivePriority("SEMI2k23", "32")
-        self.assertDictEqual(newElectivePriority.get_json(), {"Elective Priority   ID":"EC001", "Semester ID":"SEMI2K23", "Program ID":"32"})
+    def test_elective_priority_toJSON  (self):
+        newElectivePriority = ElectivePriority("SEMI2K23", "32")
+        self.assertDictEqual(newElectivePriority.get_json(), {"Elective Priority ID":None, "Semester ID":"SEMI2K23", "Program ID":"32"})
 
 class CoursePlanDirectorUnitTest(unittest.TestCase):
 
     def test_new_course_plan_director(self):
         newCoursePlanDirector = CoursePlanDirector("ElectivePriority", "elective")
-        assert(newCoursePlanDirector.builder, newCoursePlanDirector.category) == ("ElectivePriority", "elective")
+        assert(newCoursePlanDirector.builderName, newCoursePlanDirector.category) == ("ElectivePriority", "elective")
 
 "Integration Tests" 
 class CoursePlanIntegrationTests(unittest.TestCase):

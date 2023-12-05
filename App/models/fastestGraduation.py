@@ -78,6 +78,7 @@ class FastestGraduation(CoursePlanBuilder):
         
     def get_json(self):
         return{
-            'Degree Plan ID': self.fastestGraduationID,
-            'Plan': self.fastestPlan
+            'Fastest Graduation ID': self.fastestGraduationID,
+            'Semester ID': self.semesterID,
+            'Program ID': self.programID
         }

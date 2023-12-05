@@ -29,3 +29,15 @@ class Semester(db.Model):
 
   def __repr__(self):
     return f"Semester {self.semesterType} - {self.year}"
+
+  def get_json(self):
+        courses = []
+        for c in self.courses:
+            courses.append(c.get_json())
+            
+        return{
+            'Semester ID': self.semesterID,
+            'Courses': courses,
+            'Semester Year': self.year,
+            'Semester Type': self.semesterType
+        }
