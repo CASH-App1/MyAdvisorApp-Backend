@@ -19,3 +19,10 @@ class SemesterCourse(db.Model):
 
     def __repr__(self):
         return f"<SemesterCourse {self.semesterCourseID}>"
+
+    def get_json(self):
+        return{
+            'Semester Course ID': self.semesterCourseID,
+            'Course Code': self.courseCode,
+            'Semester ID': self.semesterID
+        }

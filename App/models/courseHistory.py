@@ -14,13 +14,16 @@ class CourseHistory(db.Model):
         self.courseCode = courseCode
         self.gradeLetter = gradeLetter
         self.percent = percent
+        self.courseType = courseType
         self.semesterID = semID
     
 
     def get_json(self):
         return{
-            'CourseHistory ID': self.courseHistoryID,
+            'Course History ID': self.courseHistoryID,
             'Course Code': self.courseCode,
-            'Course Grade': f'{self.gradeLetter} : {self.percent}',
-            'Course Type': self.courseType
+            'Course Grade': self.gradeLetter,
+            'Percentage' : self.percent,
+            'Course Type': self.courseType,
+            'Semester ID': self.semesterID
         }

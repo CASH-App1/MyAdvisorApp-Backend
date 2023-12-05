@@ -52,7 +52,8 @@ class ElectivePriority(CoursePlanBuilder):
 
     def get_json(self):
         return{
-            'Degree Plan ID': self.electivePlanID,
-            'Plan': self.electivePlan
+            'Elective Priority ID': self.electivePlanID,
+            'Semester ID': self.semesterID,
+            'Program ID': self.programID
         }
     

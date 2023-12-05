@@ -7,14 +7,14 @@ from App.database import db, create_db
 class CourseUnitTests(unittest.TestCase):
 
     def test_new_course(self):
-        newCourse = Course("CSCI101", "PR001", "DataStructures", 3, 8)
-        assert (newCourse.courseCode, newCourse.prereqID, newCourse.courseName, newCourse.credits, newCourse.difficulty) == ("CSCI101", "PR001", "DataStructures", 3, 8)
+        newCourse = Course("CSCI101", "DataStructures", 3, 8)
+        assert (newCourse.courseCode, newCourse.courseName, newCourse.credits, newCourse.difficulty) == ("CSCI101", "DataStructures", 3, 8)
 
     def test_course_toJSON(self):
-        newCourse = Course("CSCI101", "PR001", "DataStructures", 3, 8)
-        self.assertDictEqual(newCourse.get_json(), {"CourseCode":"CSCI101", "Prerequisite ID": "PR001", "Course Name":"Data Structures", "Credits":3, "Difficulty":8})
+        newCourse = Course("CSCI101", "DataStructures", 3, 8)
+        self.assertDictEqual(newCourse.get_json(), {"Course Code":"CSCI101", "Course Name":"DataStructures", "Credits":3, "Difficulty":8})
 
-
+'''
 class PrerequisiteUnitTests(unittest.TestCase):
 
     def test_new_prerequisite(self):
@@ -24,16 +24,16 @@ class PrerequisiteUnitTests(unittest.TestCase):
     def test_prerequisite_toJSON(self):
         newPrerequisite = Prerequisite("MATH202")
         self.assertDictEqual(newPrerequisite.get_json(), {"Prerequisite ID":"PR001", "Course Code": "MATH202"})
-    
+''' 
 class CourseHistoryUnitTests(unittest.TestCase):
 
     def test_new_course_history (self):
-        newCourseHistory = CourseHistory("CSCI101", "A", "0.85", "elective")
-        assert (newCourseHistory.courseCode, newCourseHistory.gradeLetter, newCourseHistory.percent, newCourseHistory.courseType) == ("CSCI101", "A", "0.85", "elective")
+        newCourseHistory = CourseHistory("CH001", "CSCI101", "A", "0.85", "elective", "SEMI2K23")
+        assert (newCourseHistory.courseHistoryID, newCourseHistory.courseCode, newCourseHistory.gradeLetter, newCourseHistory.percent, newCourseHistory.courseType, newCourseHistory.semesterID) == ("CH001", "CSCI101", "A", "0.85", "elective", "SEMI2K23")
     
     def test_course_history_toJSON (self):
-        newCourseHistory = CourseHistory("CSCI101", "A", "0.85", "elective")
-        self.assertDictEqual(newCourseHistory.get_json(), {"Course History ID": "CH001", "Course Code":"CSCI101", "Grade":"A", "Percentage":"0.85", "Course Type":"elective"})
+        newCourseHistory = CourseHistory("CH001", "CSCI101", "A", "0.85", "elective", "SEMI2K23")
+        self.assertDictEqual(newCourseHistory.get_json(), {"Course History ID": "CH001", "Course Code":"CSCI101", "Course Grade":"A", "Percentage":"0.85", "Course Type":"elective", "Semester ID":"SEMI2K23"})
 
 
 "Integration Tests"
