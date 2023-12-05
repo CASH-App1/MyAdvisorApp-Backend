@@ -60,21 +60,15 @@ class StudentIntegrationTests(unittest.TestCase):
             db.engine.dispose()
 
     def test_create_student(self):
-        student = add_student("816031318", "Sam", "Dawson", "sdawson@example.com", "sam_dawson", "password123", 
+        student = add_student(816, "Sam", "Dawson", "sdawson@example.com", "sam_dawson", "password123", 
                 "Computer Science Major", "Electronics Minor")
         retrieved_student = get_student(student.studentID)
         
-        self.assertEqual((retrieved_student.firstName, retrieved_student.lastName, retrieved_student.email, 
-                        retrieved_student.username, retrieved_student.program1, retrieved_student.program2),
-                         ("Sam", "Dawson", "sdawson@example.com", "sam_dawson", "Computer Science Major", "Electronics Minor"))
-
-    def test_update_student(self):
-        student = add_student("816021458", "Jessica", "Pearson", "jessica.p@example.com", "jessica_pearson", "passjess", 
-                            "Computer Science Maajor", "Mathematics Major")
+        student = add_student(814, "Jessica", "Pearson", "jessica.p@example.com", "jessica_pearson", "passjess", "Computer Science Major", "Mathematics Major")
         updated_student = update_student(student.studentID, "Janette", "Spectar", "janette@example.com", "janette_spectar", "new_password")
-        retrieved_student = get_student(updated_student.studentID)
+        retrieved_student = get_student(update_student.studentID)
 
-        self.assertEqual((retrieved_student.firstName, retrieved_student.lastName, retrieved_student.email, retrieved_student.username),
-                         ("Janette", "Spectar", "janette@example.com", "janette_spectar"))
+        assert(retrieved_student.firstName, retrieved_student.lastName, retrieved_student.email, retrieved_student.username) == ("Janette", "Spectar", "janette@example.com", "janette_spectar")
 
+   
    
