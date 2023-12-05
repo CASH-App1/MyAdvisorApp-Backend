@@ -7,7 +7,6 @@ from flask import jsonify
 from App.database import db, get_migrate
 from App.main import create_app
 from App.controllers import *
-
 test1 = ["COMP1600",  "COMP1601", "COMP1602", "COMP1603", "COMP1604", "MATH1115", "INFO1600", "INFO1601",  "FOUN1101", "FOUN1105", "FOUN1301", "COMP3605", "COMP3606", "COMP3607", "COMP3608",]
 
 file_path = "testData/test.txt"

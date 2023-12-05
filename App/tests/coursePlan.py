@@ -2,6 +2,7 @@ import pytest, unittest
 from App.models import CoursePlan, CoursePlanCourses, EasiestCourses, FastestGraduation, ElectivePriority, CoursePlanDirector
 from App.controllers import *
 from App.main import create_app
+
 from App.database import db, create_db
 
 class CoursePlanUnitTests(unittest.TestCase):

@@ -6,6 +6,7 @@ from App.database import db, create_db
 from App.models import User, Student, Program, StudentProgram
 from App.controllers import add_student, update_student, get_student
 
+from App.models import User, Student, Program, StudentCourseHistory, StudentProgram
 
 
 LOGGER = logging.getLogger(__name__)

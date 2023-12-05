@@ -27,6 +27,7 @@ class PrerequisiteUnitTests(unittest.TestCase):
 ''' 
 class CourseHistoryUnitTests(unittest.TestCase):
 
+
     def test_new_course_history (self):
         newCourseHistory = CourseHistory("CH001", "CSCI101", "A", "0.85", "elective", "SEMI2K23")
         assert (newCourseHistory.courseHistoryID, newCourseHistory.courseCode, newCourseHistory.gradeLetter, newCourseHistory.percent, newCourseHistory.courseType, newCourseHistory.semesterID) == ("CH001", "CSCI101", "A", "0.85", "elective", "SEMI2K23")

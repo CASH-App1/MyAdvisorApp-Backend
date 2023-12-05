@@ -35,7 +35,7 @@ def check_prerequisite_exists(programName, courseCode):
     if course and program:
       return ProgramCourse.query.filter_by(programID= program.programID, courseCode = courseCode).first()
     return None
-    
+  
 
 def get_program_by_name(program_name):
     program = Program.query.filter_by(programName=program_name).first()
