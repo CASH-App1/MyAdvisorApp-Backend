@@ -20,6 +20,7 @@ class Semester(db.Model):
     if course not in self.courses:
       self.courses.append(course)
       db.session.commit()
+      
       return True
 
   def remove_course(self, course):

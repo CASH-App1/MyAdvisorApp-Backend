@@ -62,7 +62,7 @@ def get_all_semester_courses():
 
 
 def get_upcoming_semester():
-  return Semester.query.order_by(SemesterHistory.semesterID.desc()).first()
+  return Semester.query.order_by(Semester.semesterID.desc()).first()
 
 
 def get_semester_course_by_id(semester_course_id):

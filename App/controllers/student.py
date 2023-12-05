@@ -57,7 +57,7 @@ def update_student(studentID, new_first_name, new_last_name, new_email, new_user
 
 
 def create_semester_history(student_id, year, semester_type):
-    new_semester_history = SemesterHistory(student_id=student_id, year=year, semester_type=semester_type)
+    new_semester_history = SemesterHistory(student_id, year, semester_type)
     db.session.add(new_semester_history)
     db.session.commit()
     return new_semester_history
@@ -81,7 +81,7 @@ def get_student_plans(student):
        studentPlans.append(p.get_json())
 
 
-def addCoursetoHistory(studentid, semesterHistory, courseCode, gradeLetter, percent, courseType, semesterID):
+def addCoursetoHistory(semesterHistory, courseCode, gradeLetter, percent, courseType, semesterID):
     courseHist = CourseHistory(courseCode, gradeLetter, percent, courseType, semesterID)
     if courseHist not in semesterHistory.courses:
         db.session.add(courseHist)

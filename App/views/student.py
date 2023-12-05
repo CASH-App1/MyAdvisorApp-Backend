@@ -18,7 +18,7 @@ def autogenerate_course_plan():
     if not verify_student(username):
       return jsonify(error = 'You are unauthorized to perform this action. Please login with Student credentials.'), 401
 
-    student = Student.query.filter_by(username = username).first()
+    student = Student.query.get(username)
     valid_plans = ["Elective Priority", "Easiest Courses", "Fastest Graduation"]
     valid_degree_types = ['Major', 'Minor', 'Special']
 
@@ -39,7 +39,7 @@ def add_course_to_plan():
     if not verify_student(username):
       return jsonify(error = 'You are unauthorized to perform this action. Please login with Student credentials.'), 401
 
-    student = Student.query.filter_by(username = username).first()
+    student = Student.query.get(username)
 
     semester = Semester.query.order_by(SemesterHistory.historyID.desc()).first()
     if data['year']  != semester.year and data['semesterType'] != semseter.semesterType:
@@ -75,7 +75,7 @@ def remove_course_from_plan():
     if not verify_student(username):
       return jsonify(error = 'You are unauthorized to perform this action. Please login with Student credentials.'), 401 
  
-    student = Student.query.filter_by(username = username).first()
+    student = Student.query.get(username)
 
     semester = Semester.query.order_by(SemesterHistory.historyID.desc()).first()
     if data['year']  != semester.year and data['semesterType'] != semseter.semesterType:
@@ -107,11 +107,11 @@ def view_course_plans():
     if not verify_student(username):
       return jsonify(error = 'You are unauthorized to perform this action. Please login with Student credentials.'), 401
       
-    student = Student.query.filter_by(username = username).first()
+    student = Student.query.get(username)
     coursePlans = get_student_plans(student)
 
     if coursePlans:
-        return jsonify(message = f'Student {studen.firstName} {student.lastName} Course Plans: {coursePlans}'), 200
+        return jsonify(message = f'Student {student.firstName} {student.lastName} Course Plans: {coursePlans}'), 200
     return jsonify(error = f'Student {student.firstName} {student.lastName} has no created course plans.'), 200
 
 
@@ -123,6 +123,7 @@ def update_academic_history():
     username = get_jwt_identity()
     if not verify_student(username):
       return jsonify(error = 'You are unauthorized to perform this action. Please login with Student credentials.'), 401
+    print(username)
     semester = get_upcoming_semester()
     if data['year']  >= semester.year and data['semesterType'] >= semseter.semesterType:
         return jsonify(error = f'Invalid semester entered'), 400
@@ -131,7 +132,8 @@ def update_academic_history():
     if semesterHist:
         return jsonify(error = f"Semester {data['semesterType']} - {data['year']} already exists!"), 200
     
-    student = Student.query.filter_by(username = username).first()
+    student = Student.query.get(username)
+    print(student)
     updatedHistory = updateStudentHistory(student, data['year'],  data['semesterType'],  data['histories'])
     if updatedHistory:
         return jsonify(message = 'Semester History addition successful'), 200
@@ -145,7 +147,7 @@ def view_academic_history():
     if not verify_student(username):
       return jsonify(error = 'You are unauthorized to perform this action. Please login with Student credentials.'), 401
       
-    student = Student.query.filter_by(username = username).first()
+    student = Student.query.get(username)
     history = get_student_history(student)
 
     if history:

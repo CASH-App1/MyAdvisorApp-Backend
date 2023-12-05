@@ -17,9 +17,10 @@ def create_program(department_code, program_name, core_credits, elective_credits
     return None
 
 def add_program_prerequisites(programName, courseCode, courseType):
-    program = Program.query.filter_by(programName = programName)
+    program = Program.query.filter_by(programName = programName).first()
     course = Course.query.filter_by(courseCode = courseCode).first()
     if program and course:
+        print("added")
         program.add_course(courseCode, courseType)
         db.session.commit()
 
@@ -31,9 +32,12 @@ def get_all_programCourses(programName):
 
 def check_prerequisite_exists(programName, courseCode):
     program = Program.query.filter_by(programName = programName).first()
+    print(program)
     course = Course.query.get(courseCode)
+    print(course)
     if course and program:
-        return ProgramCourse.query.filter_by(programID= program.programID, courseCode = courseCode).first()
+      print("hi")
+      return ProgramCourse.query.filter_by(programID= program.programID, courseCode = courseCode).first()
     return None
     
 

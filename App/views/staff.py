@@ -40,29 +40,34 @@ def addProgramRequirements():
   if not verify_staff(username):
     return jsonify(error = 'You are unauthorized to perform this action. Please login with Staff credentials.'), 401
 
-
   program = Program.query.filter_by(programName = data['programName']).first()
   if not program:
     return jsonify(error = 'Program does not exist'), 400
 
+  prereqs = "Program prerequisites : "
+
   #add core courses
   for core in data['coreCourses']:
     check = check_prerequisite_exists(data['programName'], core['course'])
-    if check:
+    if not check:
       add_program_prerequisites(data['programName'], core['course'], 'core')
+      prereqs += f"{core['course']} "
 
   #add elective courses
   for elective in data['electiveCourses']:
     check = check_prerequisite_exists(data['programName'], elective['course'])
-    if check:
+    if not check:
       add_program_prerequisites(data['programName'], elective['course'], 'elective')
+      prereqs += f"{elective['course']} "
 
   #add foundation courses
   for foundation in data['foundationCourses']:
     check = check_prerequisite_exists(data['programName'], foundation['course'])
-    if check:
+    if not check:
       add_program_prerequisites(data['programName'], foundation['course'], 'foundation')
-  return jsonify(message = 'Program pre-requisites added successfully'), 200
+      prereqs += f"{foundation['course']} "
+      
+  return jsonify(message = f'{prereqs} added successfully'), 200
 
 @staff_views.route('/staff/new-semester', methods=['POST'])
 @jwt_required()
@@ -98,8 +103,8 @@ def getSemesterCourses():
       return jsonify(message = 'There are no offered courses this semester'), 200
       
     if listing:
-      courses = [l.get_json() + "\n" for l in listing]
-      return jsonify(message = f'Offered courses:\n{courses}'), 200
+      courses = [l.get_json() for l in listing]
+      return jsonify(message = f'Offered courses: {listing}'), 200
   return jsonify(error = 'Semester does not exist!'), 400
 
 
@@ -111,22 +116,20 @@ def addSemesterCourse():
   if not verify_staff(username):
     return jsonify(error = 'You are unauthorized to perform this action. Please login with Staff credentials.'), 401
 
-  course = Course.query.get(data['course'])
-  if not course:
-    return jsonify(error = f'Course {course.courseCode} does not exist'), 400
+  for c in data['courses']:
+    course = Course.query.get(c['course'])
+    if not course:
+      return jsonify(error = f"Course {data['course']} does not exist"), 400
+    
+    semester = Semester.query.filter_by(year = data['year'], semesterType = data['semesterType']).first()
+    if not semester:
+      return  jsonify(error = f'Semester does not exist'), 400
+
+    added = add_semester_course(course.courseCode, semester.semesterID)
+    if not added:
+      return jsonify(error = "Course addition unsucessful"), 400
   
-  semester = Semester.query.filter_by(year = data['year'], semesterType = data['semesterType']).first()
-  if not semester:
-    return  jsonify(error = f'Semester does not exist'), 400
-
-  offeredCourses = get_courses_in_semester(data['year'], data['semesterType'])
-  if course in offeredCourses:
-    return jsonify(error = f"{courseCode} already exists in the semester's offered courses"), 400
-
-  course = add_semester_course(data['course'], semester.semesterID)
-  if course:
-     return jsonify(message = f"Added {data['course']} successfully"), 200
-  return jsonify(error = "Course addition unsucessful"), 400
+  return jsonify(message = f"Added courses successfully"), 200
 
 
 
@@ -140,7 +143,7 @@ def removeSemesterCourse():
 
   course = Course.query.get(data['course'])
   if not course:
-    return jsonify(error = f'Course {course.courseCode} does not exist'), 400
+    return jsonify(error = f"Course {data['course']} does not exist"), 400
 
   semester = Semester.query.filter_by(year = data['year'], semesterType = data['semesterType']).first()
   if not semester:
@@ -148,9 +151,8 @@ def removeSemesterCourse():
 
   offeredCourses = get_courses_in_semester(data['year'], data['semesterType'])
   if course in offeredCourses:
-    return jsonify(message = f"{courseCode} already exists in the semester\'s offered courses"), 400
-
-  course = remove_semester_course(courseCode, semester.semesterID)
-  if course:
-     return jsonify(message = f'Deleted {course.courseCode} successfully'), 200
-  return jsonify(error = "Course deletion unsucessful"), 400
+    course = remove_semester_course(data['course'], semester.semesterID)
+    if course:
+       return jsonify(message = f"Deleted {data['course']} successfully"), 200
+    return jsonify(error = "Course deletion unsucessful"), 400
+  
