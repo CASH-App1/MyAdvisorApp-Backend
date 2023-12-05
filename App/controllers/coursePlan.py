@@ -2,8 +2,8 @@ from App.models import *
 from App.controllers import *
 from App.database import db
 
-def create_course_plan(student_id):
-    new_course_plan = CoursePlan(student_id)
+def create_course_plan(student_id, semesterID):
+    new_course_plan = CoursePlan(student_id, semesterID)
     db.session.add(new_course_plan)
     db.session.commit()
     return new_course_plan
@@ -31,7 +31,7 @@ def remove_course_from_plan(course, plan):
 
 
 def get_course_plan(planID):
-    return CoursePlan.query.get(data['planID'])
+    return CoursePlan.query.get(planID)
 
 
 def autogenerator(student, planType, degreeType, programID, semesterID):

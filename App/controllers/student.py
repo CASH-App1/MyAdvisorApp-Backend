@@ -74,11 +74,7 @@ def get_student_history(student):
 
 
 def get_student_plans(student):
-    plans = student.coursePlans
-
-    studentPlans = []
-    for p in plans:
-       studentPlans.append(p.get_json())
+    return student.coursePlans
 
 
 def addCoursetoHistory(semesterHistory, courseCode, gradeLetter, percent, courseType, semesterID):

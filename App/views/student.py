@@ -33,7 +33,7 @@ def autogenerate_course_plan():
 
 @student_views.route('/student/course-plan', methods=['POST'])
 @jwt_required()
-def add_course_to_plan():
+def add_course_to_plan_view():
     data = request.json
     username = get_jwt_identity()
     if not verify_student(username):
@@ -41,29 +41,33 @@ def add_course_to_plan():
 
     student = Student.query.get(username)
 
-    semester = Semester.query.order_by(SemesterHistory.historyID.desc()).first()
+    semester = Semester.query.order_by(Semester.semesterID.desc()).first()
     if data['year']  != semester.year and data['semesterType'] != semseter.semesterType:
         return jsonify(error = f'Invalid semester entered'), 400
 
     if data['planID'] == 0:
-        plan = create_course_plan(student.studentID)
+        plan = create_course_plan(student.studentID, semester.semesterID)
 
     if data['planID'] != 0:
         plan = get_course_plan(data['planID'])
         if not plan:
             return jsonify(error = f'Course Plan does not exist'), 400
 
+
     course = get_course_by_courseCode(data['course'])
+    print(course)
     if not course:
-        return jsonify(error = f"Course {data['course'].courseCode} does not exist"), 400 
+        return jsonify(error = f"Course {data['course']} does not exist"), 400 
 
     if course in plan.courses:
         return jsonify(message = 'Course already exists in plan'), 200
                      
     if check_prerequisites(course, student):
+      if course in semester.courses:
         added = add_course_to_plan(course, plan)
         if added:
-            return jsonify(message = 'Course(s) added successfully'), 200
+          return jsonify(message = 'Course(s) added successfully'), 200
+      return jsonify(error = f'The course {course.courseCode} is not offered.'), 400
     return jsonify(error = f"The pre-requisites for {course.courseCode} have not been met!"), 400
     
     
@@ -123,17 +127,16 @@ def update_academic_history():
     username = get_jwt_identity()
     if not verify_student(username):
       return jsonify(error = 'You are unauthorized to perform this action. Please login with Student credentials.'), 401
-    print(username)
+    
     semester = get_upcoming_semester()
     if data['year']  >= semester.year and data['semesterType'] >= semseter.semesterType:
         return jsonify(error = f'Invalid semester entered'), 400
 
     semesterHist = SemesterHistory.query.filter_by(year = data['year'], semesterType = data['semesterType']).first()
     if semesterHist:
-        return jsonify(error = f"Semester {data['semesterType']} - {data['year']} already exists!"), 200
+        return jsonify(error = f"Semester {data['semesterType']} - {data['year']} already exists!"), 400
     
     student = Student.query.get(username)
-    print(student)
     updatedHistory = updateStudentHistory(student, data['year'],  data['semesterType'],  data['histories'])
     if updatedHistory:
         return jsonify(message = 'Semester History addition successful'), 200
@@ -151,6 +154,6 @@ def view_academic_history():
     history = get_student_history(student)
 
     if history:
-        return jsonify(message = f'{student.firstName} {student.lastName} Academic History: \n {history}'), 200
+        return jsonify(message = f'{student.firstName} {student.lastName} Academic History: {history}'), 200
     return jsonify(error = f'There is no academic history for {student.firstName} {student.lastName}'), 200
     

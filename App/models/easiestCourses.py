@@ -27,8 +27,8 @@ class EasiestCourses(CoursePlanBuilder):
         plan = CoursePlan.query.get(easiestPlan).first()
 
         program = Program.query.get(self.easiestPlan.programID).first()
-        semesterCourses = SemesterCourse.query.get(self.easiestPlan.semesterID).all()
-        programCourses = ProgramCourse.query.filter_by(programID = self.fastestPlan.programID).all()
+        semesterCourses = SemesterCourse.query.filter_by(self.easiestPlan.semesterID).all()
+        programCourses = ProgramCourse.query.filter_by(programID = self.easiestPlan.programID).all()
         courses = [course for course in programCourses if course in semesterCourses]
         courses.sort(key = sortKey)
 

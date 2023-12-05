@@ -22,13 +22,13 @@ def get_course_by_courseCode(code):
 def check_prerequisites(course, student):
     qualify =0
     #prereq = Prerequisite.query.get(course.prereqID).first()
-    if course.prerequisites.count() > 0:
+    if len(course.prerequisites) > 0:
         for p in course.prerequisites:
             for s in student.studentHistory:
                 for c in s.courses:
                     if p.courseCode == c.courseCode:
                         qualify += 1
     
-    if course.prerequisites.count() == 0 or course.prerequisites.count() == qualify:
+    if len(course.prerequisites) == 0 or len(course.prerequisites) == qualify:
         return True
     return False

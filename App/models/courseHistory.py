@@ -9,13 +9,13 @@ class CourseHistory(db.Model):
     percent = db.Column(db.Float, nullable= False)
     courseType = db.Column(db.String(50), nullable = False)
 
-    def __init__(self, id, courseCode, gradeLetter, percent, courseType, semID):
-        self.courseHistoryID = id
+    def __init__(self, courseCode, gradeLetter, percent, courseType, semID):
         self.courseCode = courseCode
         self.gradeLetter = gradeLetter
         self.percent = percent
         self.courseType = courseType
         self.semesterID = semID
+        self.courseType = courseType
     
 
     def get_json(self):
