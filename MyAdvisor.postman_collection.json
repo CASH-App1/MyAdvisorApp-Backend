@@ -1,0 +1,2879 @@
+{
+	"info": {
+		"_postman_id": "a9065ba6-297a-4913-ba42-895808174c2d",
+		"name": "MyAdvisor",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25449016",
+		"_collection_link": "https://orange-crescent-772906.postman.co/workspace/My-Workspace~8ab053c1-1201-412a-8149-3eee32d178c3/collection/25449016-a9065ba6-297a-4913-ba42-895808174c2d?action=share&source=collection_link&creator=25449016"
+	},
+	"item": [
+		{
+			"name": "Staff Login - Success",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Returned Access Token\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(pm.response.text()).to.include(\"token\");\r",
+							"    pm.environment.set('staff_token', jsonData['staff_token'])\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"username\":\"charlotte.joule28\",\r\n\t\"password\":\"yU8Xlr>W=gkt\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/staff-login",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"staff-login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Staff Login - Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"username\":\"charlotte.joule28\",\r\n\t\"password\":\"yU8Xlr>W=gkt\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://myuwiadvisorapp.onrender.com/staff-login",
+							"protocol": "https",
+							"host": [
+								"myuwiadvisorapp",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"staff-login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "287"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Dec 2023 03:40:00 GMT"
+						},
+						{
+							"key": "Expect-Ct",
+							"value": "max-age=2592000, report-uri=\"https://sentry.repl.it/api/10/security/?sentry_key=615192fd532445bfbbbe966cd7131791\""
+						},
+						{
+							"key": "Replit-Cluster",
+							"value": "global"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.2.2 Python/3.10.11"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=7768687; includeSubDomains"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"staff_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwMTY2MTIwMCwianRpIjoiZjMwMDkxNzMtMzM4MC00MGQ3LWI5MzctNDA0Yjk4MmFjMjc3IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MjgsIm5iZiI6MTcwMTY2MTIwMCwiZXhwIjoxNzAyMjY2MDAwfQ.2guaQoIczxCLlPH4FXJ6Y6jxRlNzmohzjlT3HXKMggg\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Staff Login - Invalid Credentials",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"username\":\"bob123\",\r\n\t\"password\":\"bobpass\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/staff-login",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"staff-login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Staff Login - Invalid Credentials",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"username\":\"bob123\",\r\n\t\"password\":\"bobpass\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/staff-login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"staff-login"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "51"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Dec 2023 02:47:05 GMT"
+						},
+						{
+							"key": "Expect-Ct",
+							"value": "max-age=2592000, report-uri=\"https://sentry.repl.it/api/10/security/?sentry_key=615192fd532445bfbbbe966cd7131791\""
+						},
+						{
+							"key": "Replit-Cluster",
+							"value": "global"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.2.2 Python/3.10.11"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=7771862; includeSubDomains"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Unauthorized. Invalid Credentials\"\n}"
+				}
+			]
+		},
+		{
+			"name": "(Staff) Create Program",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Program creation message\",function(){\r",
+							"    let jsonData= pm.response.json();\r",
+							"    pm.expect(\r",
+							"        jsonData['message'].includes(\"Program Computer Science with Management Special added\")\r",
+							"    ).to.be.true;\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearer {{staff_token}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"programName\":\"Computer Science with Management Special\",\r\n    \"departmentCode\": \"DCIT\",\r\n    \"coreCredits\":21,\r\n    \"electiveCredits\": 9,\r\n    \"founCredits\":6\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/staff/program",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"staff",
+						"program"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "(Staff) Create Program",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"programName\":\"Computer Science with Management Special\",\r\n    \"departmentCode\": \"DCIT\",\r\n    \"coreCredits\":21,\r\n    \"electiveCredits\": 9,\r\n    \"founCredits\":6\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://myuwiadvisorapp.onrender.com/staff/program",
+							"protocol": "https",
+							"host": [
+								"myuwiadvisorapp",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"staff",
+								"program"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "74"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Dec 2023 18:57:56 GMT"
+						},
+						{
+							"key": "Expect-Ct",
+							"value": "max-age=2592000, report-uri=\"https://sentry.repl.it/api/10/security/?sentry_key=615192fd532445bfbbbe966cd7131791\""
+						},
+						{
+							"key": "Replit-Cluster",
+							"value": "global"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.2.2 Python/3.10.11"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=7713611; includeSubDomains"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Program Computer Science with Management Special added\"\n}"
+				}
+			]
+		},
+		{
+			"name": "(Staff) Create Program - Already Exists",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Program already exists message\",function(){\r",
+							"    let jsonData= pm.response.json();\r",
+							"    pm.expect(\r",
+							"        jsonData['error'].includes(\"Program already exists\")\r",
+							"    ).to.be.true;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearer {{staff_token}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"programName\":\"Computer Science Special\",\r\n    \"coreCredits\":21,\r\n    \"departmentCode\": \"DCIT\",\r\n    \"electiveCredits\": 9,\r\n    \"founCredits\":6\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/staff/program",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"staff",
+						"program"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "(Staff) Create Program - Already Exists",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"programName\":\"Computer Science Special\",\r\n    \"coreCredits\":21,\r\n    \"departmentCode\": \"DCIT\",\r\n    \"electiveCredits\": 9,\r\n    \"founCredits\":6\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://myuwiadvisorapp.onrender.com/staff/program",
+							"protocol": "https",
+							"host": [
+								"myuwiadvisorapp",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"staff",
+								"program"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "40"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Dec 2023 19:01:58 GMT"
+						},
+						{
+							"key": "Expect-Ct",
+							"value": "max-age=2592000, report-uri=\"https://sentry.repl.it/api/10/security/?sentry_key=615192fd532445bfbbbe966cd7131791\""
+						},
+						{
+							"key": "Replit-Cluster",
+							"value": "global"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.2.2 Python/3.10.11"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=7713369; includeSubDomains"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Program already exists\"\n}"
+				}
+			]
+		},
+		{
+			"name": "(Staff) - Create Semester",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Success message\",function(){\r",
+							"    let jsonData= pm.response.json();\r",
+							"    pm.expect(\r",
+							"        jsonData['message'].includes(\"Semester 1 - 2023\")\r",
+							"    ).to.be.true;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearer {{staff_token}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"year\": 2023,\r\n    \"semesterType\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/staff/new-semester",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"staff",
+						"new-semester"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "(Staff) - Create Semester",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"year\": 2023,\r\n    \"semesterType\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/staff/new-semester",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"staff",
+								"new-semester"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "46"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Dec 2023 19:17:59 GMT"
+						},
+						{
+							"key": "Expect-Ct",
+							"value": "max-age=2592000, report-uri=\"https://sentry.repl.it/api/10/security/?sentry_key=615192fd532445bfbbbe966cd7131791\""
+						},
+						{
+							"key": "Replit-Cluster",
+							"value": "global"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.2.2 Python/3.10.11"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=7712408; includeSubDomains"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Success: Semester 1 - 2023\"\n}"
+				}
+			]
+		},
+		{
+			"name": "(Staff) Create Program Requirement - Success",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearer {{staff_token}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"programName\":\"Computer Science with Management Special\",\r\n    \"coreCourses\":[\r\n        {\"course\":\"CSCI101\"},\r\n        {\"course\":\"MATH202\"},\r\n        {\"course\":\"ENG101\"},\r\n        {\"course\":\"PHYS101\"},\r\n        {\"course\":\"CHEM202\"},\r\n        {\"course\":\"PHIL202\"},\r\n        {\"course\":\"PSYC101\"}\r\n    ],\r\n    \"electiveCourses\":[\r\n        {\"course\":\"MUS101\"},\r\n        {\"course\":\"ART101\"},\r\n        {\"course\":\"ECON202\"}\r\n    ],\r\n    \"foundationCourses\":[\r\n        {\"course\":\"FOUN202\"},\r\n        {\"course\":\"SOC101\"}\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/program-requirements",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"program-requirements"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "(Staff) Create Program Requirement - Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"programName\":\"Computer Science with Management Special\",\r\n    \"coreCourses\":[\r\n        {\"course\":\"CSCI101\"},\r\n        {\"course\":\"MATH202\"},\r\n        {\"course\":\"ENG101\"},\r\n        {\"course\":\"PHYS101\"},\r\n        {\"course\":\"CHEM202\"},\r\n        {\"course\":\"PHIL202\"},\r\n        {\"course\":\"PSYC101\"}\r\n    ],\r\n    \"electiveCourses\":[\r\n        {\"course\":\"MUS101\"},\r\n        {\"course\":\"ART101\"},\r\n        {\"course\":\"ECON202\"}\r\n    ],\r\n    \"foundationCourses\":[\r\n        {\"course\":\"FOUN202\"},\r\n        {\"course\":\"SOC101\"}\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/program-requirements",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"program-requirements"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "155"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Dec 2023 21:46:01 GMT"
+						},
+						{
+							"key": "Expect-Ct",
+							"value": "max-age=2592000, report-uri=\"https://sentry.repl.it/api/10/security/?sentry_key=615192fd532445bfbbbe966cd7131791\""
+						},
+						{
+							"key": "Replit-Cluster",
+							"value": "global"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.2.2 Python/3.10.11"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=7703528; includeSubDomains"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Program prerequisites : CSCI101 MATH202 ENG101 PHYS101 CHEM202 PHIL202 PSYC101 MUS101 ART101 ECON202 FOUN202 SOC101  added successfully\"\n}"
+				}
+			]
+		},
+		{
+			"name": "(Staff) Create Program Requirement - Program Not Exist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function (){\r",
+							"    if (pm.response.to.have.status(400)) {\r",
+							"        let jsonData = pm.response.json();\r",
+							"        pm.expect(\r",
+							"            jsonData['error'].includes(\"Program does not exist\")\r",
+							"        ).to.be.true;\r",
+							"    } else {\r",
+							"        console.error(\"Account creation failed with status code: \" + pm.response.code);\r",
+							"        pm.expect.fail(\"Account creation failed\");\r",
+							"    } \r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearer {{staff_token}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"programName\":\"Computer Science 123\",\r\n    \"coreCourses\":[\r\n        {\"course\":\"CSCI101\"},\r\n        {\"course\":\"MATH202\"},\r\n        {\"course\":\"ENG101\"},\r\n        {\"course\":\"PHYS101\"},\r\n        {\"course\":\"CHEM202\"},\r\n        {\"course\":\"PHIL202\"},\r\n        {\"course\":\"PSYC101\"}\r\n    ],\r\n    \"electiveCourses\":[\r\n        {\"course\":\"MUS101\"},\r\n        {\"course\":\"ART101\"},\r\n        {\"course\":\"ECON202\"}\r\n    ],\r\n    \"foundationCourses\":[\r\n        {\"course\":\"FOUN202\"},\r\n        {\"course\":\"SOC101\"}\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/program-requirements",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"program-requirements"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "(Staff) Create Program Requirement - Program Not Exist",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"programName\":\"Computer Science 123\",\r\n    \"coreCourses\":[\r\n        {\"course\":\"CSCI101\"},\r\n        {\"course\":\"MATH202\"},\r\n        {\"course\":\"ENG101\"},\r\n        {\"course\":\"PHYS101\"},\r\n        {\"course\":\"CHEM202\"},\r\n        {\"course\":\"PHIL202\"},\r\n        {\"course\":\"PSYC101\"}\r\n    ],\r\n    \"electiveCourses\":[\r\n        {\"course\":\"MUS101\"},\r\n        {\"course\":\"ART101\"},\r\n        {\"course\":\"ECON202\"}\r\n    ],\r\n    \"foundationCourses\":[\r\n        {\"course\":\"FOUN202\"},\r\n        {\"course\":\"SOC101\"}\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://myuwiadvisorapp.onrender.com/program-requirements",
+							"protocol": "https",
+							"host": [
+								"myuwiadvisorapp",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"program-requirements"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "40"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Dec 2023 21:47:02 GMT"
+						},
+						{
+							"key": "Expect-Ct",
+							"value": "max-age=2592000, report-uri=\"https://sentry.repl.it/api/10/security/?sentry_key=615192fd532445bfbbbe966cd7131791\""
+						},
+						{
+							"key": "Replit-Cluster",
+							"value": "global"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.2.2 Python/3.10.11"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=7703465; includeSubDomains"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Program does not exist\"\n}"
+				}
+			]
+		},
+		{
+			"name": "(Staff) Add Semester Course",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearer {{staff_token}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"year\":2023,\r\n    \"semesterType\": 1,\r\n    \"courses\":[\r\n        {\"course\":\"CSCI101\"},\r\n        {\"course\":\"MATH202\"},\r\n        {\"course\":\"ENG101\"},\r\n        {\"course\":\"PHYS101\"},\r\n        {\"course\":\"CHEM202\"},\r\n        {\"course\":\"PHIL202\"},\r\n        {\"course\":\"PSYC101\"},\r\n        {\"course\":\"MUS101\"},\r\n        {\"course\":\"ART101\"},\r\n        {\"course\":\"ECON202\"},\r\n        {\"course\":\"FOUN202\"},\r\n        {\"course\":\"SOC101\"}\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/staff/semester-courses",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"staff",
+						"semester-courses"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "(Staff) Add Semester Course",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"year\":2023,\r\n    \"semesterType\": 1,\r\n    \"courses\":[\r\n        {\"course\":\"CSCI101\"},\r\n        {\"course\":\"MATH202\"},\r\n        {\"course\":\"ENG101\"},\r\n        {\"course\":\"PHYS101\"},\r\n        {\"course\":\"CHEM202\"},\r\n        {\"course\":\"PHIL202\"},\r\n        {\"course\":\"PSYC101\"},\r\n        {\"course\":\"MUS101\"},\r\n        {\"course\":\"ART101\"},\r\n        {\"course\":\"ECON202\"},\r\n        {\"course\":\"FOUN202\"},\r\n        {\"course\":\"SOC101\"}\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/staff/semester-courses",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"staff",
+								"semester-courses"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "46"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 05 Dec 2023 00:04:21 GMT"
+						},
+						{
+							"key": "Expect-Ct",
+							"value": "max-age=2592000, report-uri=\"https://sentry.repl.it/api/10/security/?sentry_key=615192fd532445bfbbbe966cd7131791\""
+						},
+						{
+							"key": "Replit-Cluster",
+							"value": "global"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.2.2 Python/3.10.11"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=7695227; includeSubDomains"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Added courses successfully\"\n}"
+				}
+			]
+		},
+		{
+			"name": "(Staff) Get Offered Courses",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearer {{staff_token}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"year\": \"2023\",\r\n    \"semesterType\": \"1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/staff/offered-courses",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"staff",
+						"offered-courses"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "(Staff) Get Offered Courses",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"year\": \"2023\",\r\n    \"semesterType\": \"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://myuwiadvisorapp.onrender.com/staff/offered-courses",
+							"protocol": "https",
+							"host": [
+								"myuwiadvisorapp",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"staff",
+								"offered-courses"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "55"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Dec 2023 21:02:02 GMT"
+						},
+						{
+							"key": "Expect-Ct",
+							"value": "max-age=2592000, report-uri=\"https://sentry.repl.it/api/10/security/?sentry_key=615192fd532445bfbbbe966cd7131791\""
+						},
+						{
+							"key": "Replit-Cluster",
+							"value": "global"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.2.2 Python/3.10.11"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=7706165; includeSubDomains"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Offered courses: [<Course CSCI101>]\"\n}"
+				},
+				{
+					"name": "(Staff) Get Offered Courses - No Courses",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"year\": \"2023\",\r\n    \"semesterType\": \"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/staff/offered-courses",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"staff",
+								"offered-courses"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "62"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Dec 2023 19:31:00 GMT"
+						},
+						{
+							"key": "Expect-Ct",
+							"value": "max-age=2592000, report-uri=\"https://sentry.repl.it/api/10/security/?sentry_key=615192fd532445bfbbbe966cd7131791\""
+						},
+						{
+							"key": "Replit-Cluster",
+							"value": "global"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.2.2 Python/3.10.11"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=7711627; includeSubDomains"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"There are no offered courses this semester\"\n}"
+				}
+			]
+		},
+		{
+			"name": "(Staff) Remove Semester Course",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Success message\",function(){\r",
+							"    let jsonData= pm.response.json();\r",
+							"    pm.expect(\r",
+							"        jsonData['message'].includes(\"Deleted CSCI101 successfully\")\r",
+							"    ).to.be.true;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearer {{staff_token}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"year\":2023,\r\n    \"semesterType\": 1,\r\n    \"course\": \"CSCI101\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/staff/semester-courses",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"staff",
+						"semester-courses"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "(Staff) Remove Semester Course",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"year\":2023,\r\n    \"semesterType\": 1,\r\n    \"course\": \"CSCI101\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/staff/semester-courses",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"staff",
+								"semester-courses"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "48"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Dec 2023 21:15:29 GMT"
+						},
+						{
+							"key": "Expect-Ct",
+							"value": "max-age=2592000, report-uri=\"https://sentry.repl.it/api/10/security/?sentry_key=615192fd532445bfbbbe966cd7131791\""
+						},
+						{
+							"key": "Replit-Cluster",
+							"value": "global"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.2.2 Python/3.10.11"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=7705359; includeSubDomains"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Deleted CSCI101 successfully\"\n}"
+				}
+			]
+		},
+		{
+			"name": "(Student) Sign Up - Success",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Signup success message\",function(){\r",
+							"    let jsonData= pm.response.json();\r",
+							"    pm.expect(\r",
+							"        jsonData['message'].includes(\"Student 816030870 - marina.wyett5 created!\")\r",
+							"    ).to.be.true;\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"studentID\": 816030870,\r\n    \"username\": \"marina.wyett5\",\r\n    \"password\": \"kQ1|?d\",\r\n    \"email\": \"mwyett0@nationalgeographic.com\",\r\n    \"firstName\": \"Marina\",\r\n    \"lastName\": \"Myers\",\r\n    \"program1\": \"Marketing Major\",\r\n    \"program2\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/signup-student",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"signup-student"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "(Student) Sign Up - Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"studentID\": 816030870,\r\n    \"username\": \"marina.wyett5\",\r\n    \"password\": \"kQ1|?d\",\r\n    \"email\": \"mwyett0@nationalgeographic.com\",\r\n    \"firstName\": \"Marina\",\r\n    \"lastName\": \"Myers\",\r\n    \"program1\": \"Marketing Major\",\r\n    \"program2\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/signup-student",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"signup-student"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "62"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Dec 2023 03:22:09 GMT"
+						},
+						{
+							"key": "Expect-Ct",
+							"value": "max-age=2592000, report-uri=\"https://sentry.repl.it/api/10/security/?sentry_key=615192fd532445bfbbbe966cd7131791\""
+						},
+						{
+							"key": "Replit-Cluster",
+							"value": "global"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.2.2 Python/3.10.11"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=7769758; includeSubDomains"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Student 816030870 - marina.wyett5 created!\"\n}"
+				}
+			]
+		},
+		{
+			"name": "(Student) Sign Up - Invalid Program",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Degree program does not exist error message\",function(){\r",
+							"    let jsonData= pm.response.json();\r",
+							"    pm.expect(\r",
+							"        jsonData['error'].includes(\"The degree program abcd123 does not exist\")\r",
+							"    ).to.be.true;\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"studentID\": 816030870,\r\n    \"username\": \"mariah456\",\r\n    \"password\": \"kQ1|?d\",\r\n    \"email\": \"mwyett0@geographic.com\",\r\n    \"firstName\": \"Marina\",\r\n    \"lastName\": \"Myers\",\r\n    \"program1\": \"abcd123\",\r\n    \"program2\": \"Electronics Minor\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/signup-student",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"signup-student"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "(Student) Sign Up - Invalid Program",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"studentID\": 816030870,\r\n    \"username\": \"mariah456\",\r\n    \"password\": \"kQ1|?d\",\r\n    \"email\": \"mwyett0@geographic.com\",\r\n    \"firstName\": \"Marina\",\r\n    \"lastName\": \"Myers\",\r\n    \"program1\": \"abcd123\",\r\n    \"program2\": \"Electronics Minor\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/signup-student",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"signup-student"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "59"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Dec 2023 03:11:42 GMT"
+						},
+						{
+							"key": "Expect-Ct",
+							"value": "max-age=2592000, report-uri=\"https://sentry.repl.it/api/10/security/?sentry_key=615192fd532445bfbbbe966cd7131791\""
+						},
+						{
+							"key": "Replit-Cluster",
+							"value": "global"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.2.2 Python/3.10.11"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=7770385; includeSubDomains"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"The degree program abcd123 does not exist\"\n}"
+				}
+			]
+		},
+		{
+			"name": "(Student) Sign Up - Username Taken",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Username taken error message\",function(){\r",
+							"    let jsonData= pm.response.json();\r",
+							"    pm.expect(\r",
+							"        jsonData['error'].includes(\"username already taken!\")\r",
+							"    ).to.be.true;\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"studentID\": 816030870,\r\n    \"username\": \"marina.wyett5\",\r\n    \"password\": \"kQ1|?d\",\r\n    \"email\": \"mwyett0@geographic.com\",\r\n    \"firstName\": \"Marina\",\r\n    \"lastName\": \"Myers\",\r\n    \"program1\": \"Marketing Major\",\r\n    \"program2\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/signup-student",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"signup-student"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "(Student) Sign Up - Username Taken",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"studentID\": 816030870,\r\n    \"username\": \"marina.wyett5\",\r\n    \"password\": \"kQ1|?d\",\r\n    \"email\": \"mwyett0@geographic.com\",\r\n    \"firstName\": \"Marina\",\r\n    \"lastName\": \"Myers\",\r\n    \"program1\": \"Marketing Major\",\r\n    \"program2\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/signup-student",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"signup-student"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "41"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Dec 2023 03:18:30 GMT"
+						},
+						{
+							"key": "Expect-Ct",
+							"value": "max-age=2592000, report-uri=\"https://sentry.repl.it/api/10/security/?sentry_key=615192fd532445bfbbbe966cd7131791\""
+						},
+						{
+							"key": "Replit-Cluster",
+							"value": "global"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.2.2 Python/3.10.11"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=7769978; includeSubDomains"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"username already taken!\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Student Login - Success",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Returned Access Token\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(pm.response.text()).to.include(\"token\");\r",
+							"    pm.environment.set('student_token', jsonData['student_token'])\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"username\":\"marina.wyett5\",\r\n\t\"password\":\"kQ1|?d\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/student-login",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"student-login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Student Login - Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"username\":\"marina.wyett5\",\r\n\t\"password\":\"kQ1|?d\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/student-login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"student-login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "290"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Dec 2023 03:36:03 GMT"
+						},
+						{
+							"key": "Expect-Ct",
+							"value": "max-age=2592000, report-uri=\"https://sentry.repl.it/api/10/security/?sentry_key=615192fd532445bfbbbe966cd7131791\""
+						},
+						{
+							"key": "Replit-Cluster",
+							"value": "global"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.2.2 Python/3.10.11"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=7768925; includeSubDomains"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"student_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwMTY2MDk2MywianRpIjoiMDg1Y2EyNzMtMmQ5Ny00NmE2LThlYTUtZTcwOGQxZThkM2RjIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MTYyLCJuYmYiOjE3MDE2NjA5NjMsImV4cCI6MTcwMjI2NTc2M30.k8IGzR_9pzdAzZuRpewlqw7vYSd5N_NrFKhIKc_ci0E\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Student Login - Invalid Credentials",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"username\":\"bob123\",\r\n\t\"password\":\"bobpass\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/student-login",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"student-login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Student Login - Invalid Credentials",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"username\":\"bob123\",\r\n\t\"password\":\"bobpass\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/student-login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"student-login"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "51"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 04 Dec 2023 03:23:41 GMT"
+						},
+						{
+							"key": "Expect-Ct",
+							"value": "max-age=2592000, report-uri=\"https://sentry.repl.it/api/10/security/?sentry_key=615192fd532445bfbbbe966cd7131791\""
+						},
+						{
+							"key": "Replit-Cluster",
+							"value": "global"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.2.2 Python/3.10.11"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=7769666; includeSubDomains"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"Unauthorized. Invalid Credentials\"\n}"
+				}
+			]
+		},
+		{
+			"name": "(Student) Update Student History",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Semester History Updated message\", function() {\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.expect(\r",
+							"        jsonData['message'].includes(\"Semester History addition successful\")\r",
+							"    ).to.be.true;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearer {{student_token}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"year\": 2022,\r\n    \"semesterType\": 2,\r\n    \"histories\":[\r\n        {\"courseCode\":\"FIN202\", \"gradeLetter\":\"A\", \"percent\": 85, \"courseType\": \"elective\"},\r\n        {\"courseCode\":\"PHIL101\", \"gradeLetter\":\"B\", \"percent\": 75, \"courseType\": \"core\"},\r\n        {\"courseCode\":\"MARK202\", \"gradeLetter\":\"B\", \"percent\": 75, \"courseType\": \"elective\"},\r\n        {\"courseCode\":\"CHEM101\", \"gradeLetter\":\"A+\", \"percent\": 96, \"courseType\": \"core\"},\r\n        {\"courseCode\":\"HIST101\", \"gradeLetter\":\"A-\", \"percent\": 85, \"courseType\": \"foundation\"}\r\n    ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/student/academic-history",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"student",
+						"academic-history"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "(Student) Update Student History",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"year\": 2022,\r\n    \"semesterType\": 2,\r\n    \"histories\":[\r\n        {\"courseCode\":\"FIN202\", \"gradeLetter\":\"A\", \"percent\": 85, \"courseType\": \"elective\"},\r\n        {\"courseCode\":\"PHIL101\", \"gradeLetter\":\"B\", \"percent\": 75, \"courseType\": \"core\"},\r\n        {\"courseCode\":\"MARK202\", \"gradeLetter\":\"B\", \"percent\": 75, \"courseType\": \"elective\"},\r\n        {\"courseCode\":\"CHEM101\", \"gradeLetter\":\"A+\", \"percent\": 96, \"courseType\": \"core\"},\r\n        {\"courseCode\":\"HIST101\", \"gradeLetter\":\"A-\", \"percent\": 85, \"courseType\": \"foundation\"}\r\n    ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/student/academic-history",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"student",
+								"academic-history"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "56"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 05 Dec 2023 00:59:15 GMT"
+						},
+						{
+							"key": "Expect-Ct",
+							"value": "max-age=2592000, report-uri=\"https://sentry.repl.it/api/10/security/?sentry_key=615192fd532445bfbbbe966cd7131791\""
+						},
+						{
+							"key": "Replit-Cluster",
+							"value": "global"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.2.2 Python/3.10.11"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=7691932; includeSubDomains"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Semester History addition successful\"\n}"
+				}
+			]
+		},
+		{
+			"name": "View Academic History",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearer {{student_token}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/student/academic-history",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"student",
+						"academic-history"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "View Academic History",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/student/academic-history",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"student",
+								"academic-history"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "814"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 05 Dec 2023 03:11:43 GMT"
+						},
+						{
+							"key": "Expect-Ct",
+							"value": "max-age=2592000, report-uri=\"https://sentry.repl.it/api/10/security/?sentry_key=615192fd532445bfbbbe966cd7131791\""
+						},
+						{
+							"key": "Replit-Cluster",
+							"value": "global"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.2.2 Python/3.10.11"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=7683984; includeSubDomains"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Marina Myers Academic History: [{'Student ID': 816030870, 'Semester Date': '2022 - Semester 2', 'Courses': [{'Course History ID': 1, 'Course Code': 'FIN202', 'Course Grade': 'A', 'Percentage': 85.0, 'Course Type': 'elective', 'Semester ID': 1}, {'Course History ID': 2, 'Course Code': 'PHIL101', 'Course Grade': 'B', 'Percentage': 75.0, 'Course Type': 'core', 'Semester ID': 1}, {'Course History ID': 3, 'Course Code': 'MARK202', 'Course Grade': 'B', 'Percentage': 75.0, 'Course Type': 'elective', 'Semester ID': 1}, {'Course History ID': 4, 'Course Code': 'CHEM101', 'Course Grade': 'A+', 'Percentage': 96.0, 'Course Type': 'core', 'Semester ID': 1}, {'Course History ID': 5, 'Course Code': 'HIST101', 'Course Grade': 'A-', 'Percentage': 85.0, 'Course Type': 'foundation', 'Semester ID': 1}]}]\"\n}"
+				}
+			]
+		},
+		{
+			"name": "(Student) Add Course to Plan - Create Plan",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearer {{student_token}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"year\": 2023,\r\n    \"semesterType\": 1,\r\n    \"planID\": 0,\r\n    \"course\": \"CHEM202\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/student/course-plan",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"student",
+						"course-plan"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "(Student) Add Course to Plan - Create Plan",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"year\": 2023,\r\n    \"semesterType\": 1,\r\n    \"planID\": 0,\r\n    \"course\": \"CHEM202\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/student/course-plan",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"student",
+								"course-plan"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "48"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 05 Dec 2023 02:16:33 GMT"
+						},
+						{
+							"key": "Expect-Ct",
+							"value": "max-age=2592000, report-uri=\"https://sentry.repl.it/api/10/security/?sentry_key=615192fd532445bfbbbe966cd7131791\""
+						},
+						{
+							"key": "Replit-Cluster",
+							"value": "global"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.2.2 Python/3.10.11"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=7687294; includeSubDomains"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Course(s) added successfully\"\n}"
+				}
+			]
+		},
+		{
+			"name": "(Student) Add Course to Plan",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearer {{student_token}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"year\": 2023,\r\n    \"semesterType\": 1,\r\n    \"planID\": 1,\r\n    \"course\": \"CHEM 202\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/student/course-plan",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"student",
+						"course-plan"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "(Student) Add Course to Plan",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"year\": 2023,\r\n    \"semesterType\": 1,\r\n    \"planID\": 1,\r\n    \"course\": \"FOUN202\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/student/course-plan",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"student",
+								"course-plan"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "48"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 05 Dec 2023 02:17:24 GMT"
+						},
+						{
+							"key": "Expect-Ct",
+							"value": "max-age=2592000, report-uri=\"https://sentry.repl.it/api/10/security/?sentry_key=615192fd532445bfbbbe966cd7131791\""
+						},
+						{
+							"key": "Replit-Cluster",
+							"value": "global"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.2.2 Python/3.10.11"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=7687243; includeSubDomains"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Course(s) added successfully\"\n}"
+				}
+			]
+		},
+		{
+			"name": "(Student) Add Course to Plan - Course Not Offered",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearer {{student_token}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"year\": 2023,\r\n    \"semesterType\": 1,\r\n    \"planID\": 1,\r\n    \"course\": \"CHEM 202\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/student/course-plan",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"student",
+						"course-plan"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "(Student) Add Course to Plan Copy",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"year\": 2023,\r\n    \"semesterType\": 1,\r\n    \"planID\": 0,\r\n    \"course\": \"CSCI101\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/student/course-plan",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"student",
+								"course-plan"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "52"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 05 Dec 2023 02:00:46 GMT"
+						},
+						{
+							"key": "Expect-Ct",
+							"value": "max-age=2592000, report-uri=\"https://sentry.repl.it/api/10/security/?sentry_key=615192fd532445bfbbbe966cd7131791\""
+						},
+						{
+							"key": "Replit-Cluster",
+							"value": "global"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.2.2 Python/3.10.11"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=7688242; includeSubDomains"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"The course CSCI101 is not offered.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "(Student) Remove Course from Plan",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearer {{student_token}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"year\": 2023,\r\n    \"semesterType\": 1,\r\n    \"planID\": 1,\r\n    \"course\": \"CHEM202\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/student/course-plan",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"student",
+						"course-plan"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "(Student) Remove Course from Plan",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"year\": 2023,\r\n    \"semesterType\": 1,\r\n    \"planID\": 1,\r\n    \"course\": \"CHEM202\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/student/course-plan",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"student",
+								"course-plan"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "55"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 05 Dec 2023 03:15:14 GMT"
+						},
+						{
+							"key": "Expect-Ct",
+							"value": "max-age=2592000, report-uri=\"https://sentry.repl.it/api/10/security/?sentry_key=615192fd532445bfbbbe966cd7131791\""
+						},
+						{
+							"key": "Replit-Cluster",
+							"value": "global"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.2.2 Python/3.10.11"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=7683773; includeSubDomains"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Course CHEM202 removed successfully\"\n}"
+				}
+			]
+		},
+		{
+			"name": "View Course Plans",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearer {{student_token}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/student/course-plans",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"student",
+						"course-plans"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "View Course Plans",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/student/course-plans",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"student",
+								"course-plans"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Length",
+							"value": "135"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 05 Dec 2023 02:21:00 GMT"
+						},
+						{
+							"key": "Expect-Ct",
+							"value": "max-age=2592000, report-uri=\"https://sentry.repl.it/api/10/security/?sentry_key=615192fd532445bfbbbe966cd7131791\""
+						},
+						{
+							"key": "Replit-Cluster",
+							"value": "global"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/2.2.2 Python/3.10.11"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=7687027; includeSubDomains"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Student Marina Myers Course Plans: [<CoursePlan 1>, <CoursePlan 2>, <CoursePlan 3>, <CoursePlan 4>, <CoursePlan 5>]\"\n}"
+				}
+			]
+		},
+		{
+			"name": "(Student) Autogenerate Easiest Courses Plan",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearer {{student_token}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"planType\": \"Easiest Courses\",\r\n    \"degreeType\": \"Minor\",\r\n    \"programID\": 27\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/student/autogenerated-plan",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"student",
+						"autogenerated-plan"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "(Student) Autogenerate Elective Priority Plan",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearer {{student_token}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"planType\": \"Elective Priority\",\r\n    \"degreeType\": \"Major\",\r\n    \"programID\": 27\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/student/autogenerated-plan",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"student",
+						"autogenerated-plan"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "(Student) Autogenerate Fastest Graduation Plan",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "Bearer {{student_token}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"planType\": \"Fastest Graduation\",\r\n    \"degreeType\": \"Elective\",\r\n    \"programID\": 27\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/student/create_student_plan",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"student",
+						"create_student_plan"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
