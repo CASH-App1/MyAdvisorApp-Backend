@@ -15,7 +15,6 @@ class CourseHistory(db.Model):
         self.percent = percent
         self.courseType = courseType
         self.semesterID = semID
-        self.courseType = courseType
     
 
     def get_json(self):

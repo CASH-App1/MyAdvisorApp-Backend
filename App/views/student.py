@@ -73,7 +73,7 @@ def add_course_to_plan_view():
     
 @student_views.route('/student/course-plan', methods=['DELETE'])
 @jwt_required()
-def remove_course_from_plan():
+def remove_course_from_plan_view():
     data = request.json
     username = get_jwt_identity()
     if not verify_student(username):
@@ -81,7 +81,7 @@ def remove_course_from_plan():
  
     student = Student.query.get(username)
 
-    semester = Semester.query.order_by(SemesterHistory.historyID.desc()).first()
+    semester = Semester.query.order_by(Semester.semesterID.desc()).first()
     if data['year']  != semester.year and data['semesterType'] != semseter.semesterType:
         return jsonify(error = f'Invalid semester entered'), 400
 
@@ -97,7 +97,7 @@ def remove_course_from_plan():
     if course not in plan.courses:
         return jsonify(message = 'Course does not exist in plan'), 200
     
-    removed = remove_course_to_plan(course, plan)
+    removed = remove_course_from_plan(course, plan)
     if removed:
         return jsonify(message = f'Course {course.courseCode} removed successfully'), 200
     return jsonify(error = f'Course {course.courseCode} removal was unsuccessful!'), 400

@@ -1,5 +1,6 @@
-from App.models import *  
+
 from App.database import db
+from App.models import *
 
 class Student(User):
     studentID = db.Column(db.Integer, primary_key=True)
